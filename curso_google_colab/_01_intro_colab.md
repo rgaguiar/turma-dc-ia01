@@ -20,6 +20,20 @@ O Google Colab (ou Colaboratory) é um ambiente de desenvolvimento interativo ba
 
 [Acessando o Google Colab pelo Google Drive](https://github.com/user-attachments/assets/e884a208-21f2-44d8-8f86-bd6c4a82e901)
 
-
+  
+> ⚠️ **Atenção — Ativando o Google Colab no Drive**
+>
+> Caso o **Google Colab** não apareça na lista de aplicativos do seu Google Drive, siga os passos abaixo:
+>
+> 1. Acesse o **Google Drive**.
+> 2. Clique em **“+ Novo”** (canto superior esquerdo).
+> 3. Vá em **“Mais”**.
+> 4. Clique em **“Conectar mais aplicativos”**.
+> 5. No campo de busca, digite **Colaboratory**.
+> 6. Clique em **Instalar**.
+> 7. Autorize a conexão quando solicitado.
+>
+> Após a instalação, o Colab ficará disponível em  
+> **+ Novo → Mais → Google Colab**.
 ## 2. Entendendo a Interface
 ## 3. O mínimo de Python necessário
