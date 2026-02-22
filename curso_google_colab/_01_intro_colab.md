@@ -24,7 +24,7 @@ Todo o processamento ocorre nos servidores do Google, o que elimina barreiras de
 
 No vídeo abaixo, você verá o passo a passo completo para ativar o Google Colab no Drive.
 
-[Acessando o Google Colab pelo Google Drive](https://github.com/user-attachments/assets/e884a208-21f2-44d8-8f86-bd6c4a82e901)
+[Vídeo: Acessando o Google Colab pelo Google Drive](https://github.com/user-attachments/assets/e884a208-21f2-44d8-8f86-bd6c4a82e901)
 
   
 > ⚠️ **Atenção — Ativando o Google Colab no Drive**
@@ -77,7 +77,7 @@ O espaço central à direita é o núcleo de desenvolvimento, composto pelos blo
 
 ### Vídeo Demonstrativo
 
-[Acessando células de texto](https://github.com/user-attachments/assets/daaa16c2-ffa0-45c2-99e8-05d44bcf7046)
+[Vídeo: Acessando células de texto](https://github.com/user-attachments/assets/daaa16c2-ffa0-45c2-99e8-05d44bcf7046)
 
 Nessa etapa, a célula de texto pode ser executada de duas maneiras: clicando no botão **Play** (▶️) ou pressionando o atalho **Ctrl + Enter** no teclado.  
 
@@ -86,7 +86,7 @@ Nessa etapa, a célula de texto pode ser executada de duas maneiras: clicando no
 
 ### Vídeo Demonstrativo
 
-[Gravação de tela de 2026-02-22 17-36-07.webm](https://github.com/user-attachments/assets/a528de4e-3010-4927-9b56-24fa587c1105)
+[Vídeo: Acessando células de código](https://github.com/user-attachments/assets/a528de4e-3010-4927-9b56-24fa587c1105)
 
 É possível perceber que as cores do texto mudam automaticamente. Isso ocorre porque a linguagem Python possui palavras reservadas, que são destacadas com cores diferentes para facilitar a leitura do código.
 
