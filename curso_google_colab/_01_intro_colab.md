@@ -1,4 +1,4 @@
-# Google Colab para Criação de Agentes de IA
+# Desenvolvimento de Agentes de IA para Profissionais: Um Guia via Google Colab
 
 <img width="1400" height="531" alt="image" src="https://github.com/user-attachments/assets/30e095c6-c715-4414-a330-aec548488ff2" />
 
