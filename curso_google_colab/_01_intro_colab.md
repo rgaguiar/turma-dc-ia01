@@ -86,6 +86,10 @@ Nessa etapa, a célula de texto pode ser executada de duas maneiras: clicando no
 
 ### Vídeo Demonstrativo
 
+[Gravação de tela de 2026-02-22 17-36-07.webm](https://github.com/user-attachments/assets/a528de4e-3010-4927-9b56-24fa587c1105)
+
+É possível perceber que as cores do texto mudam automaticamente. Isso ocorre porque a linguagem Python possui palavras reservadas, que são destacadas com cores diferentes para facilitar a leitura do código.
+
 
 
 ## 3. O mínimo de Python necessário
