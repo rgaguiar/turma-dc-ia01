@@ -16,7 +16,13 @@ Versão: 1.0
 
 
 ## 1. O que é o Google Colab?
-O Google Colab (ou Colaboratory) é um ambiente de desenvolvimento interativo baseado em nuvem. Ele permite a escrita e a execução de código Python diretamente no navegador web, dispensando a necessidade de instalação, configuração de infraestrutura ou de Ambientes de Desenvolvimento Integrados (IDEs) no computador local. Todo o processamento ocorre nos servidores do Google, o que mitiga barreiras de hardware e simplifica o acesso a recursos computacionais avançados. Para o escopo deste curso, o Colab atua como a plataforma central onde os scripts de automação e os agentes de IA serão desenvolvidos e testados.
+O Google Colab (ou Colaboratory) é um ambiente de desenvolvimento interativo baseado em nuvem. Ele permite escrever e executar código Python diretamente no navegador, sem necessidade de instalação ou configuração local.
+
+Todo o processamento ocorre nos servidores do Google, o que elimina barreiras de infraestrutura e facilita o acesso a recursos computacionais avançados.
+
+### Vídeo demonstrativo
+
+No vídeo abaixo, você verá o passo a passo completo para ativar o Google Colab no Drive.
 
 [Acessando o Google Colab pelo Google Drive](https://github.com/user-attachments/assets/e884a208-21f2-44d8-8f86-bd6c4a82e901)
 
