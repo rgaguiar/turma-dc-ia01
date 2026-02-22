@@ -6,13 +6,13 @@
 Versão: 1.0
 
 ### Sumário
-1. **O que é o Google Colab**
-2. Entendendo a Interface
-3. O mínimo de Python necessário
-4. Instalando ferramentas no Colab
-5. Criando seu primeiro agente com Agno
-6. Lidando com erros
-7. Boas práticas no curso
+1. [O que é o Google Colab](#1-o-que-é-o-google-colab)
+2. [Entendendo a Interface](#2-entendendo-a-interface)
+3. [O mínimo de Python necessário](#3-o-mínimo-de-python-necessário)
+4. [Instalando ferramentas no Colab](#4-instalando-ferramentas-no-colab)
+5. [Criando seu primeiro agente com Agno](#5-criando-seu-primeiro-agente-com-agno)
+6. [Lidando com erros](#6-lidando-com-erros)
+7. [Boas práticas no curso](#7-boas-práticas-no-curso)
 
 
 ## 1. O que é o Google Colab?
@@ -20,3 +20,6 @@ O Google Colab (ou Colaboratory) é um ambiente de desenvolvimento interativo ba
 
 [Acessando o Google Colab pelo Google Drive](https://github.com/user-attachments/assets/e884a208-21f2-44d8-8f86-bd6c4a82e901)
 
+
+## 2. Entendendo a Interface
+## 3. O mínimo de Python necessário
