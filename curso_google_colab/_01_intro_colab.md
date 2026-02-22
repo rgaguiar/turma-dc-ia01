@@ -67,13 +67,19 @@ Posicionada à esquerda, esta barra atua como um painel de controle para recurso
 <img width="1853" height="949" alt="image" src="https://github.com/user-attachments/assets/ca0d7b10-7082-4663-b151-2f1b335c89be" />  
 
   
-**4. Área de Trabalho Principal (Células)**
+**4. Área de Trabalho Principal (Células)**  
+
+O espaço central à direita é o núcleo de desenvolvimento, composto pelos blocos independentes e sequenciais chamados de "células". Na visualização atual, observam-se células de código vazias ("Comece a programar"). Cada uma possui um controle de execução individual (o botão ▶️ à esquerda da célula), que envia o script contido no bloco para ser processado pelo interpretador Python.
 
 >
 > * **Células de Texto (Markdown)**: Utilizadas para documentação, estruturação visual do documento e inserção de diretrizes ou anotações teóricas.  
 >
 
 ### Vídeo Demonstrativo
+
+[Acessando células de texto](https://github.com/user-attachments/assets/daaa16c2-ffa0-45c2-99e8-05d44bcf7046)
+
+Nessa etapa, a célula de texto pode ser executada de duas maneiras: clicando no botão **Play** (▶️) ou pressionando o atalho **Ctrl + Enter** no teclado.  
 
 >
 > * **Células de Código**: Destinadas exclusivamente à inserção de instruções em Python. Cada célula de código possui um botão de execução (▶️). Ao ser acionado, o interpretador processa estritamente o código contido naquela célula e exibe o resultado da operação (output) imediatamente abaixo dela.
