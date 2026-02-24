@@ -93,3 +93,7 @@ Nessa etapa, a célula de texto pode ser executada de duas maneiras: clicando no
 
 
 ## 3. O mínimo de Python necessário
+## 4. Instalando ferramentas no Colab
+## 5. Criando seu primeiro agente com Agno
+## 6. Lidando com erros
+## 7. Boas práticas no curso
