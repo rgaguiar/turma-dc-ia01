@@ -94,6 +94,21 @@ Nessa etapa, a célula de texto pode ser executada de duas maneiras: clicando no
 
 ## 3. O mínimo de Python necessário
 ## 4. Instalando ferramentas no Colab
+
+O Google Colab já vem configurado com as ferramentas básicas para o uso do Python. No entanto, para criarmos nossos agentes de IA, precisaremos adicionar sistemas específicos que não vêm instalados por padrão, como o Agno.
+
+Para adicionar essas novas funcionalidades, utilizamos um comando padrão do Python chamado `pip`, que atua como um instalador. Como, neste caso, estamos dando uma ordem direta ao servidor do Google (e não apenas escrevendo o código do agente), precisamos iniciar o comando com um ponto de exclamação. Assim, ao digitar `!pip install agno` e executar a célula, o Colab fará o download do sistema, deixando-o pronto para uso no seu documento.
+
+### Atenção ao tempo de inatividade:
+> O Google Colab funciona em sessões temporárias de trabalho. É fundamental saber que, se a aba do navegador for fechada ou ficar sem uso por cerca de 30 minutos, o sistema do Google se desconecta. Quando isso acontece, o ambiente retorna ao seu estado inicial limpo (como se tivesse sido reiniciado). Consequentemente, será necessário executar novamente o comando de instalação (`!pip install agno`) e as demais células do seu projeto para continuar trabalhando.
+
+### A diferença entre Instalar e Importar:
+>Apenas instalar o pacote no sistema não ativa suas funções automaticamente no seu texto de código. O Agno é um sistema muito amplo e possui recursos diversos. Para que o seu projeto funcione de forma rápida e eficiente, a regra na programação é carregar apenas os recursos que você realmente vai utilizar. Portanto, logo após a instalação, utilizamos o comando import (`importar`) para selecionar e trazer funcionalidades específicas do Agno para trabalhar no seu código.
+
+### Vídeo Demonstrativo
+
+[!pip install - Instalando Ferramentas](https://github.com/user-attachments/assets/55bcbe6e-8d7e-4080-9a03-a007eb1d97fd)
+
 ## 5. Criando seu primeiro agente com Agno
 ## 6. Lidando com erros
 ## 7. Boas práticas no curso
