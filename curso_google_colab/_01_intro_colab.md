@@ -115,7 +115,13 @@ Nesta etapa, a transição do desenvolvimento visual (Langflow) para a codifica�
 
 * **Autenticação (API Key):** O fornecimento da credencial de segurança que autoriza a comunicação entre o código executado no Colab e a interface de programação do Modelo de Linguagem de Grande Escala (LLM) escolhido, neste caso, a plataforma Groq. Por questões de segurança da informação, **nunca** digitamos essa chave diretamente no texto do código. Utilizamos o painel de "Segredos" (ícone de chave na barra lateral do Colab) para guardá-la em um cofre digital.
 
-> 🎥 **[INSERIR VÍDEO AQUI: Passo a passo de como criar e acessar sua chave (API Key) na plataforma Groq e como salvá-la na aba de "Segredos" do Colab]**
+> **Obtendo o Token para usar os modelos do Groq**  
+[Obtendo o token no Groq](https://github.com/user-attachments/assets/c6803e04-3235-40d9-b099-32940daef566)
+
+
+> **Cadastrando a Chave no cofre de senhas do Google Colab**  
+[Obtendo o token no Groq](https://github.com/user-attachments/assets/1d211f2d-5a7b-43f6-bc53-248a40362eb1)
+
 
 * **Parametrização de Papel (System Prompt):** A definição do escopo de atuação, contexto operacional e restrições de comportamento do agente. No código, essas informações são inseridas em dois parâmetros principais: o `role` (onde definimos o cargo ou função do agente) e o `instructions` (onde listamos as regras de comportamento e formatação de saída).
 * **Integração de Ferramentas (Tools):** A declaração explícita de funções externas que o agente está autorizado a invocar para cumprir suas tarefas, como a execução de buscas web ou a leitura de bases de dados proprietárias. *(Nota: Exploraremos e utilizaremos este recurso nas próximas etapas do curso).*
@@ -134,7 +140,7 @@ Em vez de criar processos complexos do zero, você "importa" (traz para o seu pr
 
 Para consolidar esses conceitos, desenvolveremos duas aplicações práticas. A primeira demonstrará a estrutura base de um agente executando tarefas textuais no próprio Colab. A segunda avançará para a criação de um assistente integrado a uma interface visual interativa.
 
-> 🎥 **[INSERIR VÍDEO AQUI: Demonstração das duas aplicações funcionando no Colab]**
+> 🎥 **[Demonstração das duas aplicações funcionando no Colab]**
 > *Sugestão de demonstração para o vídeo: Mostre as duas aplicações rodando. Primeiro, o agente gerando os 3 temas de marketing no terminal. Em seguida, a interface visual (Gradio) rodando dentro do próprio Colab, onde você insere uma pergunta de negócios e recebe a resposta estruturada.*
 
 #### Exemplo 1: Agente Especialista em Redes Sociais (Apenas LLM)
