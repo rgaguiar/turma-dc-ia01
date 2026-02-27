@@ -119,6 +119,7 @@ Nesta etapa, a transição do desenvolvimento visual (Langflow) para a codifica�
 
 [Obtendo o token no Groq](https://github.com/user-attachments/assets/c6803e04-3235-40d9-b099-32940daef566)
 
+> ⚠️ **Atenção: Por motivo de segurança, a chave exibida na imagem foi desativada.**
 
 **Vídeo Demonstrativo: Cadastrando a Chave no cofre de senhas do Google Colab**  
 
