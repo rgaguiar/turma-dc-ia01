@@ -115,11 +115,13 @@ Nesta etapa, a transição do desenvolvimento visual (Langflow) para a codifica�
 
 * **Autenticação (API Key):** O fornecimento da credencial de segurança que autoriza a comunicação entre o código executado no Colab e a interface de programação do Modelo de Linguagem de Grande Escala (LLM) escolhido, neste caso, a plataforma Groq. Por questões de segurança da informação, **nunca** digitamos essa chave diretamente no texto do código. Utilizamos o painel de "Segredos" (ícone de chave na barra lateral do Colab) para guardá-la em um cofre digital.
 
-> **Obtendo o Token para usar os modelos do Groq**  
+> **Obtendo o Token para usar os modelos do Groq**
+
 [Obtendo o token no Groq](https://github.com/user-attachments/assets/c6803e04-3235-40d9-b099-32940daef566)
 
 
-> **Cadastrando a Chave no cofre de senhas do Google Colab**  
+> **Cadastrando a Chave no cofre de senhas do Google Colab**
+
 [Cadastrando no cofre de senhas do Google Colab](https://github.com/user-attachments/assets/1d211f2d-5a7b-43f6-bc53-248a40362eb1)
 
 
