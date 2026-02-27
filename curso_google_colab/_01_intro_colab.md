@@ -120,7 +120,7 @@ Nesta etapa, a transição do desenvolvimento visual (Langflow) para a codifica�
 
 
 > **Cadastrando a Chave no cofre de senhas do Google Colab**  
-[Obtendo o token no Groq](https://github.com/user-attachments/assets/1d211f2d-5a7b-43f6-bc53-248a40362eb1)
+[Cadastrando no cofre de senhas do Google Colab](https://github.com/user-attachments/assets/1d211f2d-5a7b-43f6-bc53-248a40362eb1)
 
 
 * **Parametrização de Papel (System Prompt):** A definição do escopo de atuação, contexto operacional e restrições de comportamento do agente. No código, essas informações são inseridas em dois parâmetros principais: o `role` (onde definimos o cargo ou função do agente) e o `instructions` (onde listamos as regras de comportamento e formatação de saída).
