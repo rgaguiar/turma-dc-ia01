@@ -143,9 +143,6 @@ Em vez de criar processos complexos do zero, você "importa" (traz para o seu pr
 
 Para consolidar esses conceitos, desenvolveremos duas aplicações práticas. A primeira demonstrará a estrutura base de um agente executando tarefas textuais no próprio Colab. A segunda avançará para a criação de um assistente integrado a uma interface visual interativa.
 
-> 🎥 **[Demonstração das duas aplicações funcionando no Colab]**
-> *Sugestão de demonstração para o vídeo: Mostre as duas aplicações rodando. Primeiro, o agente gerando os 3 temas de marketing no terminal. Em seguida, a interface visual (Gradio) rodando dentro do próprio Colab, onde você insere uma pergunta de negócios e recebe a resposta estruturada.*
-
 #### Exemplo 1: Agente Especialista em Redes Sociais (Apenas LLM)
 
 Neste primeiro cenário, criaremos um agente focado em marketing de conteúdo. O objetivo é configurar um assistente que receba um nicho de mercado e sugira até três temas estratégicos para postagens, acelerando o processo criativo.
