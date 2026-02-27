@@ -150,6 +150,10 @@ Para consolidar esses conceitos, desenvolveremos duas aplicações práticas. A 
 
 Neste primeiro cenário, criaremos um agente focado em marketing de conteúdo. O objetivo é configurar um assistente que receba um nicho de mercado e sugira até três temas estratégicos para postagens, acelerando o processo criativo.
 
+**Vídeo Demonstrativo: Executando o codigo do exemplo 1.**
+
+[Agente especialista em marketing de conteúdo para redes sociais.](https://github.com/user-attachments/assets/9c1c0c37-fe0d-4182-aeb4-1b21981dc735)
+
 ```python
 # Importando as bibliotecas necessárias
 from agno.agent import Agent
