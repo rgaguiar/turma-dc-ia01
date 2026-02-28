@@ -268,7 +268,7 @@ Por fim, o comando **`interface.launch(share=True)`** é o equivalente executivo
 
 [Executando aplicação no browser](https://github.com/user-attachments/assets/cfa74cab-6764-4143-890a-6296e595901b)
 
-**🧠 Proposta de Trabalho**
+**🧠 Proposta de Trabalho 01**
 > **Desafio em Grupo: Construindo um Agente Consultor Real**
 > 
 > **Objetivo**
