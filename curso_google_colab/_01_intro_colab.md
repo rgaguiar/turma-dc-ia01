@@ -91,6 +91,9 @@ Nessa etapa, a célula de texto pode ser executada de duas maneiras: clicando no
 É possível perceber que as cores do texto mudam automaticamente. Isso ocorre porque a linguagem Python possui palavras reservadas, que são destacadas com cores diferentes para facilitar a leitura do código.
 
 ## 3. O mínimo de Python necessário
+
+> 🚧 **Tópico em Construção**
+
 ## 4. Instalando ferramentas no Colab
 
 O Google Colab já vem configurado com as ferramentas básicas para o uso do Python. No entanto, para criarmos nossos agentes de IA, precisaremos adicionar sistemas específicos que não vêm instalados por padrão, como o Agno.
@@ -265,5 +268,56 @@ Por fim, o comando **`interface.launch(share=True)`** é o equivalente executivo
 
 [Executando aplicação no browser](https://github.com/user-attachments/assets/cfa74cab-6764-4143-890a-6296e595901b)
 
+**🧠 Proposta de Trabalho**
+> **Desafio em Grupo: Construindo um Agente Consultor Real**
+> 
+> **Objetivo**
+> 
+> Nesta atividade, cada grupo deverá criar um **agente especialista altamente aplicável ao mundo real**, utilizando o Agno.  
+> 
+> O foco da atividade é:
+> 
+> - Definir um papel claro para o agente
+> - Modelar seu comportamento
+> - Torná-lo estratégico e aplicável
+> - Testar seus limites
+> 
+> > ⚠️ Atenção: O objetivo não é programar mais, e sim **refinar o comportamento do agente**.
+> 
+> **Organização**
+> 
+> Formem grupos de **3 a 4 pessoas**.
+> 
+> Cada grupo deverá escolher um contexto empresarial:
+> 
+> - Escritório de advocacia  
+> - Empresa contábil  
+> - Agência de marketing  
+> - Startup de tecnologia  
+> - Empresa familiar  
+> - Indústria tradicional  
+> - Outro (definir em grupo)
+> 
+> **Etapa 1 — Definição do Papel**
+> 
+> O grupo deve responder:
+> 
+> 1. Quem é o agente?
+> 2. Qual problema ele resolve?
+> 3. Para qual público ele responde?
+> 4. Qual o nível de profundidade das respostas?
+> 
+> Depois disso, devem ajustar no código:
+
+```python
+role="..."
+instructions=[ ... ]
+```
+
 ## 6. Lidando com erros
+
+> 🚧 **Tópico em Construção**
+
 ## 7. Boas práticas no curso
+
+> 🚧 **Tópico em Construção**
