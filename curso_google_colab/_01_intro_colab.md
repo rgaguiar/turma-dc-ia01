@@ -310,7 +310,7 @@ Por fim, o comando **`interface.launch(share=True)`** é o equivalente executivo
 > - Indústria tradicional  
 > - Outro (definir em grupo)
 > 
-> **Etapa 1 — Definição do Papel**
+> **Etapa 1 — Definição do Papel**  
 > 
 > O grupo deve responder:
 > 
@@ -327,6 +327,7 @@ Por fim, o comando **`interface.launch(share=True)`** é o equivalente executivo
 > ```
 > 
 > **Etapa 2 — Definição do Papel**
+> 
 > Agora o grupo deve obrigar o agente a responder sempre com a seguinte estrutura:
 > * Contexto
 > * Diagnóstico
@@ -337,7 +338,9 @@ Por fim, o comando **`interface.launch(share=True)`** é o equivalente executivo
 > * Recusar perguntas fora do escopo
 > * Manter linguagem profissional
 > * Focar em soluções práticas
+>   
 > **Etapa 3 — Definição do Papel**
+> 
 > O grupo deve:
 > 1. Criar um cenário empresarial realista.
 > 2. Fazer 3 perguntas estratégicas.
