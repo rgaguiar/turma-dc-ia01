@@ -320,11 +320,32 @@ Por fim, o comando **`interface.launch(share=True)`** é o equivalente executivo
 > 4. Qual o nível de profundidade das respostas?
 > 
 > Depois disso, devem ajustar no código:
-
-```python
-role="..."
-instructions=[ ... ]
-```
+> 
+> ```python
+> role="..."
+> instructions=[ ... ]
+> ```
+> 
+> **Etapa 2 — Definição do Papel**
+> Agora o grupo deve obrigar o agente a responder sempre com a seguinte estrutura:
+> * Contexto
+> * Diagnóstico
+> * Análise de riscos
+> * Estratégias recomendadas
+> * Próximos passos
+> Além disso, o agente deve:
+> * Recusar perguntas fora do escopo
+> * Manter linguagem profissional
+> * Focar em soluções práticas
+> **Etapa 3 — Definição do Papel**
+> O grupo deve:
+> 1. Criar um cenário empresarial realista.
+> 2. Fazer 3 perguntas estratégicas.
+> 3. Fazer 1 pergunta fora do escopo.
+> Exemplo de pergunta fora do escopo:
+> * "Escreva um poema."
+> * "Explique física quântica."
+> * "Qual é a capital da França?"
 
 ## 6. Lidando com erros
 
