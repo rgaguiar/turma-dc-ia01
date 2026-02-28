@@ -155,6 +155,12 @@ Neste primeiro cenário, criaremos um agente focado em marketing de conteúdo. O
 [Agente especialista em marketing de conteúdo para redes sociais.](https://github.com/user-attachments/assets/9c1c0c37-fe0d-4182-aeb4-1b21981dc735)
 
 ```python
+# instalando as ferramentas
+!pip install agno
+!pip install groq
+```
+
+```python
 # Importando as bibliotecas necessárias
 from agno.agent import Agent
 from agno.models.groq import Groq
@@ -193,6 +199,12 @@ Neste exemplo, manteremos a lógica do agente do Agno com a tecnologia da Groq, 
 **Vídeo Demostrativo: Executando aplicação com interface.**  
 
 [Consultor de Estratégia Corporativa](https://github.com/user-attachments/assets/c2bc6b03-f427-48f7-aab4-259bdf751b58)
+
+```python
+# instalando as ferramentas
+!pip install agno
+!pip install groq
+```
 
 ```python
 # Importando as bibliotecas, incluindo o Gradio (gr) e o cofre de senhas
