@@ -345,7 +345,9 @@ Por fim, o comando **`interface.launch(share=True)`** é o equivalente executivo
 > 1. Criar um cenário empresarial realista.
 > 2. Fazer 3 perguntas estratégicas.
 > 3. Fazer 1 pergunta fora do escopo.
+>    
 > Exemplo de pergunta fora do escopo:
+> 
 > * "Escreva um poema."
 > * "Explique física quântica."
 > * "Qual é a capital da França?"
