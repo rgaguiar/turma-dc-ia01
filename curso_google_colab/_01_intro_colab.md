@@ -187,6 +187,10 @@ Para que uma ferramenta de IA seja adotada em larga escala no ambiente de trabal
 
 Neste exemplo, manteremos a lógica do agente do Agno com a tecnologia da Groq, mas adicionaremos a biblioteca **Gradio**. Ela atua como uma ponte que transforma o código Python em uma interface web interativa (com caixas de texto e botões), tornando a experiência de uso semelhante à de um software corporativo padrão.
 
+**Vídeo Demostrativo: Executando aplicação com interface.**  
+
+[Consultor de Estratégia Corporativa](https://github.com/user-attachments/assets/c2bc6b03-f427-48f7-aab4-259bdf751b58)
+
 ```python
 # Importando as bibliotecas, incluindo o Gradio (gr) e o cofre de senhas
 import gradio as gr
@@ -257,8 +261,9 @@ No código, configuramos este bloco passando parâmetros muito diretos:
 
 Por fim, o comando **`interface.launch(share=True)`** é o equivalente executivo a "abrir as portas para o público". Além de fazer o Colab gerar a tela interativa imediatamente abaixo da célula de código, a adição do parâmetro `share=True` é um recurso extremamente útil: ele gera automaticamente um link público temporário (uma URL externa). Esse link pode ser enviado para qualquer colega de trabalho ou cliente, permitindo que eles acessem e utilizem o assistente diretamente pelos seus próprios navegadores, sem precisarem acessar o Google Colab ou visualizar qualquer linha de código. É a forma ideal de validar e apresentar sua solução no ambiente corporativo.
 
-> 🎥 **[INSERIR VÍDEO AQUI: Aplicação rodando no navegador externo]**
-> *Sugestão de demonstração para o vídeo: Mostre a si mesmo clicando no link gerado pelo parâmetro `share=True` (o link com o final `.gradio.live`), abrindo uma nova aba no navegador e interagindo com a ferramenta como se fosse um usuário comum da empresa testando o sistema recém-criado.*
+**Vídeo Demostrativo: Executando aplicação no browser**
+
+[Executando aplicação no browser](https://github.com/user-attachments/assets/cfa74cab-6764-4143-890a-6296e595901b)
 
 ## 6. Lidando com erros
 ## 7. Boas práticas no curso
