@@ -70,4 +70,6 @@ chave_groq = userdata.get('API_KEY_GROQ')
 os.environ["GROQ_API_KEY"] = chave_groq
 ```
 
-
+> 📌 **Atenção:**  
+> Consulte o item **“Cadastrando a Chave no Cofre de Senhas do Google Colab”**, no tópico  
+> **“Criando seu primeiro agente com Agno”**, disponível no material de [**Introdução ao Google Colab**](https://github.com/rgaguiar/turma-dc-ia01/blob/main/curso_google_colab/_01_intro_colab.md#5-criando-seu-primeiro-agente-com-agno).
