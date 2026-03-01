@@ -92,7 +92,18 @@ Nessa etapa, a célula de texto pode ser executada de duas maneiras: clicando no
 
 ## 3. O mínimo de Python necessário
 
-> 🚧 **Tópico em Construção**
+Para ter um entendimento básico da programação em Python, recomendamos assistir à playlist abaixo:
+
+[![Playlist: Python Básico](https://img.shields.io/badge/YouTube-Assistir_Playlist-red?style=for-the-badge&logo=youtube)](https://youtube.com/playlist?list=PLLfw4GJ8JzXaphz4Q5YkGnWdG5-Y61rTy&si=c2InXyYq6DSV_DMn)
+*Créditos do conteúdo: Professor Daniel Teófilo*
+
+Aqui você vai obter o básico necessário para entender como funcionam os principais conceitos lógicos da linguagem mais usada por analistas de dados, desenvolvedores e programadores. Sua facilidade permite uma curva de aprendizado rápida e acessível aos estudantes, pois é de fácil compreensão.
+
+**O Python como o "Idioma Oficial" da Inteligência Artificial**
+
+Atualmente, o Python é o padrão global absoluto para o desenvolvimento de Inteligência Artificial. Essa hegemonia estabeleceu-se porque sua estrutura de código é limpa, lógica e muito próxima da linguagem humana, o que permitiu que os maiores centros de pesquisa do mundo construíssem as bibliotecas mais avançadas de IA — como o próprio *framework* Agno, que utilizaremos neste curso — inteiramente baseadas nesta linguagem.
+
+Para profissionais de áreas como direito, marketing e administração, isso representa uma vantagem estratégica significativa. O objetivo de aprender Python neste contexto não é transformá-lo em um engenheiro de software tradicional focado em infraestrutura, mas sim fornecer a fluência estrutural necessária para que você consiga orquestrar, configurar e integrar os modelos de IA mais poderosos do mercado de forma autônoma para resolver problemas reais de negócios.
 
 ## 4. Instalando ferramentas no Colab
 
