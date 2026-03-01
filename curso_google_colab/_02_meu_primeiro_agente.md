@@ -73,3 +73,169 @@ os.environ["GROQ_API_KEY"] = chave_groq
 > 📌 **Atenção:**  
 > Consulte o item **“Cadastrando a Chave no Cofre de Senhas do Google Colab”**, no tópico  
 > **“Criando seu primeiro agente com Agno”**, disponível no material de [**Introdução ao Google Colab**](https://github.com/rgaguiar/turma-dc-ia01/blob/main/curso_google_colab/_01_intro_colab.md#5-criando-seu-primeiro-agente-com-agno).
+
+### Bloco 3: O Cérebro da Operação (Regras de Negócio)
+A qualidade de uma IA para o mercado de trabalho depende diretamente de como você a instrui. Em vez de escrevermos um texto solto, vamos dividir as instruções da nossa IA como se estivéssemos preenchendo a **Descrição de Cargo** (Job Description) de um novo funcionário. 
+
+Veja como os comentários (as linhas com `#`) organizam o nosso pensamento:
+
+```python
+# ===============================
+# AGENTE ESPECIALISTA
+# ===============================
+agente_consultor_juridico = Agent(
+    model=Groq(id="llama-3.3-70b-versatile"),
+    
+    # Cargo da IA
+    role="Consultor Sênior de Estratégia para Escritórios de Advocacia",
+    
+    instructions=[
+        # 1. Quem é o agente (Persona)
+        "Você é um consultor sênior especializado em estratégia e gestão de escritórios de advocacia.",
+        
+        # 2. Qual problema ele resolve (Objetivo)
+        "Seu objetivo é ajudar escritórios jurídicos a melhorar posicionamento, rentabilidade, organização interna e crescimento sustentável.",
+        
+        # 3. Para qual público ele responde (Tom de voz e adequação)
+        "Você responde principalmente a sócios, gestores jurídicos e advogados responsáveis pela administração do escritório.",
+        
+        # 4. Nível de profundidade (Complexidade)
+        "Forneça respostas em nível estratégico e executivo, evitando explicações excessivamente básicas.",
+        
+        # 5. Estrutura obrigatória (Formatação de saída)
+        "Organize sempre a resposta nos seguintes tópicos:",
+        "- Contexto",
+        "- Diagnóstico",
+        "- Análise de riscos",
+        "- Estratégias recomendadas",
+        "- Próximos passos",
+        
+        # 6. Limite de escopo (Barreira de Segurança / Guardrail)
+        "Se a pergunta estiver fora do escopo jurídico-empresarial, informe educadamente que o tema não faz parte da sua especialização.",
+        
+        # 7. Estilo de comunicação
+        "Seja objetivo, estratégico e orientado à tomada de decisão."
+    ]
+)
+```
+**Entendendo os Parâmetros de Configuração:**
+
+* **model= (O Motor Lógico)**: Define qual cérebro vamos usar. No nosso caso, apontamos para os servidores da Groq e escolhemos o modelo llama-3.3-70b-versatile. É como escolher o nível de senioridade e a capacidade de processamento do seu consultor (este modelo específico é excelente para raciocínios complexos).
+
+* **role= (O Cargo Oficial)**: É o "crachá" do agente. É a primeira diretriz de contexto que a IA lê para assumir a sua persona antes mesmo de ler as regras.
+
+* **instructions= (As Regras de Negócio)**: Note que este parâmetro usa colchetes [...] para criar uma lista. É a verdadeira Engenharia de Prompt no Código. O uso da cerquilha (#) no Python permite que você deixe anotações para você mesmo (o computador ignora essas linhas).
+
+>**💡 Dica de Negócios**: O item 6 (Limite de escopo) é o que chamamos tecnicamente de Guardrail (barreira de segurança). É ele que impede que um colaborador use essa ferramenta corporativa para pedir receitas de bolo ou planejar o roteiro de férias, mantendo o custo e o uso do sistema estritamente profissionais.
+
+### Bloco 4: O Procedimento Operacional Padrão (POP)
+
+Temos o especialista, mas precisamos de um processo para que a demanda chegue até ele.
+
+```python
+# ===============================
+# PROCEDIMENTO OP. PADRÃO (POP)
+# ===============================
+def consultar_assistente(pergunta_do_usuario):
+    resposta = agente_consultor_juridico.run(pergunta_do_usuario)
+    return resposta.content
+```
+
+Criamos a função consultar_assistente. Ela atua como uma triagem interna: pega o documento (`a pergunta`), entrega na mesa do especialista (`agente_consultor_juridico`), aguarda a elaboração do plano e devolve apenas o texto útil (`resposta.content`).
+
+### Bloco 5: A Recepção (Interface Visual)
+
+A ferramenta precisa ter "cara de software".
+
+```python
+# ===============================
+# INTERFACE GRADIO
+# ===============================
+interface = gr.Interface(
+    fn=consultar_assistente,
+    inputs=gr.Textbox(lines=25, placeholder="Descreva o cenário ou desafio da sua empresa..."),
+    outputs=gr.Markdown(),
+    title="Portal do Consultor Estratégico",
+    description="Insira sua dúvida de negócios abaixo para receber orientações estruturadas da IA."
+)
+interface.launch(share=True)
+```
+
+Conectamos nosso procedimento (`fn=consultar_assistente`) a uma tela web. Como consultas jurídicas e de negócios costumam ser longas, alteramos o lines=25 para dar uma caixa de texto grande e confortável ao usuário. O share=True gera o link público para você enviar para sua equipe testar no navegador deles.
+
+### Bloco 6: Homologação (Testando na Prática)
+
+Todo software precisa ser validado. Use as perguntas abaixo para testar a sua interface:
+
+```python
+# ===============================
+# PERGUNTAS PARA TESTE
+# ===============================
+# 1. Como um escritório de advocacia pode aumentar sua captação de clientes empresariais?
+# 2. Tenho um escritório com 12 advogados e queda de 25% no faturamento nos últimos 8 meses. O que devo fazer?
+# 3. Escreva um poema sobre justiça.
+```
+
+**Testando a Arquitetura:**
+
+* **Pergunta 1**: Testa a capacidade de planejamento.  
+* **Pergunta 2**: É um "teste de estresse" executivo. Avalia se a IA vai aplicar corretamente os tópicos obrigatórios (Diagnóstico, Riscos, Estratégia) em um cenário de crise real. 
+* **Pergunta 3**: Testa a nossa regra de segurança (Guardrail). O sistema deve negar o pedido educadamente.
+
+  
+
+# O Resultado Final: IA Aplicada à Realidade do Negócio
+
+O que acabamos de construir não é apenas um script de código, mas um **produto digital funcional e de alto valor estratégico**. Ao encapsularmos o raciocínio avançado de um modelo de linguagem em uma interface acessível, criamos uma ferramenta pronta para ser adotada por qualquer departamento da empresa.
+
+<img width="1819" height="958" alt="Interface do Portal do Consultor Estratégico" src="https://github.com/user-attachments/assets/52998123-967f-4b24-b20f-3051d80ef9f6" />
+
+**Por que esse projeto tem um alto valor estratégico?**
+
+* **Autonomia Operacional:** Gestores, sócios e analistas que não sabem programar agora têm acesso direto a um "consultor sênior" disponível 24/7, diretamente pelo navegador.
+* **Padronização de Entregas:** Graças à nossa Engenharia de Prompt no código, a IA não dá respostas genéricas. Toda análise gerada segue um padrão corporativo rigoroso (Contexto, Diagnóstico, Riscos e Próximos Passos).
+* **Segurança e Foco:** As regras de limite de escopo (*guardrails*) garantem que a ferramenta seja utilizada exclusivamente para resolver problemas de negócios, evitando o uso indevido da infraestrutura da empresa.
+* **Escalabilidade:** O código base que criamos pode ser facilmente replicado. Mudando apenas o `role` e as `instructions`, você pode criar um "Auditor Fiscal", um "Especialista em SEO" ou um "Revisor de Contratos" usando a mesma arquitetura.
+
+Este é o verdadeiro poder da Inteligência Artificial quando aliada a uma boa visão de negócios: transformar conhecimento técnico em **vantagem competitiva imediata**.  
+
+
+### Expandindo a Arquitetura: Casos de Uso para Outras Áreas
+
+A grande beleza da arquitetura que acabamos de construir é a sua **escalabilidade**. O código base (a infraestrutura) permanece exatamente o mesmo. Para criar uma nova ferramenta para outro departamento, você só precisa alterar o "Manual de Conduta" (os parâmetros `role` e `instructions` do Agente).
+
+Abaixo, apresentamos como você pode adaptar esse mesmo código para resolver problemas reais em diferentes áreas do negócio:
+
+#### 1. Para o Time de Marketing e Vendas
+**Objetivo:** Criar um assistente focado em conversão, aquisição de clientes e posicionamento de marca.
+* **`role`:** `"Head de Growth e Marketing Digital"`
+* **`instructions` (Exemplos de regras):**
+  * "Seu objetivo é estruturar campanhas de marketing, otimizar o Custo de Aquisição de Clientes (CAC) e aumentar o Life Time Value (LTV)."
+  * "Ao receber um produto ou serviço, crie uma estratégia de lançamento em 3 fases: Atração, Engajamento e Conversão."
+  * "Sempre inclua sugestões de gatilhos mentais e canais de distribuição (Tráfego Pago, SEO, Redes Sociais)."
+
+#### 2. Para o Time de Recursos Humanos (RH)
+**Objetivo:** Desenvolver um consultor para mediação de conflitos, cultura organizacional e avaliações de desempenho.
+* **`role`:** `"Consultor Sênior de Desenvolvimento Organizacional e RH"`
+* **`instructions` (Exemplos de regras):**
+  * "Você ajuda líderes e gestores a lidar com desafios de gestão de pessoas, retenção de talentos e engajamento."
+  * "Ao receber um relato de conflito ou baixo desempenho, forneça um roteiro prático para uma reunião de feedback construtivo (1:1)."
+  * "Mantenha um tom empático, neutro e estritamente alinhado às boas práticas de compliance trabalhista e ética corporativa."
+
+#### 3. Para o Time de Seguros e Logística
+**Objetivo:** Estruturar um analista focado em mitigação de riscos e análise de apólices complexas.
+* **`role`:** `"Especialista em Subscrição e Seguros de Transporte (Nacional e Internacional)"`
+* **`instructions` (Exemplos de regras):**
+  * "Sua função é avaliar cenários logísticos e identificar gargalos de segurança e riscos de avaria ou sinistro em cargas."
+  * "Sempre estruture a resposta apontando: Riscos da Rota, Cláusulas Sugeridas para a Apólice e Medidas de Prevenção de Perdas."
+  * "Se o usuário perguntar sobre rotas marítimas internacionais, destaque as regras de compliance aduaneiro e os incoterms aplicáveis."
+
+#### 4. Para o Time Financeiro e Controladoria
+**Objetivo:** Um assistente analítico para revisão de custos e saúde financeira.
+* **`role`:** `"Analista Sênior de Controladoria e Finanças Corporativas"`
+* **`instructions` (Exemplos de regras):**
+  * "Você analisa cenários de fluxo de caixa, redução de custos operacionais (OPEX) e viabilidade de investimentos (CAPEX)."
+  * "Diante de um cenário de queda de margem de lucro, proponha um plano de ação focado em eficiência imediata e renegociação de contratos."
+  * "Nunca forneça conselhos de investimentos em bolsa de valores; restrinja-se à saúde financeira interna da empresa."
+
+**O seu próximo passo:** Copie o código original da nossa aula, escolha uma das áreas acima que mais se aproxima da sua realidade profissional e modifique os parâmetros. Execute a célula e veja o seu novo assistente ganhar vida!
