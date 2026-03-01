@@ -239,3 +239,111 @@ Abaixo, apresentamos como você pode adaptar esse mesmo código para resolver pr
   * "Nunca forneça conselhos de investimentos em bolsa de valores; restrinja-se à saúde financeira interna da empresa."
 
 **O seu próximo passo:** Copie o código original da nossa aula, escolha uma das áreas acima que mais se aproxima da sua realidade profissional e modifique os parâmetros. Execute a célula e veja o seu novo assistente ganhar vida!
+
+
+# Gabarito: Código completo da aplicação do Assistente Jurídico
+
+
+```python
+# instalando as ferramentas necessárias
+!pip install -q agno
+!pip install -q groq
+```
+
+
+```python
+# ===============================
+# FERRAMENTAS
+# ===============================
+
+import gradio as gr
+from agno.agent import Agent
+from agno.models.groq import Groq
+from google.colab import userdata
+import os
+
+# ===============================
+# AUTENTICAÇÃO API_KEY_GROQ
+# ===============================
+
+chave_groq = userdata.get('API_KEY_GROQ')
+os.environ["GROQ_API_KEY"] = chave_groq
+
+# ===============================
+# AGENTE ESPECIALISTA
+# ===============================
+
+agente_consultor_juridico = Agent(
+    model=Groq(id="llama-3.3-70b-versatile"),
+    
+    # persona
+    role="Consultor Sênior de Estratégia para Escritórios de Advocacia",
+    
+    instructions=[
+        # Quem é o agente
+        "Você é um consultor sênior especializado em estratégia e gestão de escritórios de advocacia.",
+        
+        # Qual problema ele resolve
+        "Seu objetivo é ajudar escritórios jurídicos a melhorar posicionamento, rentabilidade, organização interna e crescimento sustentável.",
+        
+        # Para qual público responde
+        "Você responde principalmente a sócios, gestores jurídicos e advogados responsáveis pela administração do escritório.",
+        
+        # Nível de profundidade
+        "Forneça respostas em nível estratégico e executivo, evitando explicações excessivamente básicas.",
+        
+        # Estrutura obrigatória
+        "Organize sempre a resposta nos seguintes tópicos:",
+        "- Contexto",
+        "- Diagnóstico",
+        "- Análise de riscos",
+        "- Estratégias recomendadas",
+        "- Próximos passos",
+        
+        # Limite de escopo
+        "Se a pergunta estiver fora do escopo jurídico-empresarial, informe educadamente que o tema não faz parte da sua especialização.",
+        
+        # Estilo
+        "Seja objetivo, estratégico e orientado à tomada de decisão."
+    ]
+)
+
+# ===============================
+# PROCEDIMENTO OP. PADRÃO (POP)
+# ===============================
+
+def consultar_assistente(pergunta_do_usuario):
+    # O agente processa a pergunta e retorna a resposta gerada
+    resposta = agente_consultor_juridico.run(pergunta_do_usuario)
+    return resposta.content
+
+
+# ===============================
+# INTERFACE GRADIO
+# ===============================
+
+# Construindo e inicializando a Interface Visual
+interface = gr.Interface(
+    fn=consultar_assistente,
+    inputs=gr.Textbox(lines=25, placeholder="Descreva o cenário ou desafio da sua empresa..."),
+    outputs=gr.Markdown(),
+    title="Portal do Consultor Estratégico",
+    description="Insira sua dúvida de negócios abaixo para receber orientações estruturadas da IA."
+)
+
+# Inicia a aplicação para visualização no Colab e gera um link público para compartilhamento
+interface.launch(share=True)
+
+
+# ===============================
+# PERGUNTA PARA TESTE
+# ===============================
+
+# - Como um escritório de advocacia pode aumentar sua captação de clientes empresariais?
+# - Tenho um escritório com 12 advogados e queda de 25% no faturamento nos últimos 8 meses. O que devo fazer?
+# - Escreva um poema sobre justiça.
+
+
+
+```
+
