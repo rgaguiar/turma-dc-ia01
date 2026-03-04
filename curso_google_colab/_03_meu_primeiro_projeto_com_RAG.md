@@ -120,7 +120,7 @@ No Google Colab, `persistent_client=True` funciona apenas durante a sessão ativ
 ### Bloco 4: Extração e Segmentação de Dados (Chunking)
 Nesta etapa, antes de executar o código abaixo, verifique se o documento que será utilizado já foi enviado para a área de arquivos do Google Colab (veja a imagem).  
 
-Para fazer isso, basta arrastar o arquivo do seu computador para a aba “Arquivos” do Colab ou utilizar a opção Upload. Após o envio, confirme que o arquivo aparece na lista de arquivos do ambiente.  
+Para fazer isso, basta arrastar o arquivo do seu computador para a aba “Arquivos” do Colab ou utilizar a opção Upload. Após o envio, confirme que o arquivo aparece na lista de arquivos do ambiente. Para o nosso exemplo, estamos usando o arquivo **Escola do Saber.pdf**.
 
 Esse passo é importante porque o código irá acessar o documento diretamente a partir desse diretório de arquivos.  
 
