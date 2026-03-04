@@ -309,7 +309,7 @@ Isso significa que o sistema processa exatamente o arquivo enviado pelo usuário
 
 Esse fluxo permite que a aplicação funcione de forma **flexível e escalável**, possibilitando que diferentes usuários analisem **contratos, manuais ou relatórios distintos** dentro da mesma interface.
 
-### Código completo
+## Código completo
 
 ```python
 
