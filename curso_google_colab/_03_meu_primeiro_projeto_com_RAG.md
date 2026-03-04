@@ -35,7 +35,7 @@ from agno.models.openai import OpenAIChat
 from agno.vectordb.chroma import ChromaDb
 from google.colab import userdata
 
-# Autenticação (Crachás de Acesso)
+# Autenticação Segura
 os.environ["OPENAI_API_KEY"] = userdata.get("OPENAI_API_KEY")
 os.environ["HF_TOKEN"] = userdata.get("HF_TK") # Usado para os modelos de leitura
 ```
