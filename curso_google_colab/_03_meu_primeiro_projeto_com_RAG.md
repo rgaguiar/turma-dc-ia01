@@ -94,7 +94,9 @@ vector_db = ChromaDb(
     embedder=embedder,
 )
 ```
-Utilizamos o **ChromaDb**, um banco de dados vetorial projetado especificamente para armazenar e realizar buscas de similaridade em altíssima velocidade. A função Knowledge atua como a ponte de integração, estruturando esses dados de forma que o Agente consiga consultá-los.  
+Utilizamos o **ChromaDb**, um banco de dados vetorial projetado especificamente para armazenar e realizar buscas de similaridade em altíssima velocidade. A função Knowledge atua como a ponte de integração, estruturando esses dados de forma que o Agente consiga consultá-los.   
+
+No Google Colab, `persistent_client=True` funciona apenas durante a sessão ativa do ambiente.
 
 ### Bloco 4: Extração e Segmentação de Dados (Chunking)
 
