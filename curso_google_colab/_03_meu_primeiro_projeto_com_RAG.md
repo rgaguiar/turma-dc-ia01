@@ -23,7 +23,7 @@ Nesta etapa, vamos configurar a infraestrutura de dados. Faremos a leitura de um
 Iniciamos importando as dependências do projeto e configurando o acesso à API do modelo de linguagem.
 
 > **⚠️ IMPORTANTE**  
-> Para que o código funcione corretamente, é necessário armazenar a API Key da OpenAI no cofre de segredos do Google Colab (Secrets). Essa prática é importante porque evita expor a chave diretamente no código, garantindo mais segurança ao projeto.
+> Para que o código funcione corretamente, é necessário armazenar a API Key da **OpenAI** no cofre de segredos do Google Colab (Secrets). Essa prática é importante porque evita expor a chave diretamente no código, garantindo mais segurança ao projeto.
 
 Antes de iniciar o desenvolvimento do agente, é necessário instalar algumas bibliotecas que serão responsáveis pelo processamento de documentos, geração de embeddings e armazenamento vetorial.
 
