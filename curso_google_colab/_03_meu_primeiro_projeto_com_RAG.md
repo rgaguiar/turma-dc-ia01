@@ -23,6 +23,13 @@ Nesta etapa, vamos configurar a infraestrutura de dados. Faremos a leitura de um
 Iniciamos importando as dependências do projeto e garantindo o acesso seguro via API.
 
 ```python
+# instalando as ferramentas necessárias
+!pip install -q agno
+!pip install -q pypdf
+!pip install -q chromadb
+```
+
+```python
 # ===============================
 # BLOCO 1: FERRAMENTAS E AUTENTICAÇÃO
 # ===============================
