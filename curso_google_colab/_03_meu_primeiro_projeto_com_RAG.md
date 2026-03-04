@@ -125,7 +125,7 @@ Nesta etapa, antes de executar o código abaixo, verifique se o documento que se
 
 <img width="2391" height="1315" alt="image" src="https://github.com/user-attachments/assets/f5c0dfb0-62f7-4cf9-b786-822c50059b26" />
 
-Para fazer isso, basta arrastar o arquivo do seu computador para a aba “Arquivos” do Colab ou utilizar a opção Upload. Após o envio, confirme que o arquivo aparece na lista de arquivos do ambiente. Para o nosso exemplo, estamos usando o arquivo **Escola do Saber.pdf**.
+Para fazer isso, basta arrastar o arquivo do seu computador para a aba “Arquivos” do Colab ou utilizar a opção Upload. Após o envio, confirme que o arquivo aparece na lista de arquivos do ambiente. Para o nosso exemplo, estamos usando o arquivo [**Escola do Saber.pdf**](https://github.com/rgaguiar/turma-dc-ia01/blob/main/Escola%20do%20Saber.pdf)
 
 Esse passo é importante porque o código irá acessar o documento diretamente a partir desse diretório de arquivos. Após subir o arquivo para o google colab, podemos execultar o codigo abaixo.
 
