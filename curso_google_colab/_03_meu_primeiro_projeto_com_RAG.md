@@ -205,3 +205,112 @@ agent.print_response("Qual o preço do ensino médio na sua escola?", stream=Tru
 >**💡 Dica de Negócios**: O item 6 (Limite de escopo) é a trava de segurança mais importante em implementações corporativas. Ele atua como um mecanismo de compliance, garantindo que o assistente não assuma compromissos financeiros ou crie regras inexistentes para os seus clientes.
 
 ## FASE 2: Interface Dinâmica de Usuário (Gradio)
+
+Até este ponto, construímos toda a arquitetura de backend: leitura do documento, segmentação (chunking), geração de embeddings e busca semântica usando um agente com base vetorial.
+
+No entanto, em aplicações reais como em RH, Jurídico, Compliance ou Vendas, não podem depender de alguém executando código manualmente para cada novo documento. O ideal é que o próprio usuário consiga enviar arquivos e fazer perguntas diretamente por uma interface gráfica.
+
+Para resolver isso, utilizamos o Gradio, uma biblioteca que permite criar interfaces web simples para aplicações de IA. Com ele, o usuário pode:
+
+* Fazer **upload de documentos PDF**
+* Digitar **perguntas sobre o conteúdo**
+* Receber **respostas geradas pelo agente**
+
+Sem precisar acessar ou modificar o código.
+
+### Bloco 7: Procedimento Operacional Dinâmico
+
+Neste bloco criamos uma função responsável por processar o documento enviado pela interface e executar a pergunta do usuário.
+
+Essa função atua como o fluxo principal da aplicação, realizando três etapas:
+
+1. **Validação do upload**  
+Verifica se o usuário realmente enviou um arquivo antes de iniciar o processamento.
+
+2. **Processamento do documento enviado**    
+O PDF submetido pela interface é lido, segmentado em chunks e inserido na base de conhecimento.
+
+3. **Consulta ao agente**  
+A pergunta do usuário é enviada ao agente, que realiza a busca semântica nos vetores e gera a resposta.
+
+```python
+# ===============================
+# BLOCO 7: O PROCEDIMENTO DE ATENDIMENTO
+# ===============================
+import gradio as gr
+
+def analisar_documento(arquivo_pdf, pergunta_do_usuario):
+    # Validação: Exige o upload do arquivo
+    if arquivo_pdf is None:
+        return "Por favor, faça o upload de um documento PDF para iniciar a análise."
+    
+    # Processamento dinâmico do documento inserido via UI
+    knowledge.insert(
+        path=arquivo_pdf.name, 
+        reader=PDFReader(chunk_size=1000, chunk_overlap=200)
+    )
+    
+    # Execução da busca e geração da resposta
+    resposta = agent.run(pergunta_do_usuario)
+    return resposta.content
+```
+
+### Bloco 8: Lançamento da Interface Web
+
+Após definir a função responsável por processar o documento e responder às perguntas do usuário, o próximo passo é criar a interface web que permitirá a interação com o sistema.
+
+Para isso utilizamos o Gradio, que possibilita construir interfaces simples diretamente em Python. Nesse bloco configuramos os componentes visuais da aplicação, como o campo de upload do arquivo, a área onde o usuário digita sua pergunta e o espaço onde a resposta da IA será exibida.
+
+A interface conecta esses elementos à função `analisar_documento`, criada anteriormente, que executa todo o fluxo de processamento.
+
+```python
+# ===============================
+# BLOCO 8: INTERFACE DO USUÁRIO (UI)
+# ===============================
+interface = gr.Interface(
+    fn=analisar_documento,
+    inputs=[
+        # Componente de Upload restrito a formato PDF
+        gr.File(label="1. Faça o upload do documento corporativo (PDF)", file_types=[".pdf"]),
+        gr.Textbox(label="2. Insira sua consulta sobre o documento:", lines=3)
+    ],
+    outputs=gr.Markdown(label="Análise Estratégica (IA)"),
+    title="Plataforma Corporativa de Análise Documental (RAG)",
+    description="Faça o upload de contratos, apólices ou manuais. A inteligência artificial baseará suas respostas estritamente no conteúdo do arquivo enviado."
+)
+
+# Geração de URL pública para testes da equipe
+interface.launch(share=True)
+```
+
+Nesse código definimos:  
+
+* **Função principal (fn)**: conecta a interface à função `analisar_documento`, que executa o processamento.
+
+* **Inputs**:  
+    * Upload de um arquivo PDF
+    * Campo de texto para a pergunta do usuário
+* **Output**: área em Markdown onde a resposta gerada pela IA será exibida.
+* **Título e descrição**: ajudam a contextualizar a aplicação para o usuário final.
+
+Ao executar `interface.launch(share=True), o Gradio cria automaticamente uma interface web acessível por um link público temporário, permitindo que outras pessoas testem a aplicação sem precisar instalar o ambiente localmente.
+
+### O valor do processamento dinâmico
+
+Um ponto importante dessa arquitetura aparece no Bloco 7, quando utilizamos `arquivo_pdf.name`.
+
+Isso significa que o sistema processa exatamente o arquivo enviado pelo usuário, sem necessidade de preparação prévia no código. O documento é:
+
+1. carregado,
+2. segmentado em chunks,
+3. transformado em embeddings,
+4. armazenado no banco vetorial,
+5. utilizado na busca semântica para responder à pergunta.
+
+Esse fluxo permite que a aplicação funcione de forma **flexível e escalável**, possibilitando que diferentes usuários analisem **contratos, manuais ou relatórios distintos** dentro da mesma interface.
+
+### Código completo
+
+```python
+
+```
