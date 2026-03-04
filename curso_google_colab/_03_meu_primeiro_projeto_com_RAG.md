@@ -140,7 +140,7 @@ Por fim, integramos o Modelo de Linguagem à nossa Base de Conhecimento e aplica
 # BLOCO 5: O AGENTE ESPECIALISTA (COM RAG)
 # ===============================
 agent = Agent(
-    model=OpenAIChat(id="gpt-4o-mini", temperature=0.7),
+    model=OpenAIChat(id="gpt-4o-mini", temperature=0.3),
     knowledge=knowledge,   # INTEGRAÇÃO RAG: Conectando a base de dados ao agente
     search_knowledge=True, # Habilitando a função de recuperação (Retrieval)
     markdown=True,
