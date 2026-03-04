@@ -20,7 +20,9 @@ Vamos construir essa arquitetura em duas fases: primeiro estruturando o motor de
 Nesta etapa, vamos configurar a infraestrutura de dados. Faremos a leitura de um documento PDF alocado no sistema e prepararemos a IA para interpretá-lo.
 
 ### Bloco 1: As Ferramentas de Acesso
-Iniciamos importando as dependências do projeto e garantindo o acesso seguro via API (importante cadastrar a api-key da **OPENAI** no cofre de senhas).  
+Iniciamos importando as dependências do projeto e configurando o acesso à API do modelo de linguagem.
+
+Para que o código funcione corretamente, é necessário armazenar a API Key da OpenAI no cofre de segredos do Google Colab (Secrets). Essa prática é importante porque evita expor a chave diretamente no código, garantindo mais segurança ao projeto.
 
 Antes de iniciar o desenvolvimento do agente, é necessário instalar algumas bibliotecas que serão responsáveis pelo processamento de documentos, geração de embeddings e armazenamento vetorial.
 
