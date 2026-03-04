@@ -20,7 +20,7 @@ Vamos construir essa arquitetura em duas fases: primeiro estruturando o motor de
 Nesta etapa, vamos configurar a infraestrutura de dados. Faremos a leitura de um documento PDF alocado no sistema e prepararemos a IA para interpretá-lo.
 
 ### Bloco 1: As Ferramentas de Acesso
-Iniciamos importando as dependências do projeto e garantindo o acesso seguro via API.  
+Iniciamos importando as dependências do projeto e garantindo o acesso seguro via API (**OPENAI**).  
 
 Antes de iniciar o desenvolvimento do agente, é necessário instalar algumas bibliotecas que serão responsáveis pelo processamento de documentos, geração de embeddings e armazenamento vetorial.
 
