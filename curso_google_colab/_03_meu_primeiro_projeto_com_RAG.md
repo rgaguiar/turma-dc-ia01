@@ -15,7 +15,7 @@ Vamos construir essa arquitetura em duas fases: primeiro estruturando o motor de
 
 ---
 
-## FASE 1: O Motor RAG (Lógica de Bastidores)
+## FASE 1: A Arquitetura RAG (Lógica de Backend)
 
 Nesta etapa, vamos configurar a infraestrutura de dados. Faremos a leitura de um documento PDF alocado no sistema e prepararemos a IA para interpretá-lo.
 
@@ -129,4 +129,47 @@ Vale destacar que o **fixed-size chunking** é apenas uma das abordagens possív
 
 Cada técnica possui vantagens e limitações, e a escolha depende do tipo de documento e do objetivo da aplicação.
 
+### Bloco 5: Configuração do Agente com RAG
 
+Por fim, integramos o Modelo de Linguagem à nossa Base de Conhecimento e aplicamos o framework de regras de negócio.
+
+```python
+# ===============================
+# BLOCO 5: O AGENTE ESPECIALISTA (COM RAG)
+# ===============================
+agent = Agent(
+    model=OpenAIChat(id="gpt-4o-mini", temperature=0.7),
+    knowledge=knowledge,   # INTEGRAÇÃO RAG: Conectando a base de dados ao agente
+    search_knowledge=True, # Habilitando a função de recuperação (Retrieval)
+    markdown=True,
+    
+    # 1. Cargo / Persona
+    role="Assistente Sênior de Secretaria da Escola do Saber",
+    
+    # 2. Missão Principal
+    description="Fornecer informações precisas sobre matrículas e regras, baseando-se EXCLUSIVAMENTE nos documentos fornecidos.",
+    
+    # Regras de Execução
+    instructions=[
+        # 3. Público
+        "Você responde a pais de alunos e potenciais clientes.",
+        # 4. Profundidade
+        "Forneça respostas claras e acessíveis.",
+        # 5. Estrutura
+        "Organize em tópicos para facilitar a leitura.",
+        # 6. Limite de Escopo (GUARDRAIL ANTI-ALUCINAÇÃO)
+        "Sempre pesquise na base de conhecimento antes de responder. Se a informação solicitada NÃO constar no PDF, informe que não possui a resposta. Jamais gere informações não documentadas.",
+        # 7. Estilo
+        "Seja educado e direto."
+    ]
+)
+
+# ===============================
+# BLOCO 6: TESTE DE HOMOLOGAÇÃO
+# ===============================
+print("--- Iniciando Consulta ao Agente ---")
+agent.print_response("Qual o preço do ensino médio na sua escola?", stream=True)
+```
+>**💡 Dica de Negócios**: O item 6 (Limite de escopo) é a trava de segurança mais importante em implementações corporativas. Ele atua como um mecanismo de compliance, garantindo que o assistente não assuma compromissos financeiros ou crie regras inexistentes para os seus clientes.
+
+## FASE 2: Interface Dinâmica de Usuário (Gradio)
