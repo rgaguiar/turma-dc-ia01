@@ -118,6 +118,16 @@ Utilizamos o **ChromaDb**, um banco de dados vetorial projetado especificamente 
 No Google Colab, `persistent_client=True` funciona apenas durante a sessão ativa do ambiente.
 
 ### Bloco 4: Extração e Segmentação de Dados (Chunking)
+Nesta etapa, antes de executar o código abaixo, verifique se o documento que será utilizado já foi enviado para a área de arquivos do Google Colab (veja a imagem).  
+
+Para fazer isso, basta arrastar o arquivo do seu computador para a aba “Arquivos” do Colab ou utilizar a opção Upload. Após o envio, confirme que o arquivo aparece na lista de arquivos do ambiente.  
+
+Esse passo é importante porque o código irá acessar o documento diretamente a partir desse diretório de arquivos.  
+
+<img width="2391" height="1315" alt="image" src="https://github.com/user-attachments/assets/f5c0dfb0-62f7-4cf9-b786-822c50059b26" />
+
+Após subir o arquivo para o google colab, podemos execultar o codigo abaixo.
+
 
 ```python
 # ===============================
