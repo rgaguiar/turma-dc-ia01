@@ -93,6 +93,10 @@ vector_db = ChromaDb(
     persistent_client=True,
     embedder=embedder,
 )
+
+# Gerenciador de Conhecimento (Knowledge Base)
+knowledge = Knowledge(vector_db=vector_db)
+
 ```
 Utilizamos o **ChromaDb**, um banco de dados vetorial projetado especificamente para armazenar e realizar buscas de similaridade em altíssima velocidade. A função Knowledge atua como a ponte de integração, estruturando esses dados de forma que o Agente consiga consultá-los.   
 
