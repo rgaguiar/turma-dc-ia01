@@ -20,7 +20,9 @@ Vamos construir essa arquitetura em duas fases: primeiro estruturando o motor de
 Nesta etapa, vamos configurar a infraestrutura de dados. Faremos a leitura de um documento PDF alocado no sistema e prepararemos a IA para interpretá-lo.
 
 ### Bloco 1: As Ferramentas de Acesso
-Iniciamos importando as dependências do projeto e garantindo o acesso seguro via API.
+Iniciamos importando as dependências do projeto e garantindo o acesso seguro via API.  
+
+Antes de iniciar o desenvolvimento do agente, é necessário instalar algumas bibliotecas que serão responsáveis pelo processamento de documentos, geração de embeddings e armazenamento vetorial.
 
 ```python
 # instalando as ferramentas necessárias
@@ -28,6 +30,13 @@ Iniciamos importando as dependências do projeto e garantindo o acesso seguro vi
 !pip install -q pypdf
 !pip install -q chromadb
 ```
+**Contextualizando as Ferramentas**:  
+
+* **agno** é o framework utilizado para criar e orquestrar agentes de IA. Ele facilita a integração entre modelos de linguagem, bases de conhecimento, ferramentas externas e bancos vetoriais, permitindo construir aplicações baseadas em agentes de forma estruturada.
+
+* **pypdf** é Biblioteca utilizada para ler e extrair texto de arquivos PDF. No nosso projeto, ela permite que o conteúdo dos documentos seja carregado e preparado para as etapas de segmentação (chunking) e geração de embeddings.
+
+* **chromadb** é um banco de dados vetorial utilizado para armazenar os embeddings gerados a partir dos textos. Ele permite realizar buscas por similaridade semântica, encontrando trechos de documentos que possuem significado próximo à pergunta do usuário.
 
 ```python
 # ===============================
@@ -44,7 +53,6 @@ from google.colab import userdata
 
 # Autenticação Segura
 os.environ["OPENAI_API_KEY"] = userdata.get("OPENAI_API_KEY")
-os.environ["HF_TOKEN"] = userdata.get("HF_TK") # Usado para os modelos de leitura
 ```
 
 > **⚠️ Importante (Google Colab)**
@@ -136,9 +144,9 @@ Essa estratégia garante que cada trecho do documento seja processado, indexado 
 
 Vale destacar que o **fixed-size chunking** é apenas uma das abordagens possíveis. Existem outras técnicas de segmentação, como:  
 
-**Chunking por sentença ou parágrafo**, que respeita a estrutura natural do texto.  
-**Chunking semântico**, que divide o conteúdo com base em mudanças de significado.  
-**Chunking hierárquico**, que utiliza diferentes níveis de divisão (seções, subtópicos, parágrafos).  
+* **Chunking por sentença ou parágrafo**, que respeita a estrutura natural do texto.  
+* **Chunking semântico**, que divide o conteúdo com base em mudanças de significado.  
+* **Chunking hierárquico**, que utiliza diferentes níveis de divisão (seções, subtópicos, parágrafos).  
 
 Cada técnica possui vantagens e limitações, e a escolha depende do tipo de documento e do objetivo da aplicação.
 
