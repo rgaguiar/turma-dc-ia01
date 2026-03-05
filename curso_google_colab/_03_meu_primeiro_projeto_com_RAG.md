@@ -312,5 +312,115 @@ Esse fluxo permite que a aplicação funcione de forma **flexível e escalável*
 ## Código completo
 
 ```python
+# instalando as ferramentas necessárias
+!pip install -q agno
+!pip install -q pypdf
+!pip install -q chromadb
+```
+
+```python
+# ===============================
+# BLOCO 1: FERRAMENTAS E AUTENTICAÇÃO
+# ===============================
+import os
+import gradio as gr
+from agno.agent import Agent
+from agno.knowledge.embedder.sentence_transformer import SentenceTransformerEmbedder
+from agno.knowledge.knowledge import Knowledge
+from agno.knowledge.reader.pdf_reader import PDFReader
+from agno.models.openai import OpenAIChat
+from agno.vectordb.chroma import ChromaDb
+from google.colab import userdata
+
+# Autenticação Segura
+os.environ["OPENAI_API_KEY"] = userdata.get("OPENAI_API_KEY")
+
+# ===============================
+# BLOCO 2: O TRADUTOR DE SIGNIFICADOS
+# ===============================
+embedder = SentenceTransformerEmbedder(dimensions=384)
+
+# ===============================
+# BLOCO 3: BANCO DE DADOS VETORIAL E CONTEXTO
+# ===============================
+# Repositório Vetorial
+vector_db = ChromaDb(
+    collection="escola_do_saber",
+    path="./chromadb_escola",
+    persistent_client=True,
+    embedder=embedder,
+)
+
+# Gerenciador de Conhecimento (Knowledge Base)
+knowledge = Knowledge(vector_db=vector_db)
+
+
+# ===============================
+# BLOCO 4: O AGENTE ESPECIALISTA (COM RAG)
+# ===============================
+agent = Agent(
+    model=OpenAIChat(id="gpt-4o-mini", temperature=0.3),
+    knowledge=knowledge,   # INTEGRAÇÃO RAG: Conectando a base de dados ao agente
+    search_knowledge=True, # Habilitando a função de recuperação (Retrieval)
+    markdown=True,
+
+    # 1. Cargo / Persona
+    role="Assistente Sênior de Secretaria da Escola do Saber",
+
+    # 2. Missão Principal
+    description="Fornecer informações precisas sobre matrículas e regras, baseando-se EXCLUSIVAMENTE nos documentos fornecidos.",
+
+    # Regras de Execução
+    instructions=[
+        # 3. Público
+        "Você responde a pais de alunos e potenciais clientes.",
+        # 4. Profundidade
+        "Forneça respostas claras e acessíveis.",
+        # 5. Estrutura
+        "Organize em tópicos para facilitar a leitura.",
+        # 6. Limite de Escopo (GUARDRAIL ANTI-ALUCINAÇÃO)
+        "Sempre pesquise na base de conhecimento antes de responder. Se a informação solicitada NÃO constar no PDF, informe que não possui a resposta. Jamais gere informações não documentadas.",
+        # 7. Estilo
+        "Seja educado e direto."
+    ]
+)
+
+# ===============================
+# BLOCO 5: O PROCEDIMENTO DE ATENDIMENTO
+# ===============================
+import gradio as gr
+
+def analisar_documento(arquivo_pdf, pergunta_do_usuario):
+    # Validação: Exige o upload do arquivo
+    if arquivo_pdf is None:
+        return "Por favor, faça o upload de um documento PDF para iniciar a análise."
+
+    # Processamento dinâmico do documento inserido via UI
+    knowledge.insert(
+        path=arquivo_pdf.name,
+        reader=PDFReader(chunk_size=1000, chunk_overlap=200)
+    )
+
+    # Execução da busca e geração da resposta
+    resposta = agent.run(pergunta_do_usuario)
+    return resposta.content
+
+# ===============================
+# BLOCO 6: INTERFACE DO USUÁRIO (UI)
+# ===============================
+interface = gr.Interface(
+    fn=analisar_documento,
+    inputs=[
+        # Componente de Upload restrito a formato PDF
+        gr.File(label="1. Faça o upload do documento corporativo (PDF)", file_types=[".pdf"]),
+        gr.Textbox(label="2. Insira sua consulta sobre o documento:", lines=3)
+    ],
+    outputs=gr.Markdown(label="Análise Estratégica (IA)"),
+    title="Plataforma Corporativa de Análise Documental (RAG)",
+    description="Faça o upload de contratos, apólices ou manuais. A inteligência artificial baseará suas respostas estritamente no conteúdo do arquivo enviado."
+)
+
+# Geração de URL pública para testes da equipe
+interface.launch(share=True)
 
 ```
