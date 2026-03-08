@@ -1,8 +1,6 @@
-# Assistente Automatizado de Onboarding e Compliance (PDF) usando RAG
+# Assistente Gerador de Trilha de Aprendizagem usando RAG
  
 <img width="1536" height="1024" alt="ChatGPT Image 4 de mar  de 2026, 22_39_31" src="https://github.com/user-attachments/assets/92f1f85f-d584-4f9f-b80d-075772082928" />
-
-
 
 ### Ador do Negócio
 No dia a dia corporativo, profissionais de áreas como Direito, Recursos Humanos e Operações perdem dias de trabalho para ler, interpretar e resumir documentos extensos. Seja uma nova resolução tributária, um manual de subscrição de seguros ou a atualização do 
@@ -292,7 +290,7 @@ interface = gr.Interface(
 interface.launch(share=True)
 
 ```
-### Resultado do Produto: Assistente Automatizado de Onboarding e Compliance (PDF) usando RAG
+### Resultado do Produto: Assistente Gerador de Trilha de Aprendizagem usando RAG
 
 <img width="2491" height="1361" alt="image" src="https://github.com/user-attachments/assets/3939c3a8-c84c-4556-b633-fdac43588a1f" />
 
