@@ -152,9 +152,11 @@ interface.launch(share=True)
 Resolve a assimetria de informação corporativa. Multiplica a capacidade analítica da equipe, reduzindo horas de monitoramento a segundos de processamento de texto e acelerando a formulação de estratégias de mercado.
 
 ### Possibilidades de Aplicação
-* **Marketing**: Monitoramento de eventos e lançamentos da concorrência para identificação de vulnerabilidades.
-* **Operações**: Extração de atas e definição de responsáveis a partir de gravações de reuniões gerenciais.
 
+* **Marketing**: Analisar vídeos de concorrentes no YouTube para identificar posicionamento de produto, argumentos de venda e tendências de mercado.
+* **Educação e Treinamento**: Extrair os principais conceitos de aulas, palestras e tutoriais publicados no YouTube, transformando o conteúdo em resumos estruturados e roteiros de estudo.
+* **Pesquisa de Tecnologia**: Acompanhar lançamentos e demonstrações técnicas apresentados em vídeos, permitindo identificar rapidamente novas ferramentas, frameworks e abordagens.
+* **Inteligência de Conteúdo**: Transformar vídeos longos, como entrevistas ou podcasts, em relatórios executivos com os principais pontos discutidos.
 
 ## Código completo
 
@@ -221,7 +223,8 @@ interface.launch(share=True)
 
 ```
 
-### Visualização da Aplicação e Seus Resultados
+## Resultado do Produto Extrator de Insights de Vídeos do YouTube com IA
 
-<img width="2488" height="1365" alt="image" src="https://github.com/user-attachments/assets/0f173331-eb9e-4ca7-955b-c034c3cb536c" />
+<img width="2488" height="1365" alt="image" src="https://github.com/user-attachments/assets/2764246e-e15d-490b-b14b-ed58aba29349" />
+
 
