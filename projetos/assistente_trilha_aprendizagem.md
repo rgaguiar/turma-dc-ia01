@@ -1,6 +1,7 @@
 # Assistente Automatizado de Onboarding e Compliance (PDF) usando RAG
  
-<img width="1536" height="1024" alt="ChatGPT Image 8 de mar  de 2026, 15_53_18" src="https://github.com/user-attachments/assets/7d9096bf-7e05-431a-b929-a30a0040216f" />
+<img width="1536" height="1024" alt="ChatGPT Image 4 de mar  de 2026, 22_39_31" src="https://github.com/user-attachments/assets/92f1f85f-d584-4f9f-b80d-075772082928" />
+
 
 
 ### Ador do Negócio
