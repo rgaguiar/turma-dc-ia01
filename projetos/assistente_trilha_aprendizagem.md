@@ -294,4 +294,5 @@ interface.launch(share=True)
 ```
 ### Resultado do Produto: Assistente Automatizado de Onboarding e Compliance (PDF) usando RAG
 
-<img width="2485" height="853" alt="image" src="https://github.com/user-attachments/assets/d39b06dd-5ec0-42a4-9a2a-a56d7ed4b0ae" />
+<img width="2491" height="1361" alt="image" src="https://github.com/user-attachments/assets/3939c3a8-c84c-4556-b633-fdac43588a1f" />
+
