@@ -1,5 +1,6 @@
 # Assistente Automatizado de Onboarding e Compliance (PDF)
 
+<img width="1536" height="1024" alt="ChatGPT Image 8 de mar  de 2026, 15_53_18" src="https://github.com/user-attachments/assets/7d9096bf-7e05-431a-b929-a30a0040216f" />
 
 
 ### Ador do Negócio
