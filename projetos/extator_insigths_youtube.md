@@ -1,5 +1,8 @@
 # Extrator de Insights de Vídeos do YouTube com IA
 
+<img width="1536" height="1024" alt="ChatGPT Image 8 de mar  de 2026, 15_43_07" src="https://github.com/user-attachments/assets/2cc0e234-9407-4de0-b1f6-e1a99df3cde1" />
+
+
 ### Ador do Negócio
 A informação de mercado e os anúncios de concorrentes ocorrem cada vez mais em formatos audiovisuais longos (webinars, keynotes, reuniões de resultados). O problema é que ninguém no time de Vendas ou Marketing possui o tempo 
 operacional necessário para assistir a essas transmissões na íntegra. Consumir vídeo é lento, não indexável e gera um gargalo de inteligência competitiva nas empresas, atrasando a formulação de estratégias de resposta.
