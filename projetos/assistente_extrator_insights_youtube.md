@@ -242,7 +242,7 @@ interface.launch(share=True)
 
 ```
 
-## Resultado do Produto Extrator de Insights de Vídeos do YouTube com IA
+## Resultado do Produto: Extrator de Insights de Vídeos do YouTube com IA
 
 <img width="2488" height="1365" alt="image" src="https://github.com/user-attachments/assets/2764246e-e15d-490b-b14b-ed58aba29349" />
 
