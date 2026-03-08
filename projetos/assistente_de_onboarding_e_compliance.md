@@ -180,6 +180,8 @@ Transforma o consumo passivo de documentos em uma ferramenta de treinamento ativ
 * **Jurídico**: Sistematizar a adequação a novos Marcos Regulatórios gerando checklists operacionais a partir da lei pura.
 
 ## Código completo
+Você pode testar a aplicação usando o PDF de compliance da empresa Cobrape, disponível no link. 
+Baixe o arquivo e, em seguida, faça o upload dele na aplicação para verificar como o agente analisa o conteúdo com o tema que você vai usar.
 
 ```python
 # Instalar as ferramentas
