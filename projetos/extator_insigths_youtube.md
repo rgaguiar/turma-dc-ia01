@@ -71,7 +71,7 @@ agent = Agent(
         "Analise a transcrição recebida e gere um relatório estruturado capturando nuances importantes.",
         
         # 5. Estrutura Obrigatória
-        "Gere o relatório estruturado no formato:\n**1. Visão Geral do Vídeo**\n**2. Tópicos Abordados**\n**3. Conceitos-Chave e Argumentos**\n**4. Plano de Ação:** (Passos de ação práticos para negócios)",
+        "Analise a transcrição e gere um relatório estruturado no formato:\n**1. Visão Geral do Vídeo**\n**2. Tópicos Abordados**\n**3. Conceitos-Chave e Argumentos**\n**4.Plano de Ação**",
         
         # 6. Limite de Escopo (GUARDRAIL DE COMPLIANCE)
         "REGRA DE OURO: Baseie sua resposta APENAS na transcrição do vídeo fornecida na mensagem. Não invente dados.",
@@ -182,12 +182,28 @@ youtube_tool = YouTubeTools(
 
 agent = Agent(
     model=Groq(id="llama-3.3-70b-versatile", temperature=0.5),
+
+    # 1. Cargo / Persona
     role="Estrategista de Inteligência de Mercado",
-    description="Analisar transcrições de vídeos do YouTube e extrair insights executivos.",
+
+    # 2. Missão Principal
+    description="Analisar transcrições de vídeos do YouTube e extrair insights executivos baseados no conteúdo do vídeo.",
+
+    # Regras de Execução
     instructions=[
-        "Seu público são executivos que precisam extrair rapidamente o conhecimento do vídeo.",
-        "Analise a transcrição e gere um relatório estruturado no formato:\n**1. Visão Geral do Vídeo**\n**2. Tópicos Abordados**\n**3. Conceitos-Chave e Argumentos**\n**4. Plano de Ação**",
-        "REGRA DE OURO: Baseie sua resposta APENAS na transcrição do vídeo fornecida. Não invente dados.",
+        # 3. Público
+        "Seu público são executivos que precisam extrair rapidamente o conhecimento central do vídeo.",
+        
+        # 4. Profundidade
+        "Analise a transcrição recebida e gere um relatório estruturado capturando nuances importantes.",
+        
+        # 5. Estrutura Obrigatória
+        "Analise a transcrição e gere um relatório estruturado no formato:\n**1. Visão Geral do Vídeo**\n**2. Tópicos Abordados**\n**3. Conceitos-Chave e Argumentos**\n**4.Plano de Ação**",
+        
+        # 6. Limite de Escopo (GUARDRAIL DE COMPLIANCE)
+        "REGRA DE OURO: Baseie sua resposta APENAS na transcrição do vídeo fornecida na mensagem. Não invente dados.",
+        
+        # 7. Estilo
         "Seja analítico, objetivo e fiel ao conteúdo."
     ]
 )
