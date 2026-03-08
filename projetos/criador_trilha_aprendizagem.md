@@ -83,6 +83,13 @@ No projeto foi utilizado um framework de 7 passos, que define:
 ## Explicação do Código
 
 ```python
+# instalando as ferramentas
+!pip install -q agno
+!pip install -q pypdf
+!pip install -q chromadb
+```
+
+```python
 import os
 import gradio as gr
 from agno.agent import Agent
@@ -97,7 +104,6 @@ from google.colab import userdata
 # 1. INFRAESTRUTURA E AUTENTICAÇÃO
 # ===============================
 os.environ["OPENAI_API_KEY"] = userdata.get("OPENAI_API_KEY")
-os.environ["HF_TOKEN"] = userdata.get("HF_TK")
 
 embedder = SentenceTransformerEmbedder(dimensions=384)
 
@@ -189,14 +195,12 @@ interface.launch(share=True)
 
 Ao concluir este código, você acabou de criar um produto digital. Veja as adaptações estratégicas que fizemos na nossa arquitetura base:
 
-1. Ajuste na Temperatura (temperature=0.5): Diferente de um agente de marketing que precisa ser criativo (0.8), um Designer Instrucional lidando com RAG precisa ser analítico e preciso. Reduzimos a temperatura para 0.5 para garantir que a IA se apegue fortemente aos fatos do PDF.
-
-2. Estrutura Obrigatória Orientada à Ação: No passo 5 da nossa Engenharia de Prompt, obrigamos a IA a não apenas "resumir" o texto, mas sim dividi-lo em "Módulos", extrair "Conceitos-Chave" e gerar "Questões de Fixação". Isso transforma um pedaço de texto passivo em uma ferramenta de estudo ativa.
-
-3. Validação Dupla na Interface: Na função gerar_roteiro_de_estudos, adicionamos validações em código (if not tema_estudo:) para orientar o usuário caso ele esqueça de enviar o arquivo ou de digitar o tema, evitando falhas brutas na aplicação.
+1. **Ajuste na Temperatura** (`temperature=0.5`): Diferente de um agente de marketing que precisa ser criativo (`0.8`), um Designer Instrucional lidando com RAG precisa ser analítico e preciso. Reduzimos a temperatura para `0.5` para garantir que a IA se apegue fortemente aos fatos do PDF.
+2. **Estrutura Obrigatória Orientada à Ação**: No passo 5 da nossa Engenharia de Prompt, obrigamos a IA a não apenas "resumir" o texto, mas sim dividi-lo em "Módulos", extrair "Conceitos-Chave" e gerar "Questões de Fixação". Isso transforma um pedaço de texto passivo em uma ferramenta de estudo ativa.
+3. **Validação Dupla na Interface**: Na função `gerar_roteiro_de_estudos`, adicionamos validações em código (`if not tema_estudo`:) para orientar o usuário caso ele esqueça de enviar o arquivo ou de digitar o tema, evitando falhas brutas na aplicação.
 
 ### Possibilidades de Aplicação Prática:
 
-* Recursos Humanos: Transformar um "Manual do Colaborador" de 50 páginas em uma trilha de integração de 5 dias para novos funcionários.
-* Instituições de Ensino: Professores podem subir seus próprios artigos acadêmicos e gerar questionários de revisão instantâneos para os alunos.
-* Equipes Comerciais: Subir o catálogo de produtos e pedir para a IA criar uma trilha de estudo sobre "Argumentos de Vendas para o Produto X".
+* **Recursos Humanos**: Transformar um "Manual do Colaborador" de 50 páginas em uma trilha de integração de 5 dias para novos funcionários.
+* **Instituições de Ensino**: Professores podem subir seus próprios artigos acadêmicos e gerar questionários de revisão instantâneos para os alunos.
+* **Equipes Comerciais**: Subir o catálogo de produtos e pedir para a IA criar uma trilha de estudo sobre "Argumentos de Vendas para o Produto X".
