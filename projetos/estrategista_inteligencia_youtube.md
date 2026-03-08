@@ -1,4 +1,4 @@
-# Analista de Inteligência Competitiva (Vídeos)
+# Extrator de Insights de Vídeos do YouTube com IA
 
 ### Ador do Negócio
 A informação de mercado e os anúncios de concorrentes ocorrem cada vez mais em formatos audiovisuais longos (webinars, keynotes, reuniões de resultados). O problema é que ninguém no time de Vendas ou Marketing possui o tempo 
@@ -140,7 +140,8 @@ interface = gr.Interface(
         gr.Textbox(label="2. Qual o seu objetivo com este vídeo?", placeholder="Ex: Extrair argumentos de venda", lines=2)
     ],
     outputs=gr.Markdown(label="Inteligência Extraída do Vídeo"),
-    title="🎬 Analista de Inteligência Competitiva"
+    title="Extrator de Insights de Vídeos do YouTube com IA",
+    description="Cole um link de vídeo do YouTube e a IA irá extrair os principais insights, conceitos e planos de ação."
 )
 
 interface.launch(share=True)
@@ -211,11 +212,16 @@ interface = gr.Interface(
         gr.Textbox(label="2. Qual o seu objetivo com este vídeo?", lines=2)
     ],
     outputs=gr.Markdown(label="Inteligência Extraída do Vídeo"),
-    title="🎬 Analista de Inteligência Competitiva"
+    title="Extrator de Insights de Vídeos do YouTube com IA",
+    description="Cole um link de vídeo do YouTube e a IA irá extrair os principais insights, conceitos e planos de ação."
 )
 
 interface.launch(share=True)
 
 
 ```
+
+### Visualização da Aplicação e Seus Resultados
+
+<img width="2488" height="1365" alt="image" src="https://github.com/user-attachments/assets/0f173331-eb9e-4ca7-955b-c034c3cb536c" />
 
