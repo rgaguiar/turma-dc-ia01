@@ -1,5 +1,5 @@
-# Assistente Automatizado de Onboarding e Compliance (PDF)
-
+# Assistente Automatizado de Onboarding e Compliance (PDF) usando RAG
+ 
 <img width="1536" height="1024" alt="ChatGPT Image 8 de mar  de 2026, 15_53_18" src="https://github.com/user-attachments/assets/7d9096bf-7e05-431a-b929-a30a0040216f" />
 
 
@@ -291,3 +291,6 @@ interface = gr.Interface(
 interface.launch(share=True)
 
 ```
+### Resultado do Produto: Assistente Automatizado de Onboarding e Compliance (PDF) usando RAG
+
+<img width="2485" height="853" alt="image" src="https://github.com/user-attachments/assets/d39b06dd-5ec0-42a4-9a2a-a56d7ed4b0ae" />
