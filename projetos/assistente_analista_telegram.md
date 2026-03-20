@@ -1,5 +1,8 @@
 # Desenvolvendo um Analista de Dados com Agno e Telegram
 
+<img width="1536" height="1024" alt="ChatGPT Image 20 de mar  de 2026, 17_26_28" src="https://github.com/user-attachments/assets/626a0e92-64ba-45fe-8808-3cff014beabb" />
+
+
 O projeto prático tem como objetivo integrar aplicações de IA Generativa com ferramentas de mensagens, podendo ser aplicadas ao Telegram, WhatsApp, Instagram, etc. 
 A proposta é que o usuário possa criar assistentes usando frameworks de IA para realizar determinadas funções, como analisar dados, acessar e-mails, gerenciar agendas e cadastrar informações em bancos de dados.
 
@@ -24,6 +27,10 @@ Você precisará criar contas gratuitas nas seguintes plataformas para gerar as 
 * **Gmail corporativo ou pessoal**:
   * **`EMAIL_SENDER`**: O seu endereço de e-mail completo (ex: seu.nome@gmail.com).
   * **`EMAIL_PASSWORD`**: Atenção: Esta não é a senha normal que você usa para entrar no e-mail. É uma "Senha de Aplicativo" específica de 16 letras, gerada nas configurações de segurança da sua Conta Google, que permite que o nosso sistema envie mensagens com segurança.
+
+<img width="1388" height="838" alt="image" src="https://github.com/user-attachments/assets/e3462bd5-1b93-44d4-9c69-a80794ebcb72" />
+
+
 
 > #### DICA: Obtendo o EMAIL_SENDER e o EMAIL_PASSWORD
 > 
@@ -329,3 +336,12 @@ bot.infinity_polling()
 * **A Gestão de Memória (`/limpar`)**: Como o nosso sistema tem memória de longo prazo, ele acumula o contexto da conversa. Em um ambiente corporativo, se terminamos de analisar o "Preço dos Imóveis" e vamos passar para "Despesas de Marketing", não queremos que a IA misture os dados. O comando `/limpar` arranca as páginas antigas do caderno de anotações e permite que a próxima análise comece 100% focada.
 
 * **O Plantão 24h (`infinity_polling`)**: É o comando que impede o programa de desligar. Ele avisa ao Google Colab: "Fique com os ouvidos abertos indefinidamente, aguardando a próxima notificação do celular".
+
+Exemplo:
+1. *Mande no Telegram:* "Qual o preço médio dos imóveis?"
+2. *Depois mande:* "Envie este relatório para [seu email]"
+3. *Por fim mande:* "/limpar"
+
+### Resultado
+
+<img width="1083" height="978" alt="image" src="https://github.com/user-attachments/assets/401fd8d6-993e-4174-b18f-a73d1ca8db54" />
