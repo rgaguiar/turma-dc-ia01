@@ -17,10 +17,12 @@ Você precisará criar contas gratuitas nas seguintes plataformas para gerar as 
 * **Telegram (`TELEGRAM_TOKEN`)**: Necessário para criar o assistente no aplicativo. Você consegue essa chave conversando com o robô oficial chamado BotFather no próprio Telegram.
   
   1. **BotFather (Criação do Assistente e Senha de Acesso)**: O BotFather (o "Pai dos Bots") é o robô oficial do próprio Telegram responsável por criar novos assistentes virtuais. Você vai procurá-lo na barra de busca do aplicativo. É conversando com ele que você dará um nome e um perfil para o seu Analista de Dados. Ao final da criação, o BotFather te entregará o Token: uma senha única e longa que serve para conectar o nosso sistema de Inteligência Artificial ao aplicativo do Telegram.  
-  <img width="1076" height="327" alt="image" src="https://github.com/user-attachments/assets/a5e73e28-5f95-4c6a-abfa-aab8e5bc9867" />
+<img width="1086" height="370" alt="image" src="https://github.com/user-attachments/assets/4f52e04e-2231-4127-929a-5812747c9410" />
+
 
   2. **Get My ID Bot (Identificação de Segurança)**: O Get My ID é uma ferramenta de busca do Telegram que revela o seu número de identificação pessoal (o seu ID). Como o seu Analista de Dados lidará com planilhas corporativas e envios de e-mail, esse ID funciona como o seu "crachá de diretoria". Saber o seu próprio ID permite que, no futuro, nós possamos ensinar o sistema a obedecer e enviar relatórios exclusivamente para você, ignorando mensagens de pessoas desconhecidas.  
-  <img width="1076" height="327" alt="image" src="https://github.com/user-attachments/assets/75df92c5-1982-4ca7-bbe3-66e425973dc6" />
+<img width="1086" height="347" alt="image" src="https://github.com/user-attachments/assets/834effb3-4a68-41da-9d84-4ae080643ee9" />
+
 
 * **OpenAI (`OPENAI_API_KEY`)**: A chave de acesso ao "cérebro" do ChatGPT. Gerada no painel de desenvolvedores da OpenAI.
 * **Groq (`GROQ_API_KEY`)**: (Opcional) Uma chave alternativa de Inteligência Artificial, caso você prefira usar modelos de código aberto ultrarrápidos em vez da OpenAI.
@@ -159,7 +161,7 @@ drive.mount('/content/drive')
 
 ---
 
-### Bloco 4: Localizando a Base de Dados (O Endereço do Arquivo)
+### Bloco 3: Localizando a Base de Dados (O Endereço do Arquivo)
 
 No bloco anterior, nós destrancamos a sua conta do Google Drive. Agora, precisamos dizer ao código exatamente em qual "prateleira" e em qual "pasta" está o documento oficial que ele deve analisar. Na programação, nós chamamos isso de "Caminho do Arquivo" (File Path).
 
@@ -186,7 +188,8 @@ Acessando o arquivo pelo Google Colab:
 
 Pronto! Agora o Analista de Dados tem acesso a sua pasta e sabe exatamente qual documento abrir quando pedir um cálculo.
 
-### Bloco 5: A Habilidade de Comunicação (Enviando E-mails)
+---
+### Bloco 4: A Habilidade de Comunicação (Enviando E-mails)
 
 Agora que o nosso Analista sabe onde a planilha está guardada, ele precisa de um meio oficial para entregar os resultados. Neste bloco, nós vamos criar uma ferramenta (uma *Tool*) que ensina o sistema a redigir e enviar um e-mail corporativo de forma totalmente autônoma através do Gmail.
 
@@ -228,7 +231,8 @@ def enviar_email(destinatario: str, assunto: str, corpo: str) -> str:
 
 * **O Retorno de Sucesso**: A última linha do código (`return`) funciona como um aviso de entrega. O sistema do Gmail avisa a Inteligência Artificial que o e-mail foi despachado, e a IA, por sua vez, pode te avisar no Telegram: "Chefe, e-mail enviado com sucesso!".
 
-### Bloco 6: Mapeando a Base de Dados (O Índice do Arquivo)
+---
+### Bloco 5: Mapeando a Base de Dados (O Índice do Arquivo)
 
 Antes de contratar o nosso Analista, precisamos entender o que tem dentro daquela planilha do Google Drive. Porém, planilhas corporativas podem ter milhões de linhas. Se o sistema tentar ler tudo de uma vez, ele vai travar e consumir muitos recursos financeiros. 
 
@@ -250,8 +254,8 @@ O que esse código faz?
 * O comando `nrows=0` garante que o sistema baixe exatamente zero linhas de dados, puxando apenas a primeira linha lá de cima (os títulos).
 * O print final vai exibir na tela do Colab os nomes das colunas que ele encontrou (ex: Preço, Categoria, Quartos, etc.), provando que a conexão com o arquivo está funcionando perfeitamente.
 
-
-### Bloco 7: Contratando o Analista e Ativando a Memória (O Agente)
+---
+### Bloco 6: Contratando o Analista e Ativando a Memória (O Agente)
 
 Agora que sabemos quais dados temos, é hora de dar vida ao nosso funcionário digital. Aqui nós criamos o Agent (O Agente de Inteligência Artificial). Nós vamos dar a ele uma profissão, entregar as ferramentas matemáticas e de e-mail, apresentar as colunas da planilha e dar a ele um caderno de anotações para que ele tenha memória das reuniões.
 
@@ -290,7 +294,8 @@ print("Analista de Dados configurado, com caderninho na mão e memória ativada.
 
 * **As Instruções (`A Regra de Ouro`)**: Definimos o tom de voz corporativo, blindamos o sistema contra travamentos ("Nunca imprima a base inteira") e ensinamos a estrutura exata do relatório que a diretoria espera receber. Além disso, passamos a variável colunas_da_planilha para que ele saiba exatamente o que pode pesquisar.
 
-### Bloco 8: Colocando o Analista Online (A Conexão com o Telegram)
+---
+### Bloco 7: Colocando o Analista Online (A Conexão com o Telegram)
 
 Chegamos à última etapa do projeto! Nosso funcionário digital já está treinado e com acesso aos dados. Agora, precisamos ligar o canal de comunicação para que ele possa receber as perguntas e enviar os relatórios diretamente para o seu celular.
 
@@ -345,3 +350,49 @@ Exemplo:
 ### Resultado
 
 <img width="1083" height="978" alt="image" src="https://github.com/user-attachments/assets/401fd8d6-993e-4174-b18f-a73d1ca8db54" />
+
+### Bloco Auxiliar: Upgrade de Memória (Salvando no Google Drive)
+
+No formato padrão, o nosso Analista guarda o caderno de anotações (memoria_do_analista.db) na pasta temporária do Google Colab. Isso significa que, se você fechar a aba do navegador, a equipe de limpeza do Google apaga o arquivo e o seu bot perde toda a memória das reuniões passadas.
+
+Para um ambiente corporativo, nós queremos que essa memória seja permanente. Neste bloco auxiliar, nós vamos atualizar o código do nosso Agente para que ele guarde o caderno diretamente dentro da gaveta segura do seu Google Drive.
+
+```python
+# 1. Definimos o caminho do caderninho direto no Google Drive
+# ATENÇÃO: Crie a pasta 'Assistente_Escola' no seu Drive ou mude o nome abaixo para uma pasta sua.
+caminho_memoria_drive = "/content/drive/MyDrive/Assistente_Escola/memoria_do_analista.db"
+
+# Mapeia a estrutura da planilha
+df = pd.read_csv(caminho_planilha_drive, nrows=0, sep=',')
+colunas_da_planilha = list(df.columns)
+
+# Cria o analista com memória persistente
+analista_de_dados = Agent(
+    model=OpenAIChat(id="gpt-4o", temperature=0.0),
+    tools=[PythonTools(), enviar_email],
+    markdown=True,
+
+    # 2. Guardamos o banco de dados na pasta do Drive!
+    db=SqliteDb(db_file=caminho_memoria_drive),
+    add_history_to_context=True,
+
+    role="Cientista de Dados Sênior e Analista Financeiro",
+    description="Analisar bases de dados executando scripts em Python para responder a perguntas corporativas.",
+    instructions=[
+        "Seu público são Diretores Executivos que precisam de decisões baseadas em dados exatos.",
+        f"Sempre que precisar calcular dados, escreva um código Python usando 'pandas'. O arquivo está no caminho: '{caminho_planilha_drive}'.",
+        f"As colunas numéricas e de texto disponíveis nesta planilha são: {colunas_da_planilha}.",
+        "Estruture relatórios analíticos em:\n**1. Resumo da Análise:**\n**2. Resultado Executivo:**\n**3. Insights Estratégicos:**",
+        "REGRA DE PROTEÇÃO: Nunca imprima a base de dados inteira no sistema. Extraia e retorne apenas os números finais.",
+        "Se o usuário pedir para enviar a análise por e-mail, NÃO recalcule nada. Apenas pegue o texto da sua última resposta no histórico e use a ferramenta de e-mail."
+    ]
+)
+
+print("Analista de Dados configurado e memória salva permanentemente no Google Drive.")
+```
+
+#### Entendendo a principal mudança
+
+* **A Variável de Caminho (caminho_memoria_drive)**: Em vez de deixar o arquivo solto, nós indicamos o endereço exato do Google Drive onde o arquivo .db deve ser criado e atualizado.
+
+* **A Segurança a Longo Prazo**: Agora, mesmo que você desligue o computador no fim de semana, na segunda-feira o Analista vai abrir a gaveta do Drive, ler o banco de dados e lembrar perfeitamente de tudo o que a diretoria pediu na semana anterior.
