@@ -2,6 +2,12 @@
 
 <img width="1536" height="1024" alt="ChatGPT Image 20 de mar  de 2026, 17_26_28" src="https://github.com/user-attachments/assets/626a0e92-64ba-45fe-8808-3cff014beabb" />
 
+```python
+os.environ["TELEGRAM_TOKEN"] = userdata.get('TELEGRAM_TOKEN')
+os.environ["OPENAI_API_KEY"] = userdata.get('OPENAI_API_KEY')
+os.environ["EMAIL_SENDER"] = userdata.get('EMAIL_SENDER')
+os.environ["EMAIL_PASSWORD"] = userdata.get('EMAIL_PASSWORD')
+```
 
 O projeto prático tem como objetivo integrar aplicações de IA Generativa com ferramentas de mensagens, podendo ser aplicadas ao Telegram, WhatsApp, Instagram, etc. 
 A proposta é que o usuário possa criar assistentes usando frameworks de IA para realizar determinadas funções, como analisar dados, acessar e-mails, gerenciar agendas e cadastrar informações em bancos de dados.
