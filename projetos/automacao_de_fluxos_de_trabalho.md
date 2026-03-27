@@ -17,7 +17,7 @@ Diariamente, as empresas recebem dezenas de faturas e notas fiscais em PDF, toda
 O projeto resolve esse gargalo substituindo o trabalho braçal por uma "linha de produção" inteligente, dividida em dois Agentes de IA especializados:
 
 * **Etapa 1**: O Operário (Processamento em Background):
-  * Um robô invisível que monitora pastas de rede (Google Drive) 24 horas por dia. Assim que um novo PDF é detectado, a IA lê o documento, extrai apenas as informações predefinidas pela regra de negócios e salva os dados limpos em um banco de dados oficial (Excel/CSV), movendo o arquivo lido para evitar duplicidade.
+  * Um assistente que monitora pastas de rede (Google Drive) 24 horas por dia. Assim que um novo PDF é detectado, a IA lê o documento, extrai apenas as informações predefinidas pela regra de negócios e salva os dados limpos em um banco de dados oficial (Excel/CSV), movendo o arquivo lido para evitar duplicidade.
 * **Etapa 2**: O Consultor (Dashboard Interativo):
   * Uma interface web acessível via link, desenhada para a diretoria. O gestor faz perguntas em linguagem natural (ex: "Qual o total a pagar da empresa X?"). O Agente de IA recebe a pergunta, escreve o código necessário para calcular os dados reais na planilha e devolve um relatório executivo exato.
 
