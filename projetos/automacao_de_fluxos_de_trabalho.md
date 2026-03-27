@@ -129,7 +129,7 @@ def extrair_texto_do_pdf(caminho_pdf):
 
 ```python
 # ======================================================================
-# BLOCO 6: O ENCANAMENTO TÉCNICO (NÃO PRECISA MEXER)
+# BLOCO 7: O ENCANAMENTO TÉCNICO (NÃO PRECISA MEXER)
 # ======================================================================
 
 def salvar_resultado(nome_arquivo, dados):
@@ -207,7 +207,7 @@ except KeyboardInterrupt:
 
 ```python
 # ======================================================================
-# BLOCO 3: O PAINEL DA DIRETORIA (DASHBOARD)
+# BLOCO 1: O PAINEL DA DIRETORIA (DASHBOARD)
 # ======================================================================
 
 # Instala o criador de interfaces web (Gradio)
@@ -216,7 +216,7 @@ except KeyboardInterrupt:
 
 ```python
 # ======================================================================
-# BLOCO 1: PREPARANDO O ANALISTA FINANCEIRO
+# BLOCO 2: PREPARANDO O ANALISTA FINANCEIRO
 # ======================================================================
 import os
 from google.colab import userdata
@@ -258,7 +258,7 @@ colunas = list(df_colunas.columns)
 
 ```python
 # ======================================================================
-# BLOCO 2: O CÉREBRO ANALÍTICO (Com superpoder de Matemática)
+# BLOCO 4: O CÉREBRO ANALÍTICO (Com superpoder de Matemática)
 # ======================================================================
 analista_financeiro = Agent(
     model=OpenAIChat(id="gpt-4o", temperature=0.0),
@@ -282,7 +282,7 @@ analista_financeiro = Agent(
 
 ```python
 # ======================================================================
-# BLOCO 3: O PAINEL DA DIRETORIA (DASHBOARD)
+# BLOCO 5: O PAINEL DA DIRETORIA (DASHBOARD)
 # ======================================================================
 
 def fazer_pergunta_para_ia(pergunta: str) -> str:
@@ -295,7 +295,7 @@ print("Analista Financeiro conectado ao banco de dados com sucesso!")
 
 ```python
 # ======================================================================
-# BLOCO 3: O PAINEL DA DIRETORIA (DASHBOARD)
+# BLOCO 6: O PAINEL DA DIRETORIA (DASHBOARD)
 # ======================================================================
 
 interface = gr.Interface(
@@ -318,4 +318,34 @@ interface = gr.Interface(
 
 print("Gerando link de acesso público do Dashboard...")
 interface.launch(share=True)
+```
+
+
+Usando o telegram como interface
+
+```python
+# !pip install -q telebot 
+
+import telebot
+
+# Inicializa a conexão com a interface do Telegram
+bot = telebot.TeleBot(os.environ["TELEGRAM_TOKEN"])
+
+# Configura o sistema para escutar e processar comandos de texto
+@bot.message_handler(func=lambda message: True)
+def processar_pedido(message):
+
+    # Apenas ativa o status visual de "digitando..." no topo da tela do Telegram
+    bot.send_chat_action(message.chat.id, 'typing')
+
+    # Repassa a instrução do usuário para o analista de dados
+    resposta_do_analista = analista_financeiro.run(message.text)
+
+    # Retorna o relatório final diretamente no chat
+    bot.reply_to(message, resposta_do_analista.content)
+
+print("Sistema de Análise de Dados operando de forma silenciosa. Aguardando comandos.")
+
+# Mantém o sistema em execução contínua
+bot.infinity_polling()
 ```
