@@ -424,6 +424,36 @@ os.environ["OPENAI_API_KEY"] = userdata.get('OPENAI_API_KEY')
 os.environ["EMAIL_SENDER"] = userdata.get('EMAIL_SENDER')
 os.environ["EMAIL_PASSWORD"] = userdata.get('EMAIL_PASSWORD')
 ```
+
+```python
+def enviar_email(destinatario: str, assunto: str, corpo: str) -> str:
+    """Envia um e-mail com o relatório de dados usando o servidor SMTP do Gmail.
+
+    Args:
+        destinatario: O endereço de e-mail do diretor ou setor.
+        assunto: O assunto do relatório financeiro/analítico.
+        corpo: O texto do relatório com os insights estratégicos.
+    """
+    EMAIL_SENDER = os.environ.get("EMAIL_SENDER")
+    EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
+
+    msg = MIMEMultipart()
+    msg['From'] = EMAIL_SENDER
+    msg['To'] = destinatario
+    msg['Subject'] = assunto
+    msg.attach(MIMEText(corpo, 'plain'))
+
+    # Conecta no servidor SMTP e processa o envio
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(EMAIL_SENDER, EMAIL_PASSWORD)
+    server.sendmail(EMAIL_SENDER, destinatario, msg.as_string())
+    server.quit()
+
+    return f"Relatório enviado com sucesso para {destinatario}."
+```
+
+
 ```python
 # ======================================================================
 # BLOCO 4: ENTREGANDO PERMISSÃO PARA IA (ETAPA DE CONFIGURAÇÃO MANUAL)
