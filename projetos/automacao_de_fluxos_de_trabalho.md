@@ -424,17 +424,23 @@ os.environ["OPENAI_API_KEY"] = userdata.get('OPENAI_API_KEY')
 os.environ["EMAIL_SENDER"] = userdata.get('EMAIL_SENDER')
 os.environ["EMAIL_PASSWORD"] = userdata.get('EMAIL_PASSWORD')
 ```
+```python
+# ======================================================================
+# BLOCO 4: ENTREGANDO PERMISSÃO PARA IA (ETAPA DE CONFIGURAÇÃO MANUAL)
+# ======================================================================
+# Deve ser o mesmo caminho csv das notas cadastradas (Leitor de PDF)
+CAMINHO_PLANILHA = "/content/drive/MyDrive/digital-ai-generative/projeto-automation/Resultado_PDFs.csv"
+ 
+```
 
 ```python
 # ======================================================================
 # BLOCO 3: O PAINEL DA DIRETORIA (DASHBOARD)
 # ======================================================================
-
 # Lê os nomes das colunas da planilha gerada na Etapa 1
 df_colunas = pd.read_csv(CAMINHO_PLANILHA, nrows=0)
 colunas = list(df_colunas.columns)
 ```
-
 
 ```python
 # ======================================================================
@@ -475,7 +481,7 @@ print("Analista Financeiro conectado ao banco de dados com sucesso!")
 
 ```python
 # ======================================================================
-# BLOCO 6: O PAINEL DA DIRETORIA (DASHBOARD)
+# BLOCO 6 (OPÇÃO 1):  O PAINEL DA DIRETORIA (DASHBOARD)
 # ======================================================================
 
 interface = gr.Interface(
@@ -502,27 +508,8 @@ interface.launch(share=True)
 
 ```python
 # ======================================================================
-# BLOCO 6: O CHAT DA DIRETORIA (INTERFACE CONVERSACIONAL)
+# BLOCO 6 (OPÇÃO 2): O CHAT DA DIRETORIA (INTERFACE CONVERSACIONAL)
 # ======================================================================
-
-import gradio as gr
-
-def responder_chat(mensagem, historico):
-    """
-    Função intermediária que mantém o histórico da conversa.
-    """
-    
-    if historico is None:
-        historico = []
-
-    # IA processa a pergunta normalmente
-    resposta = fazer_pergunta_para_ia(mensagem)
-
-    # Adiciona ao histórico
-    historico.append((mensagem, resposta))
-
-    return historico, historico
-
 
 import gradio as gr
 
@@ -584,12 +571,9 @@ print("Gerando link de acesso público do Chat...")
 interface.launch(share=True)
 ```
 
-
-Usando o telegram como interface
-
 ```python
 # ======================================================================
-# BLOCO 6: O CHAT DA DIRETORIA (INTERFACE TELEGRAM)
+# BLOCO 6 (OPÇÃO 3): O CHAT DA DIRETORIA (INTERFACE TELEGRAM)
 # ======================================================================
 # !pip install -q telebot 
 
