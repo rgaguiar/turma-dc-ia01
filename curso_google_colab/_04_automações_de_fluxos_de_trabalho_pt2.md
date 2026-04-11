@@ -1,5 +1,6 @@
 # Automatização de Workflows com IA
 
+---
 
 ## 1. Visão Geral do Projeto
 
@@ -9,46 +10,18 @@ Implementação de um fluxo de trabalho com um Agente de Inteligência Artificia
 
 ## 2. O Problema (A Dor do Negócio)
 
-Diariamente, empresas recebem dezenas de notas fiscais, cupons e recibos por e-mail — todos em formatos diferentes (PDFs nativos, fotos borradas, scans tortos). O processamento manual exige que analistas abram cada e-mail, identifiquem os anexos, extraiam dados e os registrem.
-
-**Consequências**:
-
-* **Inexistência de Escalabilidade**: Se o volume de notas dobra, a equipe precisa dobrar.
-* **Risco de Compliance**: Erros de digitação em valores e CNPJs geram multas e problemas fiscais.
-* **Custo Operacional**: Profissionais qualificados perdendo tempo com digitação de dados desestruturados.
+Diariamente, empresas recebem dezenas de notas fiscais, cupons e recibos por e-mail — todos com layouts diferentes. O processamento manual exige que analistas abram cada e-mail, identifiquem os anexos, extraiam dados e os registrem em planilhas ou ERPs.
 
 **Consequências:**
-- Alto consumo de horas operacionais
-- Risco elevado de erros de digitação
-- Gargalos no fechamento financeiro
-- Documentos inválidos ou duplicados contaminando a base de dados
 
-**Valor de Negócio e Impacto (ROI)**
+- **Inexistência de Escalabilidade:** Se o volume de notas dobra, a equipe precisa dobrar.
+- **Risco de Compliance:** Erros de digitação em valores e CNPJs geram multas e problemas fiscais.
+- **Custo Operacional:** Profissionais qualificados perdendo tempo com digitação de dados desestruturados.
+- **Gargalos no Fechamento:** Documentos inválidos ou duplicados contaminam a base e atrasam relatórios.
 
-* Auditoria e Compliance: Criação de um rastro digital automático. Cada linha no CSV pode ser conferida com o anexo original baixado.
-* Precisão de Dados (Zero Erro de Digitação): Ao eliminar o fator humano na transposição de números, a confiança nos relatórios financeiros sobe para níveis próximos de 100%.
-* Human-in-the-Loop: O analista deixa de ser um "digitador" e passa a ser um "auditor". Ele apenas revisa o CSV final, focando nas exceções e anomalias identificadas pela IA.
----
-## 3. Por que o Agno Framework? (A Escolha Estratégica)
-
-Para este projeto, escolhemos o Agno, um framework de orquestração de agentes de IA de última geração. Enquanto outras ferramentas focam apenas em "conversar", o Agno foi desenhado para agir e estruturar informações.
-
-**Diferenciais do Agno para o seu negócio**:
-
-* **Multimodalidade Nativa**: O Agno facilita o envio de imagens e documentos para modelos como o GPT-4o, gerenciando a mídia de forma simplificada através da classe Image.
-* **Integração Perfeita com Pydantic**: Ele possui um sistema de output_schema que obriga o modelo de linguagem a seguir um contrato de dados, eliminando respostas criativas demais que quebrariam sua planilha.
-* **Agentes com Propósito**: Ao invés de um chat genérico, criamos um Agente com nome, instruções e ferramentas específicas, o que aumenta drasticamente a precisão em tarefas repetitivas.
----
-## 4. Por que Python e Agentes? (O Diferencial Tecnológico)
-
-Muitas empresas tentam resolver esse problema usando o ChatGPT manualmente ou ferramentas de Low-Code. Veja por que a abordagem via código e Agentes Agno é superior:
-
-1. **Versus Uso Manual do ChatGPT**: Nossa solução é autônoma: ela vigia a caixa de entrada e trabalha enquanto você dorme, eliminando o erro humano e o trabalho braçal de upload.
-2. **Versus Ferramentas Low-Code (Ex: Zapier, Make)**: Flexibilidade Total: Em Python, você tem controle total sobre a lógica de filtragem e conversão de arquivos sem custos de licenciamento por execução (tasks).
-3. **Processamento de Dados Complexos**: O Agno permite lidar com fluxos onde a IA precisa decidir o que fazer com base no conteúdo visual, algo que ferramentas de "clica e arrasta" têm dificuldade em processar com precisão.
 ---
 
-## 5. A Solução — O Fluxo em Três Etapas
+## 3. A Solução — O Fluxo em Três Filtros
 
 O projeto substitui o trabalho braçal por uma **linha de produção inteligente** com três filtros sequenciais:
 
@@ -63,6 +36,35 @@ Apenas documentos validados pela IA chegam ao CSV final. Documentos inválidos s
 
 ---
 
+## 4. Valor de Negócio e Impacto (ROI)
+
+**Produtividade:** O agente processa toda a caixa de entrada de forma autônoma, liberando a equipe financeira para análises estratégicas e renegociações.
+
+**Auditoria e Compliance:** Cada linha no CSV pode ser conferida com o anexo original. O rastro digital é criado automaticamente — sem esforço humano.
+
+**Precisão de Dados (Zero Erro de Digitação):** Ao eliminar o fator humano na transposição de números, a confiança nos relatórios financeiros sobe para níveis próximos de 100%.
+
+**Human-in-the-Loop:** O analista deixa de ser um "digitador" e passa a ser um "auditor". Ele apenas revisa o CSV final, focando nas exceções e anomalias identificadas pela IA.
+
+**Escalabilidade:** O sistema processa 10 ou 10.000 e-mails com o mesmo custo marginal de tempo — sem novas contratações operacionais.
+
+---
+
+## 5. Por que Python e Agentes? (O Diferencial Tecnológico)
+
+Muitas empresas tentam resolver esse problema usando o ChatGPT manualmente ou ferramentas de Low-Code. Veja por que a abordagem via código e Agentes é superior:
+
+**Versus Uso Manual do ChatGPT:**
+Nossa solução é autônoma — ela vigia a caixa de entrada e trabalha enquanto você dorme, eliminando o erro humano e o trabalho braçal de upload.
+
+**Versus Ferramentas Low-Code (Zapier, Make):**
+Em Python, você tem controle total sobre a lógica de filtragem e conversão de arquivos, sem custos de licenciamento por execução.
+
+**Processamento de Dados Complexos:**
+O Agno permite lidar com fluxos onde a IA precisa decidir o que fazer com base no conteúdo visual — algo que ferramentas de "clica e arrasta" têm dificuldade em processar com precisão.
+
+---
+
 ## 6. Stack Tecnológico
 
 | Componente | Função |
@@ -71,26 +73,14 @@ Apenas documentos validados pela IA chegam ao CSV final. Documentos inválidos s
 | **Agno** | Framework de Agentes IA — define comportamento e schema de saída |
 | **GPT-4o** | Modelo multimodal — lê imagens de documentos e extrai dados |
 | **Pydantic** | Define o molde obrigatório dos dados extraídos pela IA |
-| **imaplib** | Protocolo de acesso ao Gmail via IMAP |
+| **imaplib** | Protocolo de acesso ao Gmail |
 | **pdf2image** | Converte PDFs em imagens para a visão do modelo |
 | **csv** | Grava os dados estruturados na planilha de negócios |
 | **Google Colab** | Ambiente de execução — sem instalar nada localmente |
 
 ---
 
-## 7. Valor de Negócio e Impacto (ROI)
-
-**Produtividade:** O agente processa toda a caixa de entrada de forma autônoma, liberando a equipe financeira para análises estratégicas.
-
-**Precisão:** O schema Pydantic garante que cada campo extraído seja do tipo correto — sem texto onde deveria haver número, sem datas mal formatadas.
-
-**Filtro de Qualidade:** Documentos inválidos (fotos, contratos, propagandas) são identificados e descartados pela própria IA antes de chegar à planilha.
-
-**Escalabilidade:** O sistema processa 10 ou 10.000 e-mails com o mesmo custo marginal de tempo — sem novas contratações operacionais.
-
----
-
-# 8. Mão na Massa
+# Mão na Massa
 
 ## Contexto Geral do Projeto
 
@@ -111,7 +101,7 @@ Na prática, estamos automatizando um processo que normalmente seria feito por u
 
 ### Bloco 0: Instalando as Ferramentas
 
-Antes de qualquer coisa, precisamos instalar as bibliotecas que o projeto vai usar. Este bloco também instala o **Poppler** — uma dependência do sistema operacional necessária para converter PDFs em imagens.
+Antes de qualquer coisa, precisamos instalar as bibliotecas que o projeto vai usar. Este bloco também instala o **Poppler** — um componente do sistema operacional necessário para converter PDFs em imagens.
 
 ```python
 # Instala o framework de agentes, a conversão de PDF e o processamento de imagens
@@ -126,13 +116,13 @@ Antes de qualquer coisa, precisamos instalar as bibliotecas que o projeto vai us
 - **Agno** — framework para criar e orquestrar o agente de IA.
 - **pdf2image** — converte páginas de PDF em imagens JPEG, necessário porque o GPT-4o trabalha com visão (imagem), não com texto de PDF.
 - **Pillow** — biblioteca de processamento de imagens, usada internamente pelo pdf2image.
-- **poppler-utils** — motor de baixo nível que executa a renderização do PDF. Sem ele, o pdf2image não funciona.
+- **poppler-utils** — motor que executa a renderização do PDF. Sem ele, o pdf2image não funciona.
 
 ---
 
 ### Bloco 1: Importações e Configurações de Segurança
 
-Agora que temos as ferramentas instaladas, importamos os módulos e carregamos as credenciais de forma segura. As chaves de acesso nunca ficam escritas no código — elas são lidas do cofre de segurança do Google Colab.
+Aqui importamos os módulos e carregamos as credenciais de forma segura. As chaves de acesso nunca ficam escritas no código — elas são lidas do cofre de segurança do Google Colab.
 
 ```python
 # =====================================================================
@@ -141,8 +131,8 @@ Agora que temos as ferramentas instaladas, importamos os módulos e carregamos a
 # =====================================================================
 
 import os       # Acesso a variáveis de ambiente e sistema de arquivos
-import imaplib  # Protocolo IMAP para acessar a caixa de entrada do Gmail
-import email    # Parsing de e-mails no formato RFC822
+import imaplib  # Protocolo de acesso à caixa de entrada do Gmail
+import email    # Leitura e interpretação de e-mails
 import csv      # Leitura e escrita de arquivos CSV (planilha)
 
 from pydantic import BaseModel, Field       # Definição do molde de dados (schema)
@@ -150,13 +140,13 @@ from pdf2image import convert_from_path     # Conversão de PDF para imagem
 from google.colab import userdata           # Acesso seguro às credenciais do Colab
 from agno.agent import Agent                # Classe principal do agente de IA
 from agno.models.openai import OpenAIChat   # Conexão com o modelo GPT-4o
-from agno.media import Image                # Wrapper para enviar imagens ao agente
+from agno.media import Image                # Envia imagens para o agente
 
-# 1. CONFIGURAÇÕES INICIAIS (SEGURANÇA)
-# Lê as credenciais do cofre de segurança do Colab — nunca escreva senhas no código
+# CONFIGURAÇÕES INICIAIS (SEGURANÇA)
+# Lê as credenciais do cofre do Colab — nunca escreva senhas diretamente no código
 os.environ["OPENAI_API_KEY"] = userdata.get("OPENAI_API_KEY")
-EMAIL_USER = userdata.get("EMAIL_SENDER")   # Endereço de e-mail do remetente
-EMAIL_PASS = userdata.get("EMAIL_PASSWORD") # App Password do Gmail (não a senha normal)
+EMAIL_USER = userdata.get("EMAIL_SENDER")   # Endereço de e-mail
+EMAIL_PASS = userdata.get("EMAIL_PASSWORD") # App Password do Gmail
 ```
 
 **Por que usar Secrets do Colab?**
@@ -164,7 +154,7 @@ EMAIL_PASS = userdata.get("EMAIL_PASSWORD") # App Password do Gmail (não a senh
 Credenciais escritas diretamente no código representam um risco de segurança — qualquer pessoa com acesso ao notebook veria as senhas. O `userdata.get()` lê as variáveis de um cofre criptografado, mantendo o código seguro para compartilhar.
 
 **O que é o App Password do Gmail?**
-É uma senha específica gerada pelo Google para aplicações externas acessarem o Gmail via IMAP. É diferente da senha da conta — e pode ser revogada sem alterar a senha principal. Para gerar: *Conta Google → Segurança → Verificação em duas etapas → Senhas de app*.
+É uma senha gerada pelo Google especificamente para aplicações externas — diferente da senha da conta e pode ser revogada a qualquer momento sem afetar o acesso normal. Para gerar: *Conta Google → Segurança → Verificação em duas etapas → Senhas de app*.
 
 ---
 
@@ -173,7 +163,7 @@ Credenciais escritas diretamente no código representam um risco de segurança �
 Este é um dos blocos mais importantes do projeto. Aqui definimos **exatamente o que a IA deve entregar** — os campos obrigatórios, os tipos de dados e as instruções de preenchimento quando uma informação não for encontrada.
 
 ```python
-# 2. CONTRATO DE DADOS (O QUE A IA DEVE ENTREGAR)
+# CONTRATO DE DADOS (O QUE A IA DEVE ENTREGAR)
 # O schema Pydantic funciona como um formulário obrigatório:
 # a IA só pode responder preenchendo esses campos, nesse formato exato
 class FichaDoDocumento(BaseModel):
@@ -185,7 +175,7 @@ class FichaDoDocumento(BaseModel):
 
 **Por que o schema Pydantic é essencial?**
 
-Sem ele, a IA responderia com texto livre — e cada documento teria um formato diferente. O schema funciona como um formulário de papel entregue na mão do analista: ele só pode devolver o trabalho preenchendo os campos corretos, nos tipos corretos.
+Sem ele, a IA responderia com texto livre — e cada documento teria um formato diferente, impossível de importar automaticamente para uma planilha. O schema funciona como um formulário padronizado entregue na mão do analista: ele só pode devolver o trabalho preenchendo os campos corretos, nos tipos corretos.
 
 **Campos definidos:**
 
@@ -197,7 +187,7 @@ Sem ele, a IA responderia com texto livre — e cada documento teria um formato 
 | `data_emissao` | texto | Data no formato DD/MM/AAAA |
 
 **O campo `fornecedor` como filtro de qualidade:**
-Repare que o campo `fornecedor` tem duas funções: guarda o nome da empresa *e* serve como sinal de documento inválido. Quando a IA não reconhece um documento financeiro, ela escreve `'INVÁLIDO'` nesse campo — e o código usa esse valor para decidir se salva ou descarta o registro. Uma solução elegante que economiza um campo extra.
+Repare que o campo `fornecedor` tem duas funções: guarda o nome da empresa *e* serve como sinal de documento inválido. Quando a IA não reconhece um documento financeiro, ela escreve `'INVÁLIDO'` nesse campo — e o código usa esse valor para decidir se salva ou descarta o registro.
 
 ---
 
@@ -206,7 +196,7 @@ Repare que o campo `fornecedor` tem duas funções: guarda o nome da empresa *e*
 Aqui contratamos oficialmente o nosso Auditor Digital. Este bloco cria o agente de Inteligência Artificial com suas instruções de trabalho e a trava de segurança do schema.
 
 ```python
-# 3. O AGENTE (INTELIGÊNCIA COM FILTRO DE QUALIDADE)
+# O AGENTE (INTELIGÊNCIA COM FILTRO DE QUALIDADE)
 agente = Agent(
     # O modelo escolhido: GPT-4o com capacidade de visão (lê imagens)
     model=OpenAIChat(id="gpt-4o"),
@@ -226,10 +216,10 @@ agente = Agent(
 **O que está sendo definido aqui:**
 
 **O Modelo (`model`):**
-Escolhemos o GPT-4o — o único modelo da linha OpenAI com capacidade nativa de visão. Ele consegue ler imagens de documentos, identificar campos como CNPJ e valor, e interpretar layouts diferentes de notas fiscais sem treinamento específico.
+Escolhemos o GPT-4o — modelo com capacidade nativa de visão. Ele lê imagens de documentos, identifica campos como CNPJ e valor, e interpreta layouts diferentes de notas fiscais sem nenhum treinamento específico.
 
 **A Trava de Segurança (`output_schema`):**
-É o schema Pydantic que definimos no bloco anterior. Ele impede que o agente responda com texto livre, explicações longas ou formatos inesperados. A saída sempre será um objeto Python com os quatro campos esperados.
+É o schema Pydantic do bloco anterior. Ele impede que o agente responda com texto livre ou formatos inesperados. A saída sempre será um objeto estruturado com os quatro campos esperados pela planilha.
 
 **O Manual de Operações (`instructions`):**
 São as duas únicas regras do agente — intencionalmente simples. Regra 1: se for documento financeiro, extraia. Regra 2: se não for, marque como `'INVÁLIDO'`. Essa simplicidade garante comportamento previsível em produção.
@@ -238,22 +228,22 @@ São as duas únicas regras do agente — intencionalmente simples. Regra 1: se 
 
 ### Bloco 4: Conectando ao Gmail com Filtro Estratégico
 
-Agora abrimos a conexão com a caixa de entrada do Gmail e aplicamos o primeiro filtro do fluxo — o **Filtro Estratégico de Assunto**. Em vez de processar todos os e-mails, o sistema seleciona apenas os relevantes.
+Abrimos a conexão com a caixa de entrada do Gmail e aplicamos o primeiro filtro do fluxo — o **Filtro Estratégico de Assunto**. Em vez de processar todos os e-mails, o sistema seleciona apenas os relevantes.
 
 ```python
-# 4. ACESSO AO GMAIL COM FILTRO DE ASSUNTO (ECONOMIA DE PROCESSAMENTO)
+# ACESSO AO GMAIL COM FILTRO DE ASSUNTO (ECONOMIA DE PROCESSAMENTO)
 print("🔌 Conectando ao Gmail...")
 
-# Abre uma conexão segura com o servidor IMAP do Gmail
+# Abre uma conexão segura com o servidor de e-mail do Gmail
 mail = imaplib.IMAP4_SSL("imap.gmail.com")
 
 # Autentica com o endereço e o App Password
 mail.login(EMAIL_USER, EMAIL_PASS)
 
-# Seleciona a caixa de entrada (inbox)
+# Seleciona a caixa de entrada
 mail.select("inbox")
 
-# FILTRO ESTRATÉGICO: Apenas e-mails não lidos que falem de Nota, Cupom ou Recibo
+# FILTRO ESTRATÉGICO: Apenas e-mails não lidos com palavras-chave no assunto
 # Isso evita processar e-mails irrelevantes e economiza chamadas à API da OpenAI
 criterio_busca = '(UNSEEN OR SUBJECT "nota" OR SUBJECT "cupom" SUBJECT "recibo")'
 _, mensagens = mail.search(None, criterio_busca)
@@ -264,12 +254,9 @@ print(f"📩 {len(ids_emails)} e-mails qualificados encontrados.")
 
 **Por que o filtro estratégico é importante?**
 
-Cada chamada ao GPT-4o tem um custo — tanto em tempo quanto em dinheiro. Processar toda a caixa de entrada sem filtro significaria enviar à IA e-mails de newsletters, notificações e promoções que jamais conterão uma nota fiscal.
+Cada chamada ao GPT-4o tem um custo — tanto em tempo quanto em dinheiro. Processar toda a caixa de entrada sem filtro significaria enviar à IA newsletters, notificações e promoções que jamais conterão uma nota fiscal.
 
-O critério `(UNSEEN OR SUBJECT "nota" OR SUBJECT "cupom" SUBJECT "recibo")` funciona como uma triagem humana — só chegam ao agente os e-mails com real chance de conter um documento financeiro.
-
-**Como funciona o protocolo IMAP:**
-O IMAP (Internet Message Access Protocol) permite que o código acesse a caixa de entrada do Gmail diretamente, sem abrir o navegador. O `IMAP4_SSL` garante que a conexão seja criptografada. O `mail.search()` executa uma busca no servidor com os critérios definidos e retorna os IDs dos e-mails correspondentes.
+O filtro de assunto funciona como uma triagem humana: só chegam ao agente os e-mails com real chance de conter um documento financeiro. Menos chamadas à API, menos custo, mais velocidade.
 
 ---
 
@@ -278,10 +265,10 @@ O IMAP (Internet Message Access Protocol) permite que o código acesse a caixa d
 Este é o coração do projeto. Para cada e-mail selecionado, o sistema percorre os anexos, aplica filtros de formato, converte PDFs em imagens, aciona a IA e decide se os dados devem ser salvos ou descartados.
 
 ```python
-# 5. LOOP DE AUTOMAÇÃO
+# LOOP DE AUTOMAÇÃO
 for num in ids_emails:
 
-    # Baixa o e-mail completo no formato RFC822 (padrão de e-mail)
+    # Baixa o e-mail completo
     _, data = mail.fetch(num, "(RFC822)")
     msg = email.message_from_bytes(data[0][1])
     print(f"\n--- Analisando: {msg['Subject']} ---")
@@ -294,7 +281,7 @@ for num in ids_emails:
         if nome_arquivo and nome_arquivo.lower().endswith((".pdf", ".png", ".jpg", ".jpeg")):
             caminho = f"/content/{nome_arquivo}"
 
-            # Salva o anexo no sistema de arquivos local do Colab
+            # Salva o anexo no ambiente do Colab
             with open(caminho, "wb") as f:
                 f.write(part.get_payload(decode=True))
 
@@ -303,14 +290,13 @@ for num in ids_emails:
             if caminho.lower().endswith(".pdf"):
                 print("🔄 Convertendo PDF para Imagem...")
                 imagens = convert_from_path(caminho, first_page=1, last_page=1)
-                caminho = caminho.replace(".pdf", ".jpg")  # Atualiza o caminho
-                imagens[0].save(caminho, "JPEG")           # Salva apenas a primeira página
+                caminho = caminho.replace(".pdf", ".jpg")
+                imagens[0].save(caminho, "JPEG")
 
             # IA ANALISA O DOCUMENTO
-            # Envia a imagem para o agente e recebe a FichaDoDocumento preenchida
             print("🧠 IA processando imagem...")
             resposta = agente.run("Extraia os dados", images=[Image(filepath=caminho)])
-            ficha = resposta.content  # Objeto FichaDoDocumento com os campos extraídos
+            ficha = resposta.content
 
             # FILTRO DE SEGURANÇA: Só salva se a IA validou o documento
             if ficha.fornecedor != "INVÁLIDO":
@@ -322,7 +308,7 @@ for num in ids_emails:
                 with open("relatorio_final.csv", "a", newline="", encoding="utf-8") as f:
                     writer = csv.writer(f)
                     if not arquivo_existe:
-                        writer.writerow(["Fornecedor", "CNPJ", "Valor", "Data"])  # Cabeçalho
+                        writer.writerow(["Fornecedor", "CNPJ", "Valor", "Data"])
                     writer.writerow([ficha.fornecedor, ficha.cnpj, ficha.valor_total, ficha.data_emissao])
             else:
                 print("🚫 Arquivo ignorado: Não é um documento financeiro.")
@@ -331,54 +317,46 @@ mail.logout()
 print("\n✅ Processamento concluído com sucesso!")
 ```
 
-**O que acontece em cada iteração do loop:**
+**O que acontece em cada passagem do loop — em linguagem de negócio:**
 
-**1 — Busca o e-mail completo:**
-O `mail.fetch()` baixa o e-mail inteiro no formato RFC822 — o padrão universal que inclui cabeçalhos, corpo e todos os anexos em uma única estrutura.
-
-**2 — Percorre todas as partes (`msg.walk()`):**
-Um e-mail pode ter várias partes: texto simples, HTML, imagens inline e arquivos anexados. O `walk()` navega por todas elas em sequência para não perder nenhum anexo.
-
-**3 — Filtro de Formato:**
-O sistema ignora texto, HTML e qualquer outro tipo de arquivo — apenas PDFs e imagens (PNG, JPG, JPEG) passam para a próxima etapa. Isso evita que o agente tente processar um arquivo `.docx` ou `.xlsx` que chegue junto.
-
-**4 — Conversão de PDF para Imagem:**
-O GPT-4o é um modelo de visão — ele lê imagens, não texto de PDF. O `convert_from_path()` renderiza a primeira página do PDF como uma imagem JPEG de alta qualidade, preservando o layout visual do documento (carimbos, logotipos, campos manuscritos).
-
-**5 — A IA analisa a imagem:**
-O `agente.run()` envia a imagem para o GPT-4o com a instrução `"Extraia os dados"`. O modelo vê o documento como um humano veria — e devolve um objeto `FichaDoDocumento` com os quatro campos preenchidos.
-
-**6 — Filtro de Segurança:**
-Antes de gravar qualquer dado, o código verifica se `ficha.fornecedor != "INVÁLIDO"`. Documentos inválidos (fotos de paisagem, PDFs de contratos, imagens aleatórias) são silenciosamente descartados.
-
-**7 — Gravação no CSV:**
-O modo `"a"` (append) garante que os dados são *adicionados* ao arquivo existente, sem sobrescrever registros anteriores. O cabeçalho só é escrito uma vez — na primeira execução, quando o arquivo ainda não existe.
-
-**8 — Encerra a sessão:**
-O `mail.logout()` fecha a conexão com o Gmail de forma limpa após processar todos os e-mails selecionados.
+| Etapa | O que o sistema faz | Por que importa |
+|---|---|---|
+| **Busca o e-mail** | Baixa o conteúdo completo, incluindo anexos | Sem isso, só teríamos o assunto |
+| **Filtra o formato** | Aceita só PDF, PNG, JPG — rejeita Word, Excel, HTML | Evita que arquivos errados cheguem à IA |
+| **Converte PDF** | Transforma a primeira página em imagem JPEG | O GPT-4o enxerga imagens, não texto de PDF |
+| **Aciona a IA** | Envia a imagem e recebe a ficha preenchida | É aqui que a inteligência acontece |
+| **Filtra o resultado** | Só salva se `fornecedor != 'INVÁLIDO'` | Documentos irrelevantes não chegam à planilha |
+| **Grava no CSV** | Adiciona uma linha sem sobrescrever as anteriores | A planilha cresce a cada execução, sem perda de dados |
+| **Encerra a sessão** | Fecha a conexão com o Gmail | Boa prática de segurança — libera o acesso |
 
 ---
 
-## O Fluxo Completo em Resumo
+## Fluxo Completo em Resumo
 
 ```
-Gmail (caixa de entrada)
+Entrada → E-mail com anexo PDF ou imagem
     │
-    ▼ Filtro Estratégico: apenas e-mails não lidos com "nota", "cupom" ou "recibo"
+    ▼ Filtro de Assunto: contém "nota", "cupom" ou "recibo"?
     │
-    ▼ Filtro de Formato: apenas anexos PDF, PNG, JPG ou JPEG
+    ▼ Filtro de Formato: é PDF, PNG, JPG ou JPEG?
     │
     ▼ Conversão: PDF → Imagem JPEG (se necessário)
     │
-    ▼ Visão da IA: GPT-4o analisa a imagem e preenche a FichaDoDocumento
+    ▼ Visão da IA: GPT-4o analisa e preenche a FichaDoDocumento
     │
     ▼ Filtro de Segurança: fornecedor != "INVÁLIDO"?
-    │         │
-    │         ├── SIM → Salva no relatorio_final.csv
-    │         └── NÃO → Descarta silenciosamente
-    │
-    ▼ Próximo e-mail...
+              │
+              ├── SIM → Salva no relatorio_final.csv
+              └── NÃO → Descarta silenciosamente
+
+Saída → Uma linha limpa na planilha, pronta para ERP ou BI
 ```
+
+---
+
+## Exercício
+
+**Customização do Schema:** Adicione campos como `vencimento` ou `categoria` no Bloco 2 e observe como o agente passa a extrair automaticamente essas informações sem nenhuma outra alteração no código.
 
 ---
 
@@ -391,28 +369,13 @@ Acesse os Secrets do Colab (ícone de chave no menu lateral) e adicione `OPENAI_
 Conta Google → Segurança → Verificação em duas etapas → Senhas de app. Use essa senha, não a da conta.
 
 **3 — Teste com e-mails reais:**
-Envie para si mesmo alguns e-mails com notas fiscais em PDF ou imagem no assunto contendo "nota". Execute o código e verifique se o `relatorio_final.csv` foi gerado corretamente.
+Envie para si mesmo alguns e-mails com notas fiscais em PDF ou imagem com a palavra "nota" no assunto. Execute o código e verifique se o `relatorio_final.csv` foi gerado corretamente.
 
 **4 — Adapte o schema:**
 Precisa de mais campos? Adicione à `FichaDoDocumento` — por exemplo, `numero_nf`, `vencimento` ou `categoria`. O agente se adapta automaticamente às novas instruções.
 
 **5 — Expanda o filtro de assunto:**
-O critério de busca IMAP aceita termos customizados. Adicione palavras-chave do seu setor: `"fatura"`, `"boleto"`, `"NF-e"` — e o sistema passa a capturar todos os padrões da sua empresa.
-
----
----
-## Resumo do Fluxo de Valor
-
-1. Entrada: E-mail bagunçado com anexo PDF escaneado.
-2. Processo: O robô converte para imagem -> A IA interpreta o contexto -> O Pydantic valida o formato.
-3. Saída: Uma linha limpa em um CSV pronto para ser importado por qualquer ERP ou Dashboards de BI.
-
----
-
----
-## Exercício
-
-* **Customização**: Adicione campos como vencimento ou categoria no Bloco 2.
+Adicione palavras-chave do seu setor: `"fatura"`, `"boleto"`, `"NF-e"` — e o sistema passa a capturar todos os padrões da sua empresa.
 
 ---
 
