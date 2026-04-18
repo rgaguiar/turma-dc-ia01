@@ -174,7 +174,7 @@ Como o Google Colab começa "zerado" a cada sessão, precisamos instalar os paco
 import os
 import gradio as gr
 from google.colab import userdata
-
+from agno.team import Team
 from agno.agent import Agent
 from agno.models.groq import Groq
 from agno.models.openai import OpenAIChat
