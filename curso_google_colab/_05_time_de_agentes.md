@@ -690,7 +690,7 @@ app_rh.launch(
 
 # proejeto clima rh 2.0
 ```python
-pip install agno gradio pdfplumber pandas openpyxl reportlab
+!pip install agno gradio pdfplumber pandas openpyxl reportlab
 ```
 
 
