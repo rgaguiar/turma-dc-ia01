@@ -410,16 +410,14 @@ app_rh = gr.Interface(
     description="Transforme anotações rápidas de reuniões em um diagnóstico completo de clima organizacional e gestão de riscos."
 )
 
-app_rh.launch(
-    share=True,
-    debug=True,
-    theme=gr.themes.Soft()
-)
-
 # ===============================
 # INICIALIZANDO O SISTEMA
 # ===============================
-app_rh.launch(share=True, debug=True)
+app_rh.launch(
+    share=True,
+    debug=True,
+    theme=gr.themes.Base()
+)
 ```
 
 ---
@@ -638,15 +636,9 @@ diretor_rh = Team(
 def analisar_clima_organizacional(anotacoes_reuniao):
 
     if not anotacoes_reuniao.strip():
-        return (
-            "⚠️ Por favor, insira as anotações da reunião antes de continuar.",
-            "Aguardando entrada..."
-        )
+        return ("⚠️ Por favor, insira as anotações da reunião antes de continuar.")
 
-    resposta = diretor_rh.run(
-        f"Analise as anotações desta reunião de clima organizacional: {anotacoes_reuniao}"
-    )
-
+    resposta = diretor_rh.run(f"Analise as anotações desta reunião de clima organizacional: {anotacoes_reuniao}")
     return (resposta.content)
 
 # ===============================
@@ -662,8 +654,7 @@ app_rh = gr.Interface(
     ),
 
     outputs=[
-        gr.Markdown(label="Diagnóstico Oficial e Plano de Ação"),
-        gr.Markdown(label="Status do processamento")
+        gr.Markdown(label="Diagnóstico Oficial e Plano de Ação")
     ],
 
     title="Co-piloto Executivo de RH",
