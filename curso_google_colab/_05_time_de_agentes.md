@@ -47,9 +47,9 @@ O framework Agno tem um mecanismo nativo para isso. Um agente pode receber um pa
 
 ```python
 # Estrutura conceitual de um time no Agno
-agente_lider = Agent(
+agente_lider = Team(
     name="Diretor",
-    team=[agente_a, agente_b, agente_c],  # ← aqui está o time
+    members=[agente_a, agente_b, agente_c],  # ← aqui está o time
     model=...,
     instructions=[...]
 )
@@ -336,7 +336,7 @@ diretor_rh = Team(
 
         # Estrutura obrigatória do relatório final
         "O Relatório Final deve seguir obrigatoriamente esta estrutura:",
-        "## 📊 Diagnóstico de Clima Organizacional",
+        "## Diagnóstico de Clima Organizacional",
         "### 1. Mapeamento de Temas e Sentimentos",
         "### 2. Lacunas de Pauta Identificadas",
         "### 3. Análise de Risco (Burnout e Turnover)",
@@ -352,7 +352,7 @@ diretor_rh = Team(
 )
 ```
 
-> ⚠️ **Importante:** Note que o `team=[...]` recebe as **variáveis** dos agentes, não strings com seus nomes. O Agno usa essas referências diretamente para acionar cada membro. Por isso os membros precisam ser criados **antes** do líder.
+> ⚠️ **Importante:** Note que o `members=[...]` recebe as **variáveis** dos agentes, não strings com seus nomes. O Agno usa essas referências diretamente para acionar cada membro. Por isso os membros precisam ser criados **antes** do líder.
 
 ---
 
@@ -407,7 +407,6 @@ app_rh = gr.Interface(
     ),
 
     title="Co-piloto Executivo de RH",
-
     description="Transforme anotações rápidas de reuniões em um diagnóstico completo de clima organizacional e gestão de riscos."
 )
 
@@ -537,8 +536,9 @@ O projeto será um **Assistente Jurídico com busca em legislação**, construí
 import os
 import gradio as gr
 from google.colab import userdata
-from agno.team import Team
+
 from agno.agent import Agent
+from agno.team import Team
 from agno.models.groq import Groq
 from agno.models.openai import OpenAIChat
 
@@ -621,7 +621,7 @@ diretor_rh = Team(
         "Após receber as análises dos três especialistas, produza APENAS o Relatório Final.",
         "Não repita os processos intermediários. Entregue diretamente o documento executivo.",
         "O Relatório Final deve seguir obrigatoriamente esta estrutura:",
-        "## 📊 Diagnóstico de Clima Organizacional",
+        "## Diagnóstico de Clima Organizacional",
         "### 1. Mapeamento de Temas e Sentimentos",
         "### 2. Lacunas de Pauta Identificadas",
         "### 3. Análise de Risco (Burnout e Turnover)",
@@ -636,35 +636,45 @@ diretor_rh = Team(
 # PROCEDIMENTO OP. PADRÃO (POP)
 # ===============================
 def analisar_clima_organizacional(anotacoes_reuniao):
+
     if not anotacoes_reuniao.strip():
-        return "⚠️ Por favor, insira as anotações da reunião antes de continuar."
+        return (
+            "⚠️ Por favor, insira as anotações da reunião antes de continuar.",
+            "Aguardando entrada..."
+        )
 
     resposta = diretor_rh.run(
         f"Analise as anotações desta reunião de clima organizacional: {anotacoes_reuniao}"
     )
-    return resposta.content
+
+    return (resposta.content)
 
 # ===============================
 # INTERFACE GRADIO
 # ===============================
 app_rh = gr.Interface(
     fn=analisar_clima_organizacional,
+
     inputs=gr.Textbox(
         lines=10,
         placeholder="Cole aqui as anotações da sua reunião de One-on-One ou de equipe...",
-        label="📝 Anotações do Gestor"
+        label="Anotações do Gestor"
     ),
-    outputs=gr.Markdown(label="📋 Diagnóstico Oficial e Plano de Ação"),
-    title="📊 Co-piloto Executivo de RH",
-    description="Transforme anotações rápidas de reuniões em um diagnóstico completo de clima organizacional e gestão de riscos.",
-    theme=gr.themes.Soft(),
-    allow_flagging="never"
+
+    outputs=[
+        gr.Markdown(label="Diagnóstico Oficial e Plano de Ação"),
+        gr.Markdown(label="Status do processamento")
+    ],
+
+    title="Co-piloto Executivo de RH",
+    description="Transforme anotações rápidas de reuniões em um diagnóstico completo de clima organizacional e gestão de riscos."
 )
 
-# ===============================
-# INICIALIZANDO O SISTEMA
-# ===============================
-app_rh.launch(share=True, debug=True)
+app_rh.launch(
+    share=True,
+    debug=True,
+    theme=gr.themes.Base()
+)
 ```
 
 ```python
