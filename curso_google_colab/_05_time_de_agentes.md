@@ -16,6 +16,8 @@ Antes de escrever uma linha de código, precisamos entender o conceito. Vamos us
 
 Imagine que você é um Diretor de RH e precisa fazer o diagnóstico de clima de um time depois de várias reuniões individuais. Como você resolveria isso com uma equipe humana?
 
+
+
 Você não faria tudo sozinho. Você convocaria especialistas:
 
 | Profissional | Responsabilidade |
@@ -684,4 +686,508 @@ app_rh.launch(
 
 # TESTE 3 — Guardrail: fora do escopo
 # "Você pode me sugerir um bom restaurante para o almoço de equipe?"
+```
+
+# proejeto clima rh 2.0
+```python
+pip install agno gradio pdfplumber pandas openpyxl reportlab
+```
+
+
+```python
+# ===============================
+# FERRAMENTAS
+# ===============================
+import os
+import io
+import re
+import tempfile
+import gradio as gr
+import pandas as pd
+import pdfplumber
+from google.colab import userdata
+from datetime import datetime
+
+from reportlab.lib.pagesizes import A4
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import cm
+from reportlab.platypus import (
+    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle,
+    HRFlowable, PageBreak
+)
+from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_JUSTIFY
+
+from agno.agent import Agent
+from agno.team import Team
+from agno.models.groq import Groq
+from agno.models.openai import OpenAIChat
+
+# ===============================
+# AUTENTICAÇÃO
+# ===============================
+os.environ["GROQ_API_KEY"]   = userdata.get('GROQ_API_KEY')
+os.environ["OPENAI_API_KEY"] = userdata.get('OPENAI_API_KEY')
+
+# ===============================
+# EXTRAÇÃO DE DADOS DO ARQUIVO
+# ===============================
+
+def extrair_texto_pdf(caminho_arquivo: str) -> str:
+    """Extrai texto e tabelas de um arquivo PDF usando pdfplumber."""
+    texto_completo = []
+
+    with pdfplumber.open(caminho_arquivo) as pdf:
+        for i, pagina in enumerate(pdf.pages):
+            texto_completo.append(f"\n--- Página {i + 1} ---\n")
+
+            # Extrai texto da página
+            texto = pagina.extract_text()
+            if texto:
+                texto_completo.append(texto)
+
+            # Extrai tabelas da página (perguntas + respostas estruturadas)
+            tabelas = pagina.extract_tables()
+            for tabela in tabelas:
+                if tabela:
+                    for linha in tabela:
+                        linha_limpa = [str(c).strip() if c else "" for c in linha]
+                        texto_completo.append(" | ".join(linha_limpa))
+
+    return "\n".join(texto_completo)
+
+
+def extrair_texto_planilha(caminho_arquivo: str) -> str:
+    """Extrai dados de uma planilha Excel ou CSV."""
+    extensao = caminho_arquivo.lower().split(".")[-1]
+
+    if extensao == "csv":
+        df = pd.read_csv(caminho_arquivo)
+    else:
+        df = pd.read_excel(caminho_arquivo)
+
+    # Converte o DataFrame para texto estruturado legível pelos agentes
+    linhas = []
+    linhas.append(f"Pesquisa com {len(df)} respondentes.\n")
+    linhas.append(f"Colunas encontradas: {', '.join(df.columns.tolist())}\n")
+    linhas.append("\n=== DADOS DA PESQUISA ===\n")
+
+    for i, linha in df.iterrows():
+        linhas.append(f"\n--- Respondente {i + 1} ---")
+        for coluna in df.columns:
+            valor = str(linha[coluna]) if pd.notna(linha[coluna]) else "Sem resposta"
+            linhas.append(f"  {coluna}: {valor}")
+
+    return "\n".join(linhas)
+
+
+def processar_arquivo(arquivo) -> str:
+    """Detecta o tipo de arquivo e extrai o conteúdo adequado."""
+    if arquivo is None:
+        return ""
+
+    caminho = arquivo.name
+    extensao = caminho.lower().split(".")[-1]
+
+    if extensao == "pdf":
+        return extrair_texto_pdf(caminho)
+    elif extensao in ["xlsx", "xls", "csv"]:
+        return extrair_texto_planilha(caminho)
+    else:
+        raise ValueError(f"Formato '{extensao}' não suportado. Use PDF, XLSX, XLS ou CSV.")
+
+
+# ===============================
+# AGENTE 1: MAPEADOR DE SINAIS
+# ===============================
+mapeador_sinais = Agent(
+    name="Mapeador de Sinais",
+    role="Especialista em extração de temas e análise de sentimentos com pontuação Likert",
+    model=Groq(id="llama-3.3-70b-versatile"),
+    instructions=[
+        "Você receberá os dados de uma pesquisa de clima organizacional (respostas de formulário, PDF ou planilha).",
+        "Leia atentamente e extraia TODOS os temas mencionados, explícita ou implicitamente.",
+        "Para cada tema identificado:",
+        "  1. Classifique o sentimento predominante como POSITIVO, NEGATIVO ou NEUTRO.",
+        "  2. Atribua uma nota Likert de 1 a 5 com base no sentimento geral das respostas:",
+        "     - 1 = Muito Insatisfeito | 2 = Insatisfeito | 3 = Neutro | 4 = Satisfeito | 5 = Muito Satisfeito",
+        "  3. Para perguntas abertas (respostas dissertativas), avalie o teor do conteúdo e atribua",
+        "     uma nota de satisfação de 1 a 5 explicando brevemente o critério usado.",
+        "Organize sua análise em uma tabela Markdown com as colunas:",
+        "  Tema | Sentimento | Nota Likert (1-5) | Justificativa da Nota | Trecho de Referência",
+        "Seja objetivo. Não inclua recomendações — apenas o mapeamento com pontuações."
+    ]
+)
+
+# ===============================
+# AGENTE 2: AUDITOR DE PAUTA
+# ===============================
+auditor_pauta = Agent(
+    name="Auditor de Pauta de RH",
+    role="Especialista em diagnóstico de qualidade de pesquisas de clima organizacional",
+    model=Groq(id="llama-3.3-70b-versatile"),
+    instructions=[
+        "Você receberá a análise de sentimentos (com notas Likert) já processada pelo Mapeador de Sinais.",
+        "Uma pesquisa de clima organizacional de qualidade deve cobrir obrigatoriamente os 5 Pilares:",
+        "1. Liderança e relacionamento com a chefia",
+        "2. Remuneração e reconhecimento",
+        "3. Jornada de trabalho e carga",
+        "4. Ferramentas e infraestrutura",
+        "5. Relacionamento com a equipe e clima",
+        "Para cada pilar, informe:",
+        "  - Se foi abordado (SIM / NÃO / PARCIALMENTE)",
+        "  - A nota média Likert do pilar (se houver dados)",
+        "  - O risco de não ter diagnóstico completo naquele pilar",
+        "Use linguagem direta e executiva."
+    ]
+)
+
+# ===============================
+# AGENTE 3: ESTRATEGISTA DE RISCO
+# ===============================
+analista_risco = Agent(
+    name="Estrategista de Risco",
+    role="Especialista em gestão de riscos de pessoas e planos de ação executivos",
+    model=OpenAIChat(id="gpt-4o-mini"),
+    instructions=[
+        "Você receberá o mapeamento de temas (com notas Likert) e a auditoria de pauta produzidos pelos seus colegas.",
+        "Com base nessas informações, faça uma Análise de Risco focada em:",
+        "- Risco de Burnout: avalie os sinais de sobrecarga emocional ou de trabalho",
+        "- Risco de Turnover: avalie os sinais de desengajamento ou intenção de saída",
+        "Classifique cada risco como ALTO, MÉDIO ou BAIXO com justificativa.",
+        "Considere especialmente os temas com nota Likert 1 ou 2 como sinais críticos de atenção.",
+        "Ao final, proponha exatamente 3 Insights Acionáveis — ações práticas que o gestor pode tomar nos próximos 30 dias.",
+        "Cada insight deve ser específico, mensurável e viável para um gestor de equipe.",
+        "Use linguagem executiva. Sem introduções longas. Vá direto ao ponto."
+    ]
+)
+
+# ===============================
+# AGENTE LÍDER: DIRETOR DE RH
+# ===============================
+diretor_rh = Team(
+    name="Diretor de RH",
+    role="Coordenador de diagnóstico de clima organizacional",
+    model=OpenAIChat(id="gpt-4o-mini"),
+    members=[mapeador_sinais, auditor_pauta, analista_risco],
+    instructions=[
+        "Você coordena um time de especialistas de RH para fazer o diagnóstico de clima organizacional.",
+        "Siga exatamente esta sequência de trabalho:",
+        "1. Acione o Mapeador de Sinais para identificar temas, sentimentos e notas Likert.",
+        "2. Acione o Auditor de Pauta para verificar cobertura e lacunas nos 5 pilares.",
+        "3. Acione o Estrategista de Risco para consolidar riscos e propor insights.",
+        "Após receber as análises dos três especialistas, produza APENAS o Relatório Final.",
+        "Não repita os processos intermediários. Entregue diretamente o documento executivo.",
+        "O Relatório Final deve seguir obrigatoriamente esta estrutura:",
+        "## Diagnóstico de Clima Organizacional",
+        "### 1. Mapeamento de Temas, Sentimentos e Notas (Escala Likert 1-5)",
+        "  (inclua a tabela com: Tema | Sentimento | Nota | Justificativa | Trecho de Referência)",
+        "### 2. Cobertura dos 5 Pilares e Lacunas Identificadas",
+        "  (inclua status, nota média e risco de cada pilar)",
+        "### 3. Análise de Risco (Burnout e Turnover)",
+        "### 4. Plano de Ação — 3 Insights para os Próximos 30 Dias",
+        "Use linguagem objetiva, profissional e orientada à tomada de decisão.",
+        "O gestor que vai ler esse relatório não tem tempo. Seja direto e preciso."
+    ],
+    markdown=True
+)
+
+
+# ===============================
+# GERAÇÃO DE PDF DO RELATÓRIO
+# ===============================
+
+def gerar_pdf_relatorio(conteudo_markdown: str) -> str:
+    """
+    Converte o relatório Markdown em um PDF profissional usando ReportLab.
+    Retorna o caminho do arquivo PDF gerado.
+    """
+    caminho_pdf = tempfile.mktemp(suffix=".pdf")
+
+    doc = SimpleDocTemplate(
+        caminho_pdf,
+        pagesize=A4,
+        rightMargin=2.5 * cm,
+        leftMargin=2.5 * cm,
+        topMargin=3 * cm,
+        bottomMargin=2.5 * cm
+    )
+
+    # ---- Estilos ----
+    estilos = getSampleStyleSheet()
+
+    estilo_titulo = ParagraphStyle(
+        "Titulo",
+        parent=estilos["Title"],
+        fontSize=18,
+        textColor=colors.HexColor("#1a365d"),
+        spaceAfter=6,
+        alignment=TA_CENTER,
+        fontName="Helvetica-Bold"
+    )
+
+    estilo_subtitulo = ParagraphStyle(
+        "Subtitulo",
+        parent=estilos["Normal"],
+        fontSize=10,
+        textColor=colors.HexColor("#718096"),
+        spaceAfter=20,
+        alignment=TA_CENTER,
+        fontName="Helvetica"
+    )
+
+    estilo_h2 = ParagraphStyle(
+        "H2",
+        parent=estilos["Heading2"],
+        fontSize=13,
+        textColor=colors.HexColor("#2c5282"),
+        spaceBefore=16,
+        spaceAfter=6,
+        fontName="Helvetica-Bold"
+    )
+
+    estilo_h3 = ParagraphStyle(
+        "H3",
+        parent=estilos["Heading3"],
+        fontSize=11,
+        textColor=colors.HexColor("#2d3748"),
+        spaceBefore=12,
+        spaceAfter=4,
+        fontName="Helvetica-Bold"
+    )
+
+    estilo_corpo = ParagraphStyle(
+        "Corpo",
+        parent=estilos["Normal"],
+        fontSize=9.5,
+        textColor=colors.HexColor("#2d3748"),
+        spaceAfter=5,
+        leading=14,
+        alignment=TA_JUSTIFY,
+        fontName="Helvetica"
+    )
+
+    estilo_bullet = ParagraphStyle(
+        "Bullet",
+        parent=estilo_corpo,
+        leftIndent=12,
+        bulletIndent=0,
+        spaceAfter=3
+    )
+
+    estilo_rodape = ParagraphStyle(
+        "Rodape",
+        parent=estilos["Normal"],
+        fontSize=8,
+        textColor=colors.HexColor("#a0aec0"),
+        alignment=TA_CENTER,
+        fontName="Helvetica"
+    )
+
+    story = []
+
+    # ---- Cabeçalho ----
+    story.append(Spacer(1, 0.5 * cm))
+    story.append(Paragraph("Co-piloto Executivo de RH", estilo_titulo))
+    story.append(Paragraph(
+        f"Diagnóstico de Clima Organizacional  •  Gerado em {datetime.now().strftime('%d/%m/%Y às %H:%M')}",
+        estilo_subtitulo
+    ))
+    story.append(HRFlowable(width="100%", thickness=2, color=colors.HexColor("#2c5282"), spaceAfter=16))
+
+    # ---- Processa o Markdown linha a linha ----
+    linhas = conteudo_markdown.split("\n")
+    i = 0
+    while i < len(linhas):
+        linha = linhas[i].rstrip()
+
+        # Título ##
+        if linha.startswith("## "):
+            texto = linha[3:].strip()
+            story.append(Paragraph(texto, estilo_h2))
+            story.append(HRFlowable(width="100%", thickness=0.5, color=colors.HexColor("#bee3f8"), spaceAfter=4))
+
+        # Subtítulo ###
+        elif linha.startswith("### "):
+            texto = linha[4:].strip()
+            story.append(Paragraph(texto, estilo_h3))
+
+        # Linha de tabela Markdown (detecta pipes)
+        elif linha.startswith("|"):
+            # Coleta todas as linhas da tabela
+            tabela_linhas = []
+            while i < len(linhas) and linhas[i].strip().startswith("|"):
+                tabela_linhas.append(linhas[i])
+                i += 1
+
+            dados_tabela = []
+            eh_cabecalho = True
+            for tl in tabela_linhas:
+                # Ignora linhas separadoras (|---|---|)
+                if re.match(r"^\|[-| :]+\|$", tl.strip()):
+                    continue
+                celulas = [c.strip() for c in tl.strip().strip("|").split("|")]
+                dados_tabela.append(celulas)
+
+            if dados_tabela:
+                # Normaliza número de colunas
+                max_cols = max(len(r) for r in dados_tabela)
+                dados_norm = [r + [""] * (max_cols - len(r)) for r in dados_tabela]
+
+                # Larguras proporcional à página
+                largura_disponivel = A4[0] - 5 * cm
+                largura_col = largura_disponivel / max_cols
+
+                tabela_rlab = Table(
+                    dados_norm,
+                    colWidths=[largura_col] * max_cols,
+                    repeatRows=1
+                )
+                tabela_rlab.setStyle(TableStyle([
+                    ("BACKGROUND",    (0, 0), (-1, 0),  colors.HexColor("#2c5282")),
+                    ("TEXTCOLOR",     (0, 0), (-1, 0),  colors.white),
+                    ("FONTNAME",      (0, 0), (-1, 0),  "Helvetica-Bold"),
+                    ("FONTSIZE",      (0, 0), (-1, 0),  8),
+                    ("FONTNAME",      (0, 1), (-1, -1), "Helvetica"),
+                    ("FONTSIZE",      (0, 1), (-1, -1), 8),
+                    ("ROWBACKGROUNDS",(0, 1), (-1, -1), [colors.HexColor("#f7fafc"), colors.white]),
+                    ("GRID",          (0, 0), (-1, -1), 0.4, colors.HexColor("#e2e8f0")),
+                    ("VALIGN",        (0, 0), (-1, -1), "TOP"),
+                    ("TOPPADDING",    (0, 0), (-1, -1), 4),
+                    ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
+                    ("LEFTPADDING",   (0, 0), (-1, -1), 6),
+                    ("RIGHTPADDING",  (0, 0), (-1, -1), 6),
+                    ("WORDWRAP",      (0, 0), (-1, -1), True),
+                ]))
+                story.append(Spacer(1, 4))
+                story.append(tabela_rlab)
+                story.append(Spacer(1, 8))
+            continue  # já incrementou i dentro do while
+
+        # Bullet points (- ou *)
+        elif re.match(r"^[-*] ", linha):
+            texto = linha[2:].strip()
+            texto = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", texto)
+            story.append(Paragraph(f"&#8226;  {texto}", estilo_bullet))
+
+        # Linha em branco
+        elif linha.strip() == "":
+            story.append(Spacer(1, 4))
+
+        # Parágrafo normal
+        else:
+            texto = linha.strip()
+            if texto:
+                # Negrito inline
+                texto = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", texto)
+                story.append(Paragraph(texto, estilo_corpo))
+
+        i += 1
+
+    # ---- Rodapé ----
+    story.append(Spacer(1, 1 * cm))
+    story.append(HRFlowable(width="100%", thickness=0.5, color=colors.HexColor("#e2e8f0")))
+    story.append(Spacer(1, 0.3 * cm))
+    story.append(Paragraph(
+        "Relatório gerado automaticamente pelo Co-piloto Executivo de RH  •  Uso interno e confidencial",
+        estilo_rodape
+    ))
+
+    doc.build(story)
+    return caminho_pdf
+
+
+# ===============================
+# PROCEDIMENTO OP. PADRÃO (POP)
+# ===============================
+
+def analisar_clima_organizacional(arquivo, anotacoes_texto):
+    """
+    Aceita PDF/planilha OU texto livre com anotações.
+    Retorna o relatório em Markdown e o caminho do PDF gerado.
+    """
+    conteudo = ""
+
+    # Prioridade: arquivo enviado
+    if arquivo is not None:
+        try:
+            conteudo = processar_arquivo(arquivo)
+        except ValueError as e:
+            return str(e), None
+
+    # Fallback: texto digitado manualmente
+    if not conteudo.strip() and anotacoes_texto.strip():
+        conteudo = anotacoes_texto.strip()
+
+    if not conteudo.strip():
+        return "⚠️ Por favor, envie um arquivo (PDF ou planilha) ou cole as anotações da reunião.", None
+
+    prompt = f"""
+Analise os dados desta pesquisa de clima organizacional.
+Os dados podem vir de um formulário estruturado, PDF ou planilha.
+Extraia temas, classifique sentimentos, atribua notas Likert (1 a 5) e gere o diagnóstico completo.
+
+DADOS DA PESQUISA:
+{conteudo}
+"""
+
+    resposta = diretor_rh.run(prompt)
+    relatorio_md = resposta.content
+
+    # Gera o PDF para download
+    caminho_pdf = gerar_pdf_relatorio(relatorio_md)
+
+    return relatorio_md, caminho_pdf
+
+
+# ===============================
+# INTERFACE GRADIO
+# ===============================
+
+with gr.Blocks(theme=gr.themes.Base(), title="Co-piloto Executivo de RH") as app_rh:
+
+    gr.Markdown("""
+    # 🏢 Co-piloto Executivo de RH
+    **Transforme pesquisas de clima em diagnósticos completos com notas Likert e plano de ação.**
+
+    Envie um **PDF** ou **planilha** com as respostas da pesquisa — ou cole as anotações manualmente.
+    O sistema irá identificar temas, classificar sentimentos, atribuir notas (escala 1–5) e gerar um relatório executivo.
+    """)
+
+    with gr.Row():
+        with gr.Column(scale=1):
+            arquivo_input = gr.File(
+                label="📎 Enviar Arquivo (PDF, XLSX, XLS, CSV)",
+                file_types=[".pdf", ".xlsx", ".xls", ".csv"],
+                type="filepath"
+            )
+            texto_input = gr.Textbox(
+                lines=8,
+                placeholder="Ou cole aqui as anotações da reunião (opcional, usado se nenhum arquivo for enviado)...",
+                label="📝 Anotações Manuais"
+            )
+            btn_analisar = gr.Button("🔍 Gerar Diagnóstico", variant="primary", size="lg")
+
+        with gr.Column(scale=2):
+            relatorio_output = gr.Markdown(label="📊 Diagnóstico Oficial e Plano de Ação")
+            pdf_output = gr.File(
+                label="⬇️ Download do Relatório em PDF",
+                interactive=False
+            )
+
+    btn_analisar.click(
+        fn=analisar_clima_organizacional,
+        inputs=[arquivo_input, texto_input],
+        outputs=[relatorio_output, pdf_output]
+    )
+
+    gr.Markdown("""
+    ---
+    *Desenvolvido com Agno Framework + GPT-4o-mini + LLaMA 3.3 70B*
+    """)
+
+app_rh.launch(
+    share=True,
+    debug=True
+)
 ```
