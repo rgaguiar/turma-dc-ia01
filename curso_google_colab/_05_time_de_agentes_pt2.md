@@ -566,45 +566,7 @@ O que você acabou de construir vai além de um chatbot jurídico. É um sistema
 
 ---
 
-## 7. Expandindo a Arquitetura: Versão 2.0 com Upload de Documentos
-
-Assim como fizemos na Aula 1 com o Co-piloto de RH, você pode evoluir o Assistente Jurídico para aceitar documentos reais — contratos, convenções coletivas, recibos de pagamento — usando `pdfplumber` para extrair o texto e enviá-lo ao time junto com a descrição do caso.
-
-A estrutura de time permanece exatamente a mesma. O que muda é a função de entrada:
-
-```
-# Estrutura conceitual da versão 2.0
-import pdfplumber
-
-def analisar_com_documento(arquivo, descricao_caso):
-    """
-    Extrai o texto do contrato ou convenção coletiva enviado
-    e enriquece o contexto do time antes da análise.
-    """
-    texto_documento = ""
-
-    if arquivo is not None:
-        with pdfplumber.open(arquivo.name) as pdf:
-            for pagina in pdf.pages:
-                texto_documento += pagina.extract_text() or ""
-
-    contexto_completo = f"""
-    SITUAÇÃO TRABALHISTA:
-    {descricao_caso}
-
-    DOCUMENTO FORNECIDO (contrato, convenção coletiva ou recibo):
-    {texto_documento}
-    """
-
-    resposta = coordenador_juridico.run(contexto_completo)
-    return resposta.content
-```
-
-> 💡 **Seu próximo passo:** Teste o sistema com um caso real do seu trabalho. Se você é da área jurídica, cole uma situação de rescisão recente. Se é de RH, descreva um afastamento ou banco de horas que precise de análise.
-
----
-
-## 8. Próxima Aula
+## 7. Próxima Aula
 
 Na **Aula 3**, vamos dar ao time a capacidade de **ler e analisar documentos enviados pelo usuário** — contratos, briefings, propostas comerciais — usando RAG (Retrieval-Augmented Generation) com banco de dados vetorial.
 
