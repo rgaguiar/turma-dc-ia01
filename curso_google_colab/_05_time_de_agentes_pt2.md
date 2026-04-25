@@ -130,7 +130,7 @@ As credenciais são as mesmas da Aula 1. Você já tem tudo configurado no cofre
 # ===============================
 # INSTALAÇÃO DAS DEPENDÊNCIAS
 # ===============================
-!pip install -U agno groq openai duckduckgo-search gradio
+!pip install -q -U agno groq openai duckduckgo-search gradio ddgs
 ```
 
 **O que é novo em relação à Aula 1:**
@@ -220,8 +220,8 @@ pesquisador_legislacao = Agent(
 )
 ```
 
-> 💡 **Por que instruir o agente a SEMPRE pesquisar?** Sem essa instrução explícita, o modelo pode decidir que "já sabe" a resposta e ignorar a ferramenta. A instrução `"SEMPRE pesquise na web antes de responder"` é o guardrail que garante que ele vai à fonte antes de falar.
-
+> 💡 **Por que instruir o agente a SEMPRE pesquisar?** Sem essa instrução explícita, o modelo pode decidir que "já sabe" a resposta e ignorar a ferramenta. A instrução `"SEMPRE pesquise na web antes de responder"` é o guardrail que garante que ele vai à fonte antes de falar.  
+> ⚠️ **Importante:** Verifique o arquivo robots.txt. Digite o endereço do site seguido de /robots.txt (ex: ://exemplo.com.br/robots.txt). Este arquivo diz aos bots quais partes do site podem ou não ser acessadas.
 ---
 
 #### Agente 2 — Analista de Compliance
