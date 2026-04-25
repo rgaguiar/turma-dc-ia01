@@ -354,6 +354,7 @@ calculador_verbas = Agent(
         # Como ele deve calcular
         "SEMPRE escreva e execute código Python para calcular cada verba rescisória.",
         "Nunca faça os cálculos de cabeça ou por estimativa — use o PythonTools para executar.",
+        "Se a data de demissão não for informada, calcule o saldo de salário considerando 30 dias trabalhados (salário cheio) e informe no parecer que o valor deve ser ajustado conforme a data real da rescisão.",
 
         # Quais verbas calcular em uma demissão sem justa causa
         "Para demissão sem justa causa, calcule obrigatoriamente:",
@@ -699,6 +700,7 @@ calculador_verbas = Agent(
         "Você receberá os dados do colaborador e os artigos da CLT aplicáveis.",
         "SEMPRE escreva e execute código Python para calcular cada verba rescisória.",
         "Nunca faça os cálculos de cabeça ou por estimativa — use o PythonTools para executar.",
+        "Se a data de demissão não for informada, calcule o saldo de salário considerando 30 dias trabalhados (salário cheio) e informe no parecer que o valor deve ser ajustado conforme a data real da rescisão.",
         "Para demissão sem justa causa, calcule obrigatoriamente:",
         "1. Saldo de salário (dias trabalhados no mês / 30 × salário)",
         "2. Aviso prévio proporcional (30 dias + 3 dias por ano completo, máximo 90 dias)",
