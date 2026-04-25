@@ -1,12 +1,63 @@
 # Aula Prática: Times de Agentes com Ferramentas — O Time que Age no Mundo Real
 
-Na Aula 1, você construiu um time que **pensa**: lê anotações, analisa sentimentos, audita pautas e entrega um diagnóstico executivo. Os agentes trabalhavam apenas com o texto que você colava na tela, e faziam isso muito bem.
+## Onde Estamos e Para Onde Vamos
+
+Antes de começar, vale dar um passo atrás e ver o mapa completo do curso.
+
+### As 4 Aulas do Curso
+
+| Aula | Tema | Projeto |
+| --- | --- | --- |
+| **1** ✅ | Time simples com interface | Co-piloto Executivo de RH |
+| **2** ← você está aqui | Time com ferramentas e busca na web | Assistente Jurídico Trabalhista |
+| **3** | Time com RAG e documentos | Analista de Contratos e Briefings de Marketing |
+| **4** | Time autônomo com APIs externas | Agente de dados com monitoramento de KPIs |
+
+### O Que Você Será Capaz de Fazer ao Final das 4 Aulas
+
+**Conceitual**
+
+* Entender a diferença entre agente solo e time de agentes, e quando usar cada arquitetura
+* Tomar decisões de design: qual modelo para cada agente, quando usar ferramenta, quando não usar
+* Ler e entender código de times de agentes escrito por outras pessoas
+
+**Técnico**
+
+* Criar times de agentes com o framework Agno usando `Team` + `members`
+* Equipar agentes com ferramentas de busca na web e execução de código Python
+* Conectar agentes a documentos via RAG (leitura de PDF, planilhas)
+* Integrar APIs externas para monitoramento e alertas automáticos
+* Construir interfaces visuais com Gradio e gerar link público
+* Proteger credenciais com o cofre de Secrets do Colab
+* Fazer debug de erros comuns (modelos, ferramentas, permissões)
+
+**Valor de Negócio**
+
+* Transformar um problema real do seu setor em um time de agentes funcional
+* Adaptar a arquitetura aprendida para RH, Jurídico, Marketing ou Dados
+* Entregar uma ferramenta utilizável por colegas não-técnicos via link no navegador
+* Estimar o custo operacional de um sistema de agentes antes de colocá-lo em produção
+
+> 💡 **O perfil que você desenvolve ao final:** alguém capaz de pegar um processo repetitivo e complexo do seu trabalho — que hoje consome horas — e transformar em um time de agentes que entrega em minutos, sem depender de um desenvolvedor.
+
+---
+
+## O Que Você Já Sabe (Aula 1)
+
+Na aula anterior, você construiu um time que **pensa**: lê anotações, analisa sentimentos, audita pautas e entrega um diagnóstico executivo. Os agentes trabalhavam apenas com o texto que você colava na tela — e faziam isso muito bem.
+
+Você aprendeu:
+
+* A diferença entre agente solo e time de agentes
+* Como o Agno orquestra membros com `Team` + `members`
+* Como cada agente tem um `name`, `role`, `model` e `instructions` próprios
+* Como criar uma interface visual com Gradio e gerar link público
 
 Mas esse time tinha uma limitação clara: ele não sabe o que aconteceu ontem. Ele não consulta a legislação atualizada, não verifica a convenção coletiva vigente, não acessa nenhuma fonte externa. Se a lei mudou na semana passada, ele não sabe.
 
-Nesta aula, vamos resolver isso. Vamos equipar o time com **ferramentas**, a capacidade de pesquisar na web em tempo real e executar cálculos precisos com código Python.
+Nesta aula, vamos resolver isso. Vamos equipar o time com **ferramentas** — a capacidade de pesquisar na web em tempo real e executar cálculos precisos com código Python.
 
-O projeto do dia é o **Assistente Jurídico Trabalhista**, um time que recebe a descrição de uma situação de RH, pesquisa a legislação vigente, verifica a conformidade legal e calcula as verbas rescisórias, entregando um parecer técnico completo.
+O projeto do dia é o **Assistente Jurídico Trabalhista** — um time que recebe a descrição de uma situação de RH, pesquisa a legislação vigente, verifica a conformidade legal e calcula as verbas rescisórias, entregando um parecer técnico completo.
 
 ---
 
@@ -14,7 +65,7 @@ O projeto do dia é o **Assistente Jurídico Trabalhista**, um time que recebe a
 
 ### A Diferença entre Pensar e Agir
 
-Na Aula 1, vimos que dividir o raciocínio em especialistas melhora muito a qualidade da análise. Mas raciocínio puro tem um teto: o modelo de IA foi treinado até uma data de corte, ele não sabe o que mudou depois disso.
+Na Aula 1, vimos que dividir o raciocínio em especialistas melhora muito a qualidade da análise. Mas raciocínio puro tem um teto: o modelo de IA foi treinado até uma data de corte — ele não sabe o que mudou depois disso.
 
 Um advogado trabalhista sênior não trabalha de memória. Antes de emitir um parecer, ele **pesquisa**: consulta o texto atualizado da CLT, verifica súmulas recentes do TST, confere a convenção coletiva da categoria. Ferramentas dão exatamente essa capacidade ao agente.
 
@@ -25,7 +76,7 @@ Um advogado trabalhista sênior não trabalha de memória. Antes de emitir um pa
 | Limitado ao contexto que você fornece | Expande ativamente o contexto quando necessário |
 | Ideal para análise de documentos que você entrega | Ideal para pesquisa, compliance e due diligence |
 
-> 💡 **Dica de Negócios:** Use agentes sem ferramentas quando o insumo é o documento que você tem em mãos. Use agentes com ferramentas quando o insumo precisa ser buscado, legislação, preço de mercado, notícia recente, dado público.
+> 💡 **Dica de Negócios:** Use agentes sem ferramentas quando o insumo é o documento que você tem em mãos. Use agentes com ferramentas quando o insumo precisa ser buscado — legislação, preço de mercado, notícia recente, dado público.
 
 ### Como o Agno Implementa Ferramentas
 
@@ -33,12 +84,12 @@ Adicionar uma ferramenta a um agente é tão simples quanto declarar uma lista n
 
 ```
 # Estrutura conceitual — agente com ferramenta de busca
-from agno.tools.duckduckgo import DuckDuckGoTools
+from agno.tools.websearch import WebSearchTools
 
 agente_pesquisador = Agent(
     name="Pesquisador",
-    model=Groq(id="llama-3.3-70b-versatile"),
-    tools=[DuckDuckGoTools()],   # ← a ferramenta entra aqui
+    model=OpenAIChat(id="gpt-4o-mini"),
+    tools=[WebSearchTools(backend="bing")],   # ← a ferramenta entra aqui
     instructions=[...]
 )
 ```
@@ -51,19 +102,31 @@ Quando o agente entende, a partir das suas instruções, que precisa de uma info
 
 | Ferramenta | O que faz | Custo |
 | --- | --- | --- |
-| `DuckDuckGoTools` | Pesquisa na web sem chave de API | Gratuito |
+| `WebSearchTools` | Pesquisa na web sem chave de API adicional | Gratuito |
 | `PythonTools` | Executa código Python dentro do agente | Gratuito |
 
-### Por que DuckDuckGo e não Google?
+### Por que WebSearchTools e não DuckDuckGoTools?
 
-O DuckDuckGo não exige cadastro, não tem limite de requisições para uso moderado e indexa muito bem fontes públicas como `planalto.gov.br`, `tst.jus.br` e `jusbrasil.com.br` — exatamente onde está a legislação trabalhista brasileira que nosso agente vai precisar.
+Na prática em sala, descobrimos que o `DuckDuckGoTools` é bloqueado com frequência no Google Colab por causa do IP compartilhado. O `WebSearchTools` usa a mesma biblioteca por baixo, mas permite escolher o backend — e o `bing` se mostrou mais estável no ambiente do Colab.
+
+> ⚠️ **Lição do debug:** backends de busca gratuitos no Colab são instáveis por causa do IP compartilhado. Em produção (servidor próprio ou VPS) qualquer um funciona normalmente. Se quiser uma solução definitiva sem essa dor de cabeça, use a [Tavily API](https://tavily.com) — tem plano gratuito generoso e o Agno já tem suporte nativo com `from agno.tools.tavily import TavilyTools`.
 
 ### Por que PythonTools?
 
-Cálculos trabalhistas têm regras matemáticas precisas: avos de férias, proporcionalidade de 13º, FGTS sobre verbas. Se você pedir para a IA **calcular** sem uma ferramenta de execução de código, ela vai raciocinar sobre os valores — e pode errar. Com `PythonTools`, 
-o agente **escreve e executa** o cálculo em Python, garantindo precisão matemática real.
+Cálculos trabalhistas têm regras matemáticas precisas: avos de férias, proporcionalidade de 13º, FGTS sobre verbas. Se você pedir para a IA **calcular** sem uma ferramenta de execução de código, ela vai raciocinar sobre os valores — e pode errar. Com `PythonTools`, o agente **escreve e executa** o cálculo em Python, garantindo precisão matemática real.
 
 > ⚠️ **Importante:** Ferramentas não substituem as instruções. O agente só vai usar a ferramenta se suas `instructions` mandarem ele usar. Sem instrução explícita, ele pode ignorar a ferramenta e responder de memória.
+
+### Lição Aprendida em Sala: Groq + Tools Externas
+
+Durante a aula, descobrimos que o **Groq (Llama 3) não suporta chamada de ferramentas externas** da mesma forma que a OpenAI. Ele rejeita o mecanismo de `function calling` que o `WebSearchTools` usa.
+
+A regra prática que ficou:
+
+| Situação | Modelo correto |
+| --- | --- |
+| Agente **com** ferramenta de busca ou execução de código | `OpenAIChat` (GPT-4o ou GPT-4o mini) |
+| Agente **sem** ferramenta — apenas raciocínio e análise | `Groq` (Llama 3) — gratuito e rápido |
 
 ---
 
@@ -86,7 +149,7 @@ Responder isso com precisão exige pesquisar os artigos da CLT aplicáveis, veri
            ▼
 [Coordenador Jurídico]  ← Líder do Time (GPT-4o mini)
            │
-           ├──▶ [Pesquisador de Legislação]  → Busca CLT, súmulas TST e normas na web   (Llama 3 + DuckDuckGo)
+           ├──▶ [Pesquisador de Legislação]  → Busca CLT, súmulas TST e normas na web   (GPT-4o mini + WebSearchTools)
            │
            ├──▶ [Analista de Compliance]     → Verifica conformidade e aponta riscos     (Llama 3 via Groq)
            │
@@ -100,9 +163,9 @@ Responder isso com precisão exige pesquisar os artigos da CLT aplicáveis, veri
 
 | Agente | Modelo | Ferramenta | Justificativa |
 | --- | --- | --- | --- |
-| Pesquisador de Legislação | `Groq / Llama 3` | `DuckDuckGoTools` | Busca web gratuita de fontes públicas de legislação |
-| Analista de Compliance | `Groq / Llama 3` | Nenhuma | Analisa o que o Pesquisador trouxe — sem busca redundante |
-| Calculador de Verbas | `GPT-4o` | `PythonTools` | Cálculos precisos exigem execução real de código |
+| Pesquisador de Legislação | `GPT-4o mini` | `WebSearchTools(backend="bing")` | Groq não suporta tools externas — GPT-4o mini suporta |
+| Analista de Compliance | `Groq / Llama 3` | Nenhuma | Sem tool — Groq funciona perfeitamente e é gratuito |
+| Calculador de Verbas | `GPT-4o` | `PythonTools` | Cálculos financeiros exigem o modelo mais preciso disponível |
 | Coordenador Jurídico (Líder) | `GPT-4o mini` | Nenhuma | Coordena o time e formata o parecer final |
 
 > 💡 **Arquitetura intencional:** O Analista de Compliance não tem ferramenta de busca propositalmente. Ele trabalha **sobre** o que o Pesquisador trouxe — isso evita buscas redundantes e mantém o custo baixo.
@@ -116,9 +179,9 @@ As credenciais são as mesmas da Aula 1. Você já tem tudo configurado no cofre
 | Secret no Colab | Plataforma | Custo |
 | --- | --- | --- |
 | `GROQ_API_KEY` | [console.groq.com](https://console.groq.com) | Gratuito |
-| `OPENAI_API_KEY` | [platform.openai.com](https://platform.openai.com) | ~R$ 0,15 por análise completa |
+| `OPENAI_API_KEY` | [platform.openai.com](https://platform.openai.com) | ~R$ 0,20 por análise completa |
 
-> 📌 **Lembrete:** O `DuckDuckGoTools` não consomem tokens adicionais — apenas a chamada ao modelo LLM é cobrada.
+> 📌 **Lembrete:** O `WebSearchTools` e o `PythonTools` não consomem tokens adicionais — apenas as chamadas aos modelos LLM são cobradas.
 
 ---
 
@@ -130,14 +193,14 @@ As credenciais são as mesmas da Aula 1. Você já tem tudo configurado no cofre
 # ===============================
 # INSTALAÇÃO DAS DEPENDÊNCIAS
 # ===============================
-!pip install -q -U agno groq openai duckduckgo-search gradio ddgs
+!pip install -q -U agno groq openai ddgs gradio
 ```
 
 **O que é novo em relação à Aula 1:**
 
 | Pacote | Função |
 | --- | --- |
-| `duckduckgo-search` | Motor de busca usado internamente pela `DuckDuckGoTools` |
+| `ddgs` | Motor de busca usado internamente pelo `WebSearchTools` |
 | Os demais | Já conhecidos da Aula 1 |
 
 ---
@@ -158,7 +221,7 @@ from agno.models.groq import Groq
 from agno.models.openai import OpenAIChat
 
 # Novidade desta aula: ferramentas que os agentes vão usar
-from agno.tools.duckduckgo import DuckDuckGoTools
+from agno.tools.websearch import WebSearchTools   # ← nome correto no Agno
 from agno.tools.python import PythonTools
 
 # ===============================
@@ -168,7 +231,7 @@ os.environ["GROQ_API_KEY"]   = userdata.get('GROQ_API_KEY')
 os.environ["OPENAI_API_KEY"] = userdata.get('OPENAI_API_KEY')
 ```
 
-> 📌 **Atenção:** As ferramentas são objetos independentes, importados separadamente dos modelos. Você os instancia com `DuckDuckGoTools()` e `PythonTools()` e os entrega ao agente via `tools=[...]`. O Agno gerencia quando e como cada ferramenta é acionada durante a execução.
+> 📌 **Atenção:** As ferramentas são objetos independentes, importados separadamente dos modelos. Você os instancia com `WebSearchTools(backend="bing")` e `PythonTools()` e os entrega ao agente via `tools=[...]`. O Agno gerencia quando e como cada ferramenta é acionada durante a execução.
 
 ---
 
@@ -188,11 +251,11 @@ pesquisador_legislacao = Agent(
     # Cargo do agente dentro do time
     role="Especialista em pesquisa de legislação trabalhista e jurisprudência",
 
-    # Modelo: Groq com Llama 3 — rápido e gratuito para busca e leitura de fontes
-    model=Groq(id="llama-3.3-70b-versatile"),
+    # GPT-4o mini: suporta tools externas de forma confiável (Groq não suporta)
+    model=OpenAIChat(id="gpt-4o-mini"),
 
-    # Ferramenta de busca na web — gratuita, sem chave de API adicional
-    tools=[DuckDuckGoTools()],
+    # WebSearchTools com backend bing — mais estável no Colab
+    tools=[WebSearchTools(backend="auto")],
 
     instructions=[
         # O que ele deve fazer antes de qualquer coisa
@@ -220,8 +283,10 @@ pesquisador_legislacao = Agent(
 )
 ```
 
-> 💡 **Por que instruir o agente a SEMPRE pesquisar?** Sem essa instrução explícita, o modelo pode decidir que "já sabe" a resposta e ignorar a ferramenta. A instrução `"SEMPRE pesquise na web antes de responder"` é o guardrail que garante que ele vai à fonte antes de falar.  
-> ⚠️ **Importante:** Verifique o arquivo robots.txt. Digite o endereço do site seguido de /robots.txt (ex: ://exemplo.com.br/robots.txt). Este arquivo diz aos bots quais partes do site podem ou não ser acessadas.
+> 💡 **Por que instruir o agente a SEMPRE pesquisar?** Sem essa instrução explícita, o modelo pode decidir que "já sabe" a resposta e ignorar a ferramenta. A instrução `"SEMPRE pesquise na web antes de responder"` é o guardrail que garante que ele vai à fonte antes de falar.
+
+> ⚠️ **Boas práticas:** Antes de usar um agente para raspar dados de um site, verifique o `robots.txt` da fonte — basta acessar `site.com.br/robots.txt`. Esse arquivo informa quais áreas podem ou não ser acessadas por bots automatizados.
+
 ---
 
 #### Agente 2 — Analista de Compliance
@@ -238,10 +303,9 @@ analista_compliance = Agent(
     # Cargo do agente
     role="Especialista em análise de conformidade trabalhista e gestão de riscos jurídicos",
 
-    # Modelo: Groq com Llama 3 — análise estruturada sobre as fontes fornecidas
+    # Groq com Llama 3 — sem tool, apenas raciocínio: rápido e gratuito
     model=Groq(id="llama-3.3-70b-versatile"),
 
-    # Sem ferramenta: analisa o que o Pesquisador trouxe — sem busca redundante
     instructions=[
         # O contexto de trabalho
         "Você receberá a descrição da situação trabalhista e a pesquisa de legislação feita pelo seu colega.",
@@ -277,7 +341,7 @@ calculador_verbas = Agent(
     # Cargo do agente
     role="Especialista em cálculo de verbas rescisórias trabalhistas",
 
-    # Modelo: GPT-4o mini — escreve e executa código Python com precisão
+    # GPT-4o — modelo mais preciso para cálculos financeiros com execução de código
     model=OpenAIChat(id="gpt-4o"),
 
     # Ferramenta de execução de código — garante cálculo real, não estimado
@@ -308,7 +372,7 @@ calculador_verbas = Agent(
 )
 ```
 
-> ⚠️ **Por que GPT-4o mini no Calculador?** O `PythonTools` funciona com qualquer modelo, mas o GPT-4o mini escreve código Python mais robusto e com menos erros do que os modelos menores. Para cálculos que envolvem dinheiro, vale o custo marginal.
+> ⚠️ **Por que GPT-4o no Calculador?** Para cálculos que envolvem dinheiro e precisam de execução real de código, usamos o modelo mais capaz. O custo marginal por análise é pequeno — e o risco de um cálculo errado de rescisória é alto.
 
 ---
 
@@ -324,7 +388,7 @@ coordenador_juridico = Team(
     # Cargo do líder
     role="Coordenador de análise jurídica trabalhista",
 
-    # Modelo: GPT-4o mini — coordenação e formatação do parecer final
+    # GPT-4o mini — coordenação e formatação do parecer final
     model=OpenAIChat(id="gpt-4o-mini"),
 
     # O time completo de especialistas
@@ -430,7 +494,7 @@ with gr.Blocks(theme=gr.themes.Base(), title="Assistente Jurídico Trabalhista")
         outputs=[parecer_output]
     )
 
-    gr.Markdown("---\n*Desenvolvido com Agno Framework + GPT-4o + GPT-4o mini + LLaMA 3.3 70B + DuckDuckGo Search*")
+    gr.Markdown("---\n*Desenvolvido com Agno Framework + GPT-4o + GPT-4o mini + LLaMA 3.3 70B + WebSearch*")
 
 # ===============================
 # INICIALIZANDO O SISTEMA
@@ -523,7 +587,6 @@ def analisar_com_documento(arquivo, descricao_caso):
             for pagina in pdf.pages:
                 texto_documento += pagina.extract_text() or ""
 
-    # Contexto enriquecido: caso + documento
     contexto_completo = f"""
     SITUAÇÃO TRABALHISTA:
     {descricao_caso}
@@ -554,7 +617,7 @@ O projeto será um **Analista de Contratos e Briefings de Marketing** — um tim
 # ===============================
 # INSTALAÇÃO DAS DEPENDÊNCIAS
 # ===============================
-!pip install -U agno groq openai duckduckgo-search gradio
+!pip install -q -U agno groq openai ddgs gradio
 ```
 
 ```
@@ -569,7 +632,7 @@ from agno.agent import Agent
 from agno.team import Team
 from agno.models.groq import Groq
 from agno.models.openai import OpenAIChat
-from agno.tools.duckduckgo import DuckDuckGoTools
+from agno.tools.websearch import WebSearchTools
 from agno.tools.python import PythonTools
 
 # ===============================
@@ -584,8 +647,8 @@ os.environ["OPENAI_API_KEY"] = userdata.get('OPENAI_API_KEY')
 pesquisador_legislacao = Agent(
     name="Pesquisador de Legislação",
     role="Especialista em pesquisa de legislação trabalhista e jurisprudência",
-    model=Groq(id="llama-3.3-70b-versatile"),
-    tools=[DuckDuckGoTools()],
+    model=OpenAIChat(id="gpt-4o-mini"),
+    tools=[WebSearchTools(backend="auto")],
     instructions=[
         "Você receberá a descrição de uma situação trabalhista.",
         "SEMPRE pesquise na web antes de responder. Nunca responda apenas de memória.",
@@ -726,7 +789,7 @@ with gr.Blocks(theme=gr.themes.Base(), title="Assistente Jurídico Trabalhista")
         outputs=[parecer_output]
     )
 
-    gr.Markdown("---\n*Desenvolvido com Agno Framework + GPT-4o mini + LLaMA 3.3 70B + DuckDuckGo Search*")
+    gr.Markdown("---\n*Desenvolvido com Agno Framework + GPT-4o + GPT-4o mini + LLaMA 3.3 70B + WebSearch*")
 
 # ===============================
 # INICIALIZANDO O SISTEMA
