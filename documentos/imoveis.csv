@@ -1,0 +1,101 @@
+id,tipo,finalidade,cidade,estado,area_m2,quartos,banheiros,vagas,valor_mensal,valor_venda,condominio,iptu_mensal,mobiliado,pet_friendly,disponivel,descricao
+1,Apartamento,Locação,Rio de Janeiro,RJ,75,2,2,1,4200,0,850,320,Sim,Não,Sim,Apartamento moderno com varanda gourmet e vista para o parque
+2,Apartamento,Locação,São Paulo,SP,60,2,1,1,3500,0,720,280,Não,Sim,Sim,"Ap reformado a 2 quadras do metrô, sala ampla"
+3,Casa,Locação,Curitiba,PR,180,4,3,3,8500,0,0,650,Não,Sim,Sim,Casa espaçosa com piscina e área gourmet
+4,Apartamento,Locação,Curitiba,PR,55,1,1,1,2800,0,600,220,Sim,Não,Sim,Studio charmoso no coração da Vila Madalena
+5,Apartamento,Locação,Curitiba,PR,90,3,2,2,5200,0,950,380,Não,Não,Sim,Ap espaçoso próximo ao shopping
+6,Kitnet,Locação,Rio de Janeiro,RJ,28,1,1,0,1800,0,350,120,Sim,Não,Sim,Kitnet compacta ideal para estudantes
+7,Apartamento,Locação,Rio de Janeiro,RJ,110,3,3,2,7800,0,1200,450,Sim,Não,Sim,Alto padrão com home office e lazer completo
+8,Casa,Locação,Florianópolis,SC,140,3,2,2,5800,0,0,480,Não,Sim,Sim,Casa com quintal grande em rua tranquila
+9,Apartamento,Locação,São Paulo,SP,80,2,2,1,4500,0,880,340,Não,Sim,Não,"Em reforma, disponível em 30 dias"
+10,Cobertura,Locação,Natal,RN,200,4,4,3,15000,0,1800,750,Sim,Não,Sim,Cobertura duplex com piscina privativa
+11,Apartamento,Venda,Recife,PE,78,2,2,1,0,680000,850,320,Não,Não,Sim,"Ótima localização, metrô a 500m"
+12,Apartamento,Venda,São Paulo,SP,95,3,2,2,0,820000,920,380,Não,Sim,Sim,Planta inteligente com área de serviço
+13,Casa,Venda,São Paulo,SP,250,4,4,4,0,2400000,0,980,Não,Sim,Sim,Casa de alto padrão com jardim e piscina
+14,Apartamento,Venda,São Paulo,SP,65,2,1,1,0,590000,780,260,Sim,Não,Sim,"Reformado, pronto para morar"
+15,Studio,Venda,Belo Horizonte,MG,32,1,1,0,0,320000,480,140,Sim,Não,Sim,"Investimento ideal, alto potencial de aluguel"
+16,Apartamento,Venda,Curitiba,PR,72,2,2,1,0,520000,700,290,Não,Sim,Sim,"Próximo ao metrô, bom custo-benefício"
+17,Cobertura,Venda,Goiânia,GO,280,4,5,4,0,3800000,2200,1200,Sim,Não,Sim,Cobertura de luxo com terraço e churrasqueira
+18,Casa,Venda,Maceió,AL,320,5,5,5,0,3200000,0,1100,Não,Sim,Sim,"Condomínio fechado, segurança 24h"
+19,Apartamento,Venda,São Paulo,SP,88,3,2,2,0,750000,900,360,Não,Não,Sim,"Vista livre, andares altos disponíveis"
+20,Apartamento,Venda,Florianópolis,SC,58,1,1,1,0,480000,680,240,Sim,Sim,Sim,"Charmoso com varanda, perto de restaurantes"
+21,Apartamento,Locação,Belo Horizonte,MG,68,2,1,1,2900,0,620,250,Não,Sim,Sim,"Ap bem localizado, próximo ao shopping"
+22,Apartamento,Locação,Florianópolis,SC,72,2,2,1,3200,0,680,270,Não,Não,Sim,Condomínio com academia e salão de festas
+23,Casa,Locação,Recife,PE,160,3,3,2,9500,0,0,580,Sim,Não,Sim,Casa elegante no bairro mais nobre de SP
+24,Apartamento,Locação,Curitiba,PR,62,2,1,1,2600,0,580,230,Não,Sim,Sim,"Ótimo custo-benefício, metrô a 800m"
+25,Kitnet,Locação,Manaus,AM,30,1,1,0,1900,0,380,130,Sim,Não,Sim,"Kitnet nova, mobiliada completa"
+26,Apartamento,Locação,Natal,RN,70,2,2,1,2800,0,600,240,Não,Sim,Sim,"Próximo ao Parque do Ibirapuera, ótima área"
+27,Apartamento,Locação,Curitiba,PR,55,1,1,0,2400,0,520,200,Sim,Não,Sim,"Próximo à Paulista, fácil acesso"
+28,Casa,Locação,São Paulo,SP,130,3,2,2,4200,0,0,380,Não,Sim,Sim,Casa ampla com quintal para pets
+29,Apartamento,Locação,Belo Horizonte,MG,65,2,1,1,2700,0,580,230,Não,Não,Sim,"Reforma recente, excelente estado"
+30,Cobertura,Locação,Recife,PE,170,3,3,2,12000,0,1500,620,Sim,Não,Não,"Cobertura exclusiva, aguardando saída do atual locatário"
+31,Apartamento,Venda,Porto Alegre,RS,70,2,2,1,0,490000,660,270,Não,Sim,Sim,"Boa valorização, metrô a 400m"
+32,Apartamento,Venda,Curitiba,PR,75,2,2,1,0,530000,700,290,Não,Não,Sim,"Reformado, pronto para morar"
+33,Casa,Venda,Rio de Janeiro,RJ,190,4,3,3,0,1200000,0,520,Não,Sim,Sim,Casa espaçosa com área verde
+34,Apartamento,Venda,Belo Horizonte,MG,68,2,1,1,0,460000,620,250,Não,Não,Sim,"Planta funcional, boa localização"
+35,Studio,Venda,Porto Alegre,RS,35,1,1,0,0,340000,500,150,Sim,Não,Sim,"Próximo à Paulista, alto potencial de renda"
+36,Apartamento,Locação,Rio de Janeiro,RJ,60,2,1,1,2500,0,540,210,Não,Sim,Sim,Próximo ao metrô Jabaquara
+37,Apartamento,Locação,São Paulo,SP,75,2,2,1,2800,0,580,240,Não,Não,Sim,"Cidade satélite, excelente infraestrutura"
+38,Casa,Locação,Fortaleza,CE,120,3,2,2,3800,0,0,320,Não,Sim,Sim,Casa familiar com quintal
+39,Apartamento,Locação,Rio de Janeiro,RJ,65,2,1,1,2200,0,480,190,Não,Sim,Sim,"Próximo ao aeroporto, fácil acesso"
+40,Apartamento,Locação,Salvador,BA,70,2,2,1,2400,0,520,200,Não,Não,Sim,"Centro de Osasco, comércio na porta"
+41,Apartamento,Venda,Salvador,BA,62,2,1,1,0,420000,580,230,Não,Sim,Sim,Valorização constante na região
+42,Casa,Venda,Maceió,AL,160,3,3,2,0,980000,0,420,Não,Sim,Sim,Casa em condomínio fechado
+43,Apartamento,Venda,Curitiba,PR,68,2,1,1,0,380000,520,200,Não,Não,Sim,Oportunidade de financiamento
+44,Apartamento,Venda,São Paulo,SP,72,2,2,1,0,410000,560,220,Não,Sim,Sim,"Pronto para morar, documentação ok"
+45,Apartamento,Locação,Manaus,AM,85,2,2,1,5500,0,980,400,Sim,Não,Sim,"Clássico Higienópolis, prédio histórico reformado"
+46,Apartamento,Locação,Florianópolis,SC,78,2,2,1,4800,0,900,360,Não,Sim,Sim,A 3 min do metrô Paraíso
+47,Casa,Locação,Rio de Janeiro,RJ,150,3,3,3,5500,0,0,420,Não,Sim,Sim,Casa com piscina próximo ao autódromo
+48,Apartamento,Locação,Fortaleza,CE,52,1,1,1,2600,0,560,220,Não,Não,Sim,Charmoso no bairro oriental
+49,Kitnet,Locação,São Paulo,SP,25,1,1,0,1600,0,320,110,Sim,Não,Sim,"Próximo à Luz, ideal para trabalhadores do centro"
+50,Apartamento,Locação,Florianópolis,SC,45,1,1,0,2000,0,450,170,Sim,Não,Não,"Em manutenção predial, disponível em 15 dias"
+51,Apartamento,Venda,Porto Alegre,RS,88,2,2,1,0,780000,980,380,Sim,Não,Sim,Alto padrão no coração de Higienópolis
+52,Apartamento,Venda,Maceió,AL,80,2,2,1,0,680000,880,340,Não,Sim,Sim,"Metrô na porta, valorização garantida"
+53,Casa,Venda,Salvador,BA,200,4,3,3,0,1500000,0,560,Não,Sim,Sim,Casa de esquina com área verde
+54,Apartamento,Venda,Natal,RN,55,1,1,1,0,440000,600,230,Não,Não,Sim,"Raro na região, boa oportunidade"
+55,Apartamento,Locação,Belo Horizonte,MG,60,2,1,1,2500,0,520,210,Não,Sim,Sim,Próximo ao metrô Carandiru
+56,Apartamento,Locação,São Paulo,SP,65,2,2,1,2600,0,540,220,Não,Não,Sim,"Bairro tranquilo, ótima vizinhança"
+57,Casa,Locação,São Paulo,SP,110,3,2,2,3600,0,0,300,Não,Sim,Sim,Casa com espaço para horta
+58,Apartamento,Locação,Curitiba,PR,68,2,1,1,3000,0,620,250,Não,Sim,Sim,Metrô Lapa a 200m
+59,Apartamento,Locação,Porto Alegre,RS,72,2,2,1,3100,0,650,260,Não,Não,Sim,Condomínio com playground
+60,Studio,Locação,São Paulo,SP,33,1,1,0,2200,0,480,180,Sim,Não,Sim,"No coração de SP, vida urbana intensa"
+61,Apartamento,Venda,Curitiba,PR,67,2,2,1,0,450000,580,240,Não,Não,Sim,"Boa localização, fácil acesso ao centro"
+62,Casa,Venda,Rio de Janeiro,RJ,140,3,2,2,0,850000,0,360,Não,Sim,Sim,Casa reformada com quintal
+63,Apartamento,Venda,Fortaleza,CE,74,2,2,1,0,500000,680,270,Não,Não,Sim,Pronto para morar
+64,Apartamento,Locação,Curitiba,PR,82,2,2,1,4600,0,860,340,Não,Sim,Sim,"Excelente bairro, metrô a 300m"
+65,Apartamento,Locação,Manaus,AM,78,2,2,1,4200,0,800,320,Não,Não,Sim,Prédio novo com piscina aquecida
+66,Casa,Locação,Salvador,BA,200,4,4,3,11000,0,0,700,Sim,Sim,Sim,Casa histórica reformada no Pacaembu
+67,Apartamento,Locação,Belo Horizonte,MG,65,2,1,1,3200,0,660,260,Não,Sim,Sim,Próximo ao Parque da Água Branca
+68,Apartamento,Locação,Salvador,BA,70,2,2,1,3800,0,720,290,Sim,Não,Sim,Ap charmoso próximo ao parque
+69,Kitnet,Locação,Salvador,BA,27,1,1,0,1700,0,340,120,Sim,Não,Sim,"Reformada, inclui água e gás"
+70,Apartamento,Locação,Belo Horizonte,MG,68,2,1,1,2900,0,600,240,Não,Sim,Sim,"Próximo ao museu, região cultural"
+71,Apartamento,Venda,Curitiba,PR,84,2,2,1,0,720000,880,350,Não,Sim,Sim,Uma das melhores localizações de SP
+72,Casa,Venda,São Paulo,SP,280,5,4,4,0,3500000,0,1050,Não,Sim,Sim,Mansão histórica reformada
+73,Apartamento,Venda,Maceió,AL,68,2,1,1,0,530000,700,270,Não,Sim,Sim,Vizinho ao Parque da Água Branca
+74,Apartamento,Venda,Belo Horizonte,MG,72,2,2,1,0,580000,760,300,Sim,Não,Sim,"Finamente mobiliado, pronto para morar"
+75,Apartamento,Locação,Florianópolis,SC,88,3,2,2,5000,0,920,370,Não,Sim,Sim,Condomínio clube completo
+76,Apartamento,Locação,Curitiba,PR,74,2,2,1,4100,0,780,310,Não,Não,Sim,Próximo ao Hospital São Paulo
+77,Casa,Locação,Belo Horizonte,MG,135,3,2,2,4800,0,0,360,Não,Sim,Sim,Casa bem conservada com espaço extra
+78,Apartamento,Locação,Manaus,AM,62,2,1,1,2400,0,500,200,Não,Sim,Sim,"Região em valorização, metrô a 600m"
+79,Apartamento,Locação,Fortaleza,CE,58,2,1,1,2000,0,440,175,Não,Não,Sim,Próximo à Arena Corinthians
+80,Studio,Locação,Curitiba,PR,38,1,1,1,3200,0,680,260,Sim,Não,Sim,"Na Av. Paulista, endereço prime"
+81,Apartamento,Venda,Florianópolis,SC,90,3,2,2,0,780000,940,380,Não,Sim,Sim,Excelente condomínio com lazer
+82,Apartamento,Venda,Curitiba,PR,76,2,2,1,0,620000,800,320,Não,Não,Sim,"Região hospitalar, alta demanda"
+83,Casa,Venda,Porto Alegre,RS,145,3,2,2,0,780000,0,340,Não,Sim,Sim,Casa em rua arborizada
+84,Apartamento,Venda,São Paulo,SP,60,2,1,1,0,350000,480,185,Não,Não,Sim,Ótimo para investimento
+85,Apartamento,Locação,Curitiba,PR,120,3,3,2,8200,0,1300,520,Sim,Não,Sim,"Jardins, alto padrão e sofisticação"
+86,Apartamento,Locação,São Paulo,SP,95,2,2,1,6500,0,1100,440,Sim,Não,Sim,Coração dos Jardins
+87,Casa,Locação,Porto Alegre,RS,380,5,5,6,25000,0,0,1500,Sim,Sim,Sim,"Mansão nos Jardins, padrão máximo"
+88,Apartamento,Locação,Fortaleza,CE,68,1,1,1,4800,0,900,360,Sim,Não,Não,"Alto Itaim, aguardando desocupação"
+89,Apartamento,Locação,Curitiba,PR,102,3,2,2,7200,0,1150,460,Não,Sim,Sim,"Prime, próximo ao Ibirapuera"
+90,Cobertura,Locação,São Paulo,SP,250,4,4,3,22000,0,2500,1000,Sim,Não,Sim,"O melhor da cidade, vistas deslumbrantes"
+91,Apartamento,Venda,Belo Horizonte,MG,125,3,3,2,0,1400000,1350,540,Sim,Não,Sim,Sofisticado nos Jardins
+92,Apartamento,Venda,Natal,RN,98,2,2,1,0,980000,1120,460,Sim,Não,Sim,"Prime Jardins, valorização histórica"
+93,Casa,Venda,Porto Alegre,RS,420,6,6,6,0,8500000,0,1800,Sim,Sim,Sim,Residência de altíssimo padrão
+94,Apartamento,Venda,Belo Horizonte,MG,105,3,2,2,0,1100000,1180,480,Não,Sim,Sim,"Exclusivo, frente ao Ibirapuera"
+95,Apartamento,Locação,Belém,PA,50,1,1,0,2600,0,550,215,Sim,Não,Sim,"Próximo à USP, ideal para pesquisadores"
+96,Apartamento,Locação,Fortaleza,CE,63,2,1,1,2800,0,580,230,Não,Sim,Sim,Próximo ao Shopping Bourbon
+97,Casa,Locação,Manaus,AM,125,3,2,2,4400,0,0,350,Não,Sim,Sim,Próximo à USP e ao Incor
+98,Apartamento,Locação,Rio de Janeiro,RJ,67,2,2,1,2700,0,560,225,Não,Não,Sim,Região residencial tranquila
+99,Apartamento,Venda,Curitiba,PR,52,1,1,0,0,420000,580,220,Sim,Não,Sim,Próximo à USP e ao metrô
+100,Casa,Venda,Rio de Janeiro,RJ,180,4,3,3,0,1350000,0,460,Não,Sim,Sim,Casa espaçosa próximo à USP
