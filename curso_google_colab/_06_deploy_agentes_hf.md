@@ -7,6 +7,7 @@
 
 ---
 
+
 Nas três aulas anteriores, você aprendeu cada peça separadamente: times de agentes, ferramentas de busca, transcrição de áudio e leitura de documentos com RAG.
 
 Nesta aula, montamos o projeto integrador — e com um tema próximo da realidade de negócios: um **chat de corretor de imóveis**. O sistema identifica a intenção do cliente, aciona o especialista certo e responde com precisão, usando dados reais de um catálogo, um manual de SAC e pesquisa na internet.
@@ -16,6 +17,9 @@ Ao final da aula, fazemos o deploy no HuggingFace Spaces com link permanente —
 ---
 
 ## 1. O Projeto: Chat do Corretor de Imóveis
+
+<img width="1198" height="1313" alt="ChatGPT Image 9 de mai  de 2026, 00_32_52" src="https://github.com/user-attachments/assets/d4cdc89d-0eaf-4769-a5d9-b0a9f5e6a9fc" />
+
 
 ### O Problema que Vamos Resolver
 
