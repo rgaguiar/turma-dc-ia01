@@ -14,7 +14,65 @@ Em vez de escrever código, você arrasta, conecta e configura blocos numa inter
 
 ---
 
-## 1. Conceitos Fundamentais
+## 1. Formas de Executar o N8N
+
+Antes de instalar, é importante entender as opções disponíveis — cada uma tem um contexto adequado.
+
+| Modalidade | Custo | Para quem | Status |
+| --- | --- | --- | --- |
+| **Desktop App** | Gratuito | — | ❌ Descontinuado |
+| **Node Platform** | Gratuito | Desenvolvedores | ✅ Disponível |
+| **Docker** | Gratuito | Estudo e experimentos | ✅ **Usaremos nesta aula** |
+| **N8N Cloud** | Pago | Produção profissional | ✅ Disponível |
+| **Self-host (VPS)** | Custo do servidor | Automações próprias | ✅ Disponível |
+
+### Desktop App
+Versão com interface nativa para Windows e Mac. Foi **descontinuada** pelo time do N8N — não recebe mais atualizações e não é recomendada para novos projetos.
+
+### Node Platform
+Instala o N8N como um pacote Node.js via terminal (`npm install -g n8n`). Requer conhecimento mínimo de Node.js e gerenciamento de processos. Não é a opção mais acessível para profissionais de negócios.
+
+### Docker ← usaremos nesta aula
+
+| ✅ Vantagens | ⚠️ Desvantagens |
+| --- | --- |
+| Zero configuração de ambiente | Requer Docker Desktop instalado |
+| Funciona igual em qualquer sistema | Para quando o computador desliga |
+| Fácil de recriar se algo quebrar | Não indicado para produção em escala |
+| Ideal para aprender e experimentar | Dados ficam no computador local |
+| Gratuito sem limite de workflows | Sem suporte oficial |
+
+> 💡 **Por que Docker para esta aula?** É a forma mais rápida de ter o N8N e o WAHA funcionando sem precisar configurar ambiente, instalar dependências ou criar conta. Em 10 minutos você tem tudo rodando — e se algo der errado, basta recriar o container. É a escolha certa para aprender.
+
+### N8N Cloud
+
+Versão hospedada e gerenciada pelo próprio N8N. Melhor performance, atualizações automáticas, suporte e infraestrutura por conta deles.
+
+| ✅ Vantagens | ⚠️ Desvantagens |
+| --- | --- |
+| Sem gerenciar servidor | Pago (a partir de ~$20/mês) |
+| Alta disponibilidade 24h | Dados ficam nos servidores deles |
+| Suporte oficial | Custo recorrente |
+| Atualizações automáticas | — |
+
+> 📌 **Quando migrar para N8N Cloud?** Quando o projeto sair do experimento e virar uma automação que outras pessoas dependem — clientes, equipe, processos críticos. Para uso pessoal e aprendizado, Docker é suficiente.
+
+### Self-host (VPS)
+
+Instalar o N8N num servidor próprio (DigitalOcean, Hostinger, AWS). Você tem controle total, mas é responsável por tudo — atualizações, backups, disponibilidade.
+
+| ✅ Vantagens | ⚠️ Desvantagens |
+| --- | --- |
+| Roda 24h sem depender do seu computador | Você gerencia o servidor |
+| Custo menor que N8N Cloud (~R$25/mês) | Sem suporte oficial do N8N |
+| Dados ficam no seu servidor | Requer conhecimento mínimo de VPS |
+| Controle total | Você é responsável por backups |
+
+> 💡 **Caminho natural de evolução:** Docker (aprender) → Self-host VPS (automações próprias) → N8N Cloud (quando precisar de escala e suporte).
+
+---
+
+## 2. Conceitos Fundamentais
 
 ### O que é o N8N?
 
@@ -77,7 +135,7 @@ Webhook é um "aviso automático". Em vez do bot ficar perguntando "chegou mensa
 
 ---
 
-## 2. O Que Você Vai Precisar
+## 3. O Que Você Vai Precisar
 
 | Ferramenta | O que é | Link |
 | --- | --- | --- |
@@ -88,7 +146,7 @@ Webhook é um "aviso automático". Em vez do bot ficar perguntando "chegou mensa
 
 ---
 
-## 3. Passo a Passo Completo
+## 4. Passo a Passo Completo
 
 ### Passo 1: Instalar o N8N via Docker Desktop
 
@@ -205,25 +263,27 @@ Mesmo processo do N8N — mas com variáveis de ambiente específicas.
 
 ---
 
-### Passo 6: Workflow Completo — WAHA + AI Agent
+### Passo 6: Primeiro Projeto com WhatsApp — Ping Pong
 
-Agora substituímos o `When chat message received` pelo **WAHA Trigger**. A arquitetura é a mesma — só muda o canal de entrada.
+Antes de adicionar IA, vamos confirmar que o WAHA está funcionando com um projeto simples: você manda uma mensagem e o WhatsApp responde automaticamente com o que você digitou.
+
+> 💡 **Por que fazer isso primeiro?** Porque separa dois problemas distintos. Se o ping pong funciona, o WAHA e o N8N estão conectados corretamente. Se depois o agente com IA não funciona, o problema está na configuração da IA — não na infraestrutura.
 
 **Fluxo:**
 ```
-[WAHA Trigger] → [Edit Fields (Set)] → [AI Agent] → [WAHA Send Message]
+[WAHA Trigger] → [Edit Fields (Set)] → [Send Seen] → [Send a Text Message]
 ```
 
-#### Configuração de cada nó
+#### Os 4 nós do Ping Pong
 
-**WAHA Trigger**
+**WAHA Trigger** — recebe a mensagem do WhatsApp
 
 | Campo | Valor |
 | --- | --- |
 | Session | `default` |
 | Events | `message` |
 
-**Edit Fields (Set)** — organiza os dados que chegam do WAHA
+**Edit Fields (Set)** — organiza os dados para os próximos nós
 
 | Campo criado | Expressão |
 | --- | --- |
@@ -232,6 +292,39 @@ Agora substituímos o `When chat message received` pelo **WAHA Trigger**. A arqu
 | `session` | `{{ $json.payload.session }}` |
 | `id_mensagem` | `{{ $json.payload.id }}` |
 
+**Send Seen** — marca a mensagem como lida (o "✓✓ azul" no WhatsApp)
+
+| Campo | Valor |
+| --- | --- |
+| Session | `{{ $json.session }}` |
+| Chat ID | `{{ $json.from }}` |
+| Message ID | `{{ $json.id_mensagem }}` |
+
+> 📌 **Por que o Send Seen?** É uma boa prática — indica para o cliente que a mensagem foi recebida enquanto o agente processa. Em bots profissionais, esse nó sempre aparece antes da resposta.
+
+**Send a Text Message** — envia a resposta de volta
+
+| Campo | Valor |
+| --- | --- |
+| Session | `{{ $json.session }}` |
+| Chat ID | `{{ $json.from }}` |
+| Message | `Você digitou: {{ $json.mensagem }}` |
+
+> 🔥 **Lição em sala:** quando funcionar, você vai ver o WhatsApp receber "Você digitou: olá" em menos de 2 segundos.
+
+---
+
+### Passo 7: Workflow Completo — WAHA + AI Agent
+
+Com o ping pong funcionando, adicionamos inteligência. Substituímos o **Send a Text Message** pelo **AI Agent** — o restante do fluxo permanece igual.
+
+**Fluxo:**
+```
+[WAHA Trigger] → [Edit Fields (Set)] → [Send Seen] → [AI Agent] → [Send a Text Message]
+```
+
+#### Configuração dos nós novos
+
 **AI Agent**
 
 | Campo | Valor |
@@ -239,10 +332,10 @@ Agora substituímos o `When chat message received` pelo **WAHA Trigger**. A arqu
 | Prompt | `{{ $json.mensagem }}` |
 | LLM | Groq Chat Model — `llama-3.3-70b-versatile` |
 | Memory | Window Buffer Memory |
-| Session Key | `{{ $json.from }}` (cada número tem sua própria memória) |
+| Session Key | `{{ $json.from }}` |
 | System prompt | *Instruções do agente — adapte para seu caso de uso* |
 
-**WAHA Send Message**
+**Send a Text Message** — agora envia a resposta do agente
 
 | Campo | Valor |
 | --- | --- |
@@ -252,33 +345,50 @@ Agora substituímos o `When chat message received` pelo **WAHA Trigger**. A arqu
 
 > 📌 **Ativar o workflow:** clique no toggle **Inactive → Active** no canto superior direito. Sem isso, o WAHA Trigger não recebe mensagens mesmo com tudo configurado.
 
+
 ---
 
-## 4. Testando o Sistema
+## 5. Testando o Sistema
 
-Com o workflow ativo, mande uma mensagem no WhatsApp para o número conectado ao WAHA:
+### Teste do Ping Pong (Passo 6)
+
+Com o workflow de ping pong ativo, mande qualquer mensagem:
 
 ```
-# TESTE 1 — Resposta simples
-Você: "Olá, tudo bem?"
-Esperado: agente responde no WhatsApp
+# TESTE 1 — Ping pong básico
+Você: "olá"
+Esperado: "Você digitou: olá"
 
-# TESTE 2 — Memória
+# TESTE 2 — Confirmação do Send Seen
+Você: qualquer mensagem
+Esperado: os dois checks ficam azuis (✓✓) antes da resposta chegar
+```
+
+Se funcionar, a infraestrutura está 100% correta. Prossiga para o Passo 7.
+
+### Teste do Agente com IA (Passo 7)
+
+```
+# TESTE 3 — Resposta simples
+Você: "Olá, tudo bem?"
+Esperado: agente responde com uma saudação
+
+# TESTE 4 — Memória
 Você: "Meu nome é Rafael"
 [aguarda resposta]
 Você: "Qual é o meu nome?"
 Esperado: agente lembra o nome mencionado anteriormente
 
-# TESTE 3 — Cálculo (se Calculator estiver configurado como tool)
+# TESTE 5 — Cálculo (se Calculator estiver configurado como tool)
 Você: "Quanto é 15% de 3500?"
 Esperado: agente usa a calculadora e responde corretamente
 ```
 
-Verifique o painel **Executions** no N8N para ver o fluxo de cada mensagem — com os dados em cada etapa.
+Verifique o painel **Executions** no N8N para ver o fluxo de cada mensagem.
 
 ---
 
-## 5. Problemas Comuns
+## 6. Problemas Comuns
 
 | Problema | Causa | Solução |
 | --- | --- | --- |
@@ -291,7 +401,7 @@ Verifique o painel **Executions** no N8N para ver o fluxo de cada mensagem — c
 
 ---
 
-## 6. Estrutura dos Containers
+## 7. Estrutura dos Containers
 
 ```
 Docker Desktop
@@ -305,7 +415,7 @@ Docker Desktop
 
 ---
 
-## 7. Próxima Aula — Parte 2
+## 8. Próxima Aula — Parte 2
 
 Na próxima semana vamos expandir o sistema com:
 
@@ -316,7 +426,7 @@ Na próxima semana vamos expandir o sistema com:
 
 ---
 
-## Gabarito — Resumo das Configurações
+## 9. Gabarito — Resumo das Configurações
 
 ### Container N8N (Docker Desktop)
 
